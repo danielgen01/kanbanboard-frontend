@@ -18,7 +18,7 @@ export default {
         "medium-gray":"#828FA3",
         "bright-gray":"#E4EBFA",
         "dark-white":"#F4F7FD",
-        "white":"#FFFFF",
+        "white":"#FFFFFF",
         "dark-red":"#EA5555",
         "bright-red":"#FF9898"
       }
