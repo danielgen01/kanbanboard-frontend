@@ -3,10 +3,10 @@ import { AiOutlineClose } from "react-icons/ai"
 
 const NewTaskForm = () => {
   return (
-    <div className="transparent-background bg-black/50 absolute h-screen w-screen top-0 left-0">
+    <div className="transparent-background bg-black/50 absolute h-screen w-screen top-0 left-0  hidden">
       <div
         className="form-container bg-white fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-     min-h-[550px] w-4/5 rounded-md 
+     min-h-[550px] w-4/5 rounded-md
      dark:bg-dark-gray"
       >
         <div className="form-content flex flex-col h-full w-full px-5 py-5 gap-5">
