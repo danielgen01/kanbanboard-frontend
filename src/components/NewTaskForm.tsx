@@ -1,5 +1,5 @@
 import React from "react"
-import {AiOutlineClose} from "react-icons/ai"
+import { AiOutlineClose } from "react-icons/ai"
 
 const NewTaskForm = () => {
   return (
@@ -10,7 +10,7 @@ const NewTaskForm = () => {
      dark:bg-dark-gray"
       >
         <div className="form-content flex flex-col h-full w-full px-5 py-5 gap-5">
-        <AiOutlineClose className="ml-auto"/>
+          <AiOutlineClose className="ml-auto dark:text-white text-black" />
           <h1 className="font-bold text-xl dark:text-white">Add new Task</h1>
           {/* First input field  */}
           <div className="input-title-container flex flex-col gap-2">
@@ -24,7 +24,8 @@ const NewTaskForm = () => {
             <input
               type="text"
               name="input-title"
-              className="border-bright-gray border-2 outline-bright-gray rounded-md h-10 px-2 text-sm"
+              className="border-bright-gray border-2 outline-bright-gray rounded-md h-10 px-2 text-sm
+              dark:bg-dark-gray dark:border-medium-gray"
               placeholder="e.g Take coffee break"
             />
           </div>
@@ -33,14 +34,14 @@ const NewTaskForm = () => {
             <label
               htmlFor="input-description"
               className="text-medium-gray font-bold text-sm
-              dark:text-white dark:bg-dark-gray"
+              dark:text-white "
             >
               Description
             </label>
             <textarea
               name="input-title"
               className="border-bright-gray border-2 outline-bright-gray rounded-md h-20 px-2 py-2 text-sm resize-none
-               dark:bg-dark-gray"
+               dark:bg-dark-gray dark:border-medium-gray"
               placeholder="e.g its always good to take a small break from working to prevent burnouts"
             />
           </div>
@@ -57,7 +58,7 @@ const NewTaskForm = () => {
             <select
               name="select-status"
               className="border-bright-gray border-2 outline-bright-gray rounded-md h-10 px-2 text-sm
-              dark:text-white dark:bg-dark-gray"
+              dark:text-white dark:bg-dark-gray dark:border-medium-gray"
             >
               <option className="text-black dark:text-white">Todo</option>
               <option className="text-black dark:text-white">Doing</option>
