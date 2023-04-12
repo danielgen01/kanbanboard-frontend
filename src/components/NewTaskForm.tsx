@@ -1,4 +1,5 @@
 import React from "react"
+import {AiOutlineClose} from "react-icons/ai"
 
 const NewTaskForm = () => {
   return (
@@ -9,6 +10,7 @@ const NewTaskForm = () => {
      dark:bg-dark-gray"
       >
         <div className="form-content flex flex-col h-full w-full px-5 py-5 gap-5">
+        <AiOutlineClose className="ml-auto"/>
           <h1 className="font-bold text-xl dark:text-white">Add new Task</h1>
           {/* First input field  */}
           <div className="input-title-container flex flex-col gap-2">
