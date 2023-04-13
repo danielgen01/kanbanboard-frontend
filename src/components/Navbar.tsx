@@ -9,12 +9,12 @@ import threepointsicon from "../../assets/icon-vertical-ellipsis.svg"
 const Navbar = () => {
   return (
     <nav
-      className="h-20 shadow-sm nav-bar-ctn w-screen
+      className="h-20 shadow-sm nav-bar-ctn w-screen md:w-auto
      dark:bg-dark-gray px-5"
     >
       <div className="navbar-contentn px-5 flex  items-center w-full h-full">
         <div className="logo-ctn">
-          <img src={logomobile} className="h-8" alt="logo" />
+          <img src={logomobile} className="h-8 md:hidden" alt="logo" />
         </div>
         <div className="chosen-board ml-2 flex items-center gap-2">
           <h1

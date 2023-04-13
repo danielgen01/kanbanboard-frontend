@@ -11,15 +11,15 @@ import DeleteTask from "./components/Forms/DeleteTask/DeleteTask"
 
 function App() {
   return (
-    <div className="app min-h-screen w-screen">
-      <Navbar />
+    <div className="app min-h-screen w-screen grid grid-cols-1 md:grid-cols-5">
+      {/* <Navbar /> */}
       <Board />
       {/* <NewTaskForm /> */}
       {/* <EditTaskForm /> */}
       {/* <AddBoardForm /> */}
       {/* <EditBoardForm /> */}
       {/* <DeleteBoard /> */}
-      <DeleteTask />
+      {/* <DeleteTask /> */}
     </div>
   )
 }
