@@ -1,6 +1,6 @@
 import React from "react"
 import { AiOutlinePlus } from "react-icons/ai"
-import { InputElement } from "./InputElement"
+import { AddColInput } from "./AddColInput"
 
 const AddBoardForm = () => {
   return (
@@ -24,13 +24,15 @@ const AddBoardForm = () => {
             <label htmlFor="" className="text-sm text-medium-gray font-bold">
               Board Columns
             </label>
-            <InputElement defaultValue={"Todo"} />
-            <InputElement defaultValue={"Doing"} />
-            <InputElement defaultValue={"Done"} />
+            <AddColInput defaultValue={"Todo"} />
+            <AddColInput defaultValue={"Doing"} />
+            <AddColInput defaultValue={"Done"} />
           </section>
           <section className="buttons flex flex-col gap-5">
-            <button className="flex items-center justify-center w-full text-dark-purple font-bold bg-bright-gray h-10 gap-2 rounded-3xl 
-            dark:bg-white">
+            <button
+              className="flex items-center justify-center w-full text-dark-purple font-bold bg-bright-gray h-10 gap-2 rounded-3xl 
+            dark:bg-white"
+            >
               <AiOutlinePlus className="text-dark-purple font-bold" /> Add new
               Column
             </button>

@@ -4,7 +4,7 @@ import crossicon from "../../../../assets/icon-cross.svg"
 type props = {
   defaultValue: string
 }
-export const InputElement: React.FC<props> = ({ defaultValue }) => {
+export const AddColInput: React.FC<props> = ({ defaultValue }) => {
   return (
     <div className="input-element flex justify-between items-center">
       <input
