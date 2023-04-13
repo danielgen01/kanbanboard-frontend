@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import LogoDark from "../../../assets/logo-dark.svg"
 import LogoLight from "../../../assets/logo-light.svg"
 import boardicon from "../../../assets/icon-board.svg"
@@ -7,18 +7,23 @@ import iconLight from "../../../assets/icon-light-theme.svg"
 import iconDark from "../../../assets/icon-dark-theme.svg"
 
 const Sidebar = () => {
+  const [isDarkMode, setIsDarkMode] = useState(
+    localStorage.getItem("theme") === "dark"
+  )
+
+  useEffect(() => {
+    const isDark = localStorage.getItem("theme") === "dark"
+    document.documentElement.classList.toggle("dark", isDark)
+    setIsDarkMode(isDark)
+  }, [])
+
   function toggleDarkMode() {
-    const isDark = document.documentElement.classList.contains("dark")
+    const newIsDarkMode = !isDarkMode
 
-    if (isDark) {
-      document.documentElement.classList.remove("dark")
-      localStorage.setItem("theme", "light")
-    } else {
-      document.documentElement.classList.add("dark")
-      localStorage.setItem("theme", "dark")
-    }
+    document.documentElement.classList.toggle("dark", newIsDarkMode)
+    localStorage.setItem("theme", newIsDarkMode ? "dark" : "light")
+    setIsDarkMode(newIsDarkMode)
   }
-
   return (
     <aside className="hidden md:flex flex-col gap-4 min-h-screen py-5 dark:bg-dark-gray">
       <figure className="flex w-full justify-center">
@@ -67,14 +72,19 @@ const Sidebar = () => {
                 type="checkbox"
                 name="toggle"
                 id="toggle"
-                className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+                className={`toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer
+                ${isDarkMode ? "translate-x-[100%]" : ""} duration-200`}
                 onChange={toggleDarkMode}
+                checked={isDarkMode}
               />
               <label
                 htmlFor="toggle"
-                className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                className={`toggle-label block overflow-hidden h-6 rounded-full cursor-pointer ${
+                  isDarkMode ? "bg-dark-purple" : "bg-gray-300"
+                }`}
               ></label>
             </div>
+
             <img src={iconDark} alt="icon" className="h-6" />
           </div>
         </div>
