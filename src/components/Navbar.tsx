@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <nav
       className="h-20 shadow-sm nav-bar-ctn w-screen
-     dark:bg-dark-gray "
+     dark:bg-dark-gray px-5"
     >
       <div className="navbar-contentn px-5 flex  items-center w-full h-full">
         <div className="logo-ctn">

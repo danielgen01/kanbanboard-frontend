@@ -5,11 +5,13 @@ import { DoneColumn } from "./columns/DoneColumn"
 
 const Board = () => {
   return (
-    <main className="dark:bg-dark-black bg-dark-white min-h-screen  py-2 px-2 w-screen">
-      <section className="columns grid-cols-1 grid md:grid-cols-3">
+    <main className="dark:bg-dark-black bg-dark-white min-h-screen  py-2 px-3 md:px-5 lg:px-10 ">
+      <section className="columns flex flex-row md:grid md:grid-cols-3 overflow-x-scroll md:overflow-x-hidden ">
         {/* First grid item */}
         <TodoItemsColumn />
+        {/* Second grid item */}
         <DoingColumn />
+        {/* Third grid item */}
         <DoneColumn />
       </section>
 

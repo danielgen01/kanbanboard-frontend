@@ -4,7 +4,7 @@ import { MdSwipeLeft } from "react-icons/md"
 
 export const DoingColumn: React.FC = () => {
   return (
-    <div className="grid-item-1(todoItems) flex flex-col gap-4">
+    <div className="grid-item-2(doingItems) flex flex-col gap-4">
       <div className="headline flex items-center gap-2">
         <div className="h-5 w-5 rounded-full bg-dark-purple dark:bg-dark-purple"></div>
         <h1 className="text-medium-gray -tracking-tighter text-md uppercase font-bold">
