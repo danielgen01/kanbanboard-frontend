@@ -10,8 +10,8 @@ function App() {
     <div className="app min-h-screen w-screen">
       <Navbar />
       <Board />
-      <NewTaskForm />
-      <EditTaskForm />
+      {/* <NewTaskForm /> */}
+      {/* <EditTaskForm /> */}
     </div>
   )
 }
