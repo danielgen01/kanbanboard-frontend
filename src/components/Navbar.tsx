@@ -30,7 +30,7 @@ const Navbar = () => {
             <img
               src={addicon}
               alt="addicon"
-              className="bg-dark-purple py-3 px-5 rounded-2xl opacity-30"
+              className="bg-dark-purple py-3 px-5 rounded-2xl"
             />
           </div>
           <div className="three-points-ellipsis">
