@@ -6,6 +6,7 @@ import NewTaskForm from "./components/Forms/AddTask/NewTaskForm"
 import EditTaskForm from "./components/Forms/EditTask/EditTaskForm"
 import AddBoardForm from "./components/Forms/AddNewBoard/AddBoardForm"
 import EditBoardForm from "./components/Forms/EditBoard/EditBoard"
+import DeleteBoard from "./components/Forms/DeleteBoard/DeleteBoard"
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
       {/* <NewTaskForm /> */}
       {/* <EditTaskForm /> */}
       {/* <AddBoardForm /> */}
-      <EditBoardForm />
+      {/* <EditBoardForm /> */}
+      <DeleteBoard />
     </div>
   )
 }
