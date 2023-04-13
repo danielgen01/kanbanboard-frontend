@@ -7,10 +7,10 @@ import Navbar from "../Navbar"
 const Board = () => {
   return (
     <>
-      <main className="dark:bg-dark-black bg-dark-white min-h-screen  md:px-5 lg:px-10 col-span-4">
+      <main className="dark:bg-dark-black bg-dark-white min-h-screen  col-span-4">
         <Navbar />
 
-        <section className="columns grid md:grid-cols-3 overflow-x-scroll md:overflow-x-hidden ">
+        <section className="columns grid md:grid-cols-3 overflow-x-scroll md:overflow-x-hidden px-5 mt-5">
           {/* First grid item */}
           <TodoItemsColumn />
           {/* Second grid item */}
