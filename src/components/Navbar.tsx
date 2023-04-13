@@ -26,13 +26,14 @@ const Navbar = () => {
           <img src={chevrondown} className="h-2" alt="chevron down" />
         </div>
         <div className="top-right-icons ml-auto flex  items-center gap-5">
-          <div className="add-btn ">
+          <button className="add-btn flex bg-dark-purple py-3 px-5 rounded-2xl items-center gap-2 text-white font-bold">
             <img
               src={addicon}
               alt="addicon"
-              className="bg-dark-purple py-3 px-5 rounded-2xl"
+              className=""
             />
-          </div>
+            <span className="font-boldtext-white text-sm hidden md:block">Add New Task</span>
+          </button>
           <div className="three-points-ellipsis">
             <img src={threepointsicon} alt="ellipsis" className="" />
           </div>
