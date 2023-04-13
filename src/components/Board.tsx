@@ -1,12 +1,12 @@
 import React from "react"
-import { TodoItemsColumn } from "./columns/todoItemsColumn"
+import { TodoItemsColumn } from "./columns/TodoItemsColumn"
 import {DoingColumn} from "./columns/DoingColumn"
 import { DoneColumn } from "./columns/DoneColumn"
 
 const Board = () => {
   return (
     <main className="dark:bg-dark-black bg-dark-white min-h-screen  py-2 px-3 md:px-5 lg:px-10 ">
-      <section className="columns flex flex-row md:grid md:grid-cols-3 overflow-x-scroll md:overflow-x-hidden ">
+      <section className="columns grid md:grid-cols-3 overflow-x-scroll md:overflow-x-hidden ">
         {/* First grid item */}
         <TodoItemsColumn />
         {/* Second grid item */}

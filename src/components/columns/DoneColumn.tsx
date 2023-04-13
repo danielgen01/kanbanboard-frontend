@@ -8,7 +8,7 @@ export const DoneColumn: React.FC = () => {
       <div className="headline flex items-center gap-2">
         <div className="h-5 w-5 rounded-full bg-green-500 dark:bg-green-500"></div>
         <h1 className="text-medium-gray -tracking-tighter text-md uppercase font-bold">
-          Doing (0){" "}
+          Done (0){" "}
         </h1>
         <div className="swipe-icon-text md:hidden ml-auto">
           <h1 className="">Swipe</h1>
