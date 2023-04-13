@@ -2,8 +2,9 @@ import { useState } from "react"
 import "./App.css"
 import Navbar from "./components/Navbar"
 import Board from "./components/Board"
-import NewTaskForm from "./components/Forms/NewTaskForm"
+import NewTaskForm from "./components/Forms/AddTask/NewTaskForm"
 import EditTaskForm from "./components/Forms/EditTask/EditTaskForm"
+import AddBoardForm from "./components/Forms/AddNewBoard/AddBoardForm"
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Board />
       {/* <NewTaskForm /> */}
       {/* <EditTaskForm /> */}
+      <AddBoardForm />
     </div>
   )
 }
