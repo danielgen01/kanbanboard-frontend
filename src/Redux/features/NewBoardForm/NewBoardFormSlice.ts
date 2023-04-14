@@ -1,23 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface NewBoardFormState {
-  isFormOpen: boolean;
+  isBoardFormOpen: boolean;
 }
 
 const initialState: NewBoardFormState = {
-  isFormOpen: false,
+  isBoardFormOpen: false,
 };
 
 const newBoardForm = createSlice({
   name: 'newboardform',
   initialState,
   reducers: {
-    toggleForm: (state) => {
-      state.isFormOpen = !state.isFormOpen;
+    toggleAddBoardForm: (state) => {
+      state.isBoardFormOpen = !state.isBoardFormOpen;
     },
   },
 });
 
-export const { toggleForm } = newBoardForm.actions;
+export const { toggleAddBoardForm } = newBoardForm.actions;
 
 export default newBoardForm.reducer;

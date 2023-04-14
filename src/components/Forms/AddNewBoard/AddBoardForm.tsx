@@ -3,18 +3,18 @@ import { AiOutlinePlus } from "react-icons/ai"
 import { AddColInput } from "./AddColInput"
 
 import { useSelector, useDispatch } from "react-redux"
-import { toggleForm } from "../../../Redux/features/NewBoardForm/NewBoardFormSlice"
+import { toggleAddBoardForm } from "../../../Redux/features/NewBoardForm/NewBoardFormSlice"
 import { useAppDispatch,useAppSelector } from "../../../Redux/store"
 import { RootState } from "../../../Redux/rootReducer"
 
 const AddBoardForm: React.FC = () => {
   const isFormOpen = useAppSelector(
-    (state: RootState) => state.newboardform.isFormOpen
+    (state: RootState) => state.newboardform.isBoardFormOpen
   )
   const dispatch = useAppDispatch()
 
   const handleToggleForm = () => {
-    dispatch(toggleForm())
+    dispatch(toggleAddBoardForm())
   }
   return (
     <section className="transparent-background bg-black/50 absolute h-screen w-screen top-0 left-0 "
