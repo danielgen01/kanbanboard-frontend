@@ -17,7 +17,7 @@ function App() {
       <Sidebar />
       <Board />
       {/* <NewTaskForm /> */}
-      {/* <EditTaskForm /> */}
+      <EditTaskForm />
       {/* <AddBoardForm /> */}
       {/* <EditBoardForm /> */}
       {/* <DeleteBoard /> */}

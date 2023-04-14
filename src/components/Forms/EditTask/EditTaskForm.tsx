@@ -1,5 +1,6 @@
 import React from "react"
 import { Subtask } from "./Subtask"
+import ellipsIcon from "../../../../assets/icon-vertical-ellipsis.svg"
 
 const EditTaskForm = () => {
   return (
@@ -9,10 +10,14 @@ const EditTaskForm = () => {
        fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md"
       >
         <div className="container-content flex flex-col px-1 py-5 gap-6">
+          <div className="headline-and-edit-task-icon flex items-center">
           <h1 className="text-black dark:text-white font-bold task-title">
             Lorem ipsum dolor sit amet cscdunt culpa, blanditiis quibusdam
             tempore!
           </h1>
+          <img src={ellipsIcon} alt="" />
+          </div>
+          
           <p className="text-medium-gray">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi quia
             molestias debitis facilis ea
