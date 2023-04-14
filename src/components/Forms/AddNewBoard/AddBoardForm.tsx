@@ -1,10 +1,10 @@
 import React from "react"
-import { AiOutlinePlus } from "react-icons/ai"
+import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai"
 import { AddColInput } from "./AddColInput"
 
 import { useSelector, useDispatch } from "react-redux"
 import { toggleAddBoardForm } from "../../../Redux/features/NewBoardForm/NewBoardFormSlice"
-import { useAppDispatch,useAppSelector } from "../../../Redux/store"
+import { useAppDispatch, useAppSelector } from "../../../Redux/store"
 import { RootState } from "../../../Redux/rootReducer"
 
 const AddBoardForm: React.FC = () => {
@@ -17,15 +17,23 @@ const AddBoardForm: React.FC = () => {
     dispatch(toggleAddBoardForm())
   }
   return (
-    <section className="transparent-background bg-black/50 absolute h-screen w-screen top-0 left-0 "
-    style={{display:isBoardFormOpen? "block" : "none"}} onClick={handleToggleForm}>
+    <section
+      className="transparent-background bg-black/50 absolute h-screen w-screen top-0 left-0 "
+      style={{ display: isBoardFormOpen ? "block" : "none" }}
+    >
       <div
         className="form-container bg-white fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
      min-h-[550px] w-[90%] md:w-[50%] lg:w-[40%] xl:w-[30%] rounded-md
      dark:bg-dark-gray"
-     >
+      >
         <div className="form-content flex flex-col px-5 py-5 gap-4">
-          <h1 className="font-bold text-xl dark:text-white">Add new board</h1>
+          <div className="flex justify-between">
+            <h1 className="font-bold text-xl dark:text-white">Add new board</h1>
+            <AiOutlineClose
+              className="text-medium-gray dark:text-white cursor-pointer"
+              onClick={handleToggleForm}
+            />
+          </div>
           <label
             htmlFor=""
             className="text-medium-gray font-bold text-sm dark:text-white"
