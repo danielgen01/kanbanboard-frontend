@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react"
+import { RootState } from "../../Redux/rootReducer"
+import { toggleSidebar } from "../../Redux/features/Sidebar/sidebarSlice"
+import { useSelector, useDispatch } from "react-redux"
+
 import LogoDark from "../../../assets/logo-dark.svg"
 import LogoLight from "../../../assets/logo-light.svg"
 import boardicon from "../../../assets/icon-board.svg"
@@ -9,6 +13,15 @@ import iconShowSidebar from "../../../assets/icon-show-sidebar.svg"
 import iconHideSidebar from "../../../assets/icon-hide-sidebar.svg"
 
 const Sidebar = () => {
+  const isSideBarOpen = useSelector(
+    (state: RootState) => state.sidebar.isSideBarOpen
+  )
+  const dispatch = useDispatch()
+
+  const handleToggleSidebar = () => {
+    dispatch(toggleSidebar())
+  }
+
   const [isDarkMode, setIsDarkMode] = useState(
     localStorage.getItem("theme") === "dark"
   )
@@ -30,6 +43,7 @@ const Sidebar = () => {
     <aside
       className="hidden md:flex flex-col gap-4 min-h-screen py-5
      dark:bg-dark-gray md:col-span-2 xl:col-span-1 border-r-[.5px] border-medium-gray "
+      style={{ display: isSideBarOpen ? "flex" : "none" }}
     >
       <figure className="flex w-full justify-center">
         <img src={LogoLight} alt="" className="hidden dark:block" />
@@ -93,7 +107,10 @@ const Sidebar = () => {
             <img src={iconDark} alt="icon" className="h-6" />
           </div>
         </div>
-        <div className="toggle-side-bar-container w-[90%] flex items-center px-10 mt-5 hover:bg-bright-gray dark:hover:bg-white h-12 cursor-pointer duration-200 rounded-3xl -ml-5">
+        <div className="toggle-side-bar-container w-[90%]
+         flex items-center px-10 mt-5 hover:bg-bright-gray
+          dark:hover:bg-white h-12 cursor-pointer duration-200 rounded-3xl -ml-5"
+          onClick={handleToggleSidebar}>
           <button className="toggle-side-bar-content flex items-center gap-2">
             <img src={iconHideSidebar} alt="icon" className="h-4" />
             <p className="text-medium-gray font-bold text-sm hover:text-dark-purple">
