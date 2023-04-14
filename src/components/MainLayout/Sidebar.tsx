@@ -41,9 +41,9 @@ const Sidebar = () => {
   }
   return (
     <aside
-      className="hidden md:flex flex-col gap-4 min-h-screen py-5
-     dark:bg-dark-gray md:col-span-2 xl:col-span-1 border-r-[.5px] border-medium-gray "
-      style={{ display: isSideBarOpen ? "flex" : "none" }}
+      className={`hidden md:flex flex-col gap-4 min-h-screen py-5
+     dark:bg-dark-gray md:col-span-2 xl:col-span-1 border-r-[.5px] border-medium-gray  md:${isSideBarOpen? "block" : "hidden"}`}
+      
     >
       <figure className="flex w-full justify-center">
         <img src={LogoLight} alt="" className="hidden dark:block" />
