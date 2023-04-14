@@ -1,10 +1,10 @@
 import React from "react"
 import boardicon from "../../assets/logo-light.svg"
 import darkboardicon from "../../assets/logo-dark.svg"
-import logomobile from "../../assets/logo-mobile.svg"
-import chevrondown from "../../assets/icon-chevron-down.svg"
-import addicon from "../../assets/icon-add-task-mobile.svg"
-import threepointsicon from "../../assets/icon-vertical-ellipsis.svg"
+import logomobile from "../../../assets/logo-mobile.svg"
+import chevrondown from "../../../assets/icon-chevron-down.svg"
+import addicon from "../../../assets/icon-add-task-mobile.svg"
+import threepointsicon from "../../../assets/icon-vertical-ellipsis.svg"
 
 const Navbar = () => {
   return (

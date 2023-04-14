@@ -2,7 +2,7 @@ import React from "react"
 import { TodoItemsColumn } from "../columns/TodoItemsColumn"
 import { DoingColumn } from "../columns/DoingColumn"
 import { DoneColumn } from "../columns/DoneColumn"
-import Navbar from "../Navbar"
+import Navbar from "../Navbar/Navbar"
 
 const Board = () => {
   return (

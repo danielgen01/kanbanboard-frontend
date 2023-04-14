@@ -5,6 +5,8 @@ import boardicon from "../../../assets/icon-board.svg"
 import { AiOutlinePlus } from "react-icons/ai"
 import iconLight from "../../../assets/icon-light-theme.svg"
 import iconDark from "../../../assets/icon-dark-theme.svg"
+import iconShowSidebar from "../../../assets/icon-show-sidebar.svg"
+import iconHideSidebar from "../../../assets/icon-hide-sidebar.svg"
 
 const Sidebar = () => {
   const [isDarkMode, setIsDarkMode] = useState(
@@ -87,6 +89,13 @@ const Sidebar = () => {
 
             <img src={iconDark} alt="icon" className="h-6" />
           </div>
+        </div>
+        <div className="toggle-side-bar-container w-[90%] flex items-center px-10 mt-5 hover:bg-white h-12 cursor-pointer duration-200 rounded-3xl -ml-5">
+          <button className="toggle-side-bar-content flex items-center gap-2">
+            <img src={iconHideSidebar} alt="icon" className="h-4" />
+            <p className="text-medium-gray font-bold text-sm hover:text-dark-purple">Hide Sidebar</p>
+          </button>
+
         </div>
       </footer>
     </aside>

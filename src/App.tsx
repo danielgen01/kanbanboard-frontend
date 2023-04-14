@@ -1,6 +1,6 @@
 import { useState } from "react"
 import "./App.css"
-import Navbar from "./components/Navbar"
+import Navbar from "./components/Navbar/Navbar"
 import Board from "./components/MainLayout/Board"
 import NewTaskForm from "./components/Forms/AddTask/NewTaskForm"
 import EditTaskForm from "./components/Forms/EditTask/EditTaskForm"
