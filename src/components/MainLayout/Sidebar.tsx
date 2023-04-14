@@ -93,7 +93,7 @@ const Sidebar = () => {
             <img src={iconDark} alt="icon" className="h-6" />
           </div>
         </div>
-        <div className="toggle-side-bar-container w-[90%] flex items-center px-10 mt-5 hover:bg-white h-12 cursor-pointer duration-200 rounded-3xl -ml-5">
+        <div className="toggle-side-bar-container w-[90%] flex items-center px-10 mt-5 hover:bg-bright-gray dark:hover:bg-white h-12 cursor-pointer duration-200 rounded-3xl -ml-5">
           <button className="toggle-side-bar-content flex items-center gap-2">
             <img src={iconHideSidebar} alt="icon" className="h-4" />
             <p className="text-medium-gray font-bold text-sm hover:text-dark-purple">
