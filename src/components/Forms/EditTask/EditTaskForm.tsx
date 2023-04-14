@@ -5,7 +5,7 @@ const EditTaskForm = () => {
   return (
     <section className="transparent-background absolute top-0 left-0 h-screen w-screen bg-black/60">
       <form
-        className="edit-task-container px-10 w-[90%] min-h-[500px] bg-white dark:bg-dark-gray
+        className="edit-task-container px-10 w-[90%] md:w-[50%] lg:w-[40%] xl:w-[30%] min-h-[500px] bg-white dark:bg-dark-gray
        fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md"
       >
         <div className="container-content flex flex-col px-1 py-5 gap-6">

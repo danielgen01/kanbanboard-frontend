@@ -3,7 +3,8 @@ import React from "react"
 const DeleteTask = () => {
   return (
     <section className="transparent-background bg-black/50 absolute top-0 left-0 h-screen w-screen">
-      <div className="delete-box px-5 min-h-[300px] bg-white dark:bg-dark-gray w-[90%] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md">
+      <div className="delete-box px-5 min-h-[300px] bg-white 
+       dark:bg-dark-gray w-[90%] md:w-[50%] lg:w-[40%] xl:w-[30%] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md">
         <div className="content py-5 px-5 flex flex-col gap-5">
           <h1
             className="text-lg text-dark-red font-bold"
