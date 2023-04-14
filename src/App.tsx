@@ -16,11 +16,11 @@ function App() {
       {/* <Navbar /> */}
       <Sidebar />
       <Board />
-      <NewTaskForm />
+      {/* <NewTaskForm /> */}
       {/* <ViewTaskForm /> */}
       {/* <AddBoardForm /> */}
       {/* <EditBoardForm /> */}
-      {/* <DeleteBoard /> */}
+      <DeleteBoard />
       {/* <DeleteTask /> */}
     </div>
   )
