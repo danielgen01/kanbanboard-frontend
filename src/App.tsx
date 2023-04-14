@@ -3,7 +3,7 @@ import "./App.css"
 import Navbar from "./components/Navbar/Navbar"
 import Board from "./components/MainLayout/Board"
 import NewTaskForm from "./components/Forms/AddTask/NewTaskForm"
-import EditTaskForm from "./components/Forms/EditTask/EditTaskForm"
+import ViewTaskForm from "./components/Forms/ViewTask/ViewTask"
 import AddBoardForm from "./components/Forms/AddNewBoard/AddBoardForm"
 import EditBoardForm from "./components/Forms/EditBoard/EditBoard"
 import DeleteBoard from "./components/Forms/DeleteBoard/DeleteBoard"
@@ -16,8 +16,8 @@ function App() {
       {/* <Navbar /> */}
       <Sidebar />
       <Board />
-      {/* <NewTaskForm /> */}
-      <EditTaskForm />
+      <NewTaskForm />
+      {/* <ViewTaskForm /> */}
       {/* <AddBoardForm /> */}
       {/* <EditBoardForm /> */}
       {/* <DeleteBoard /> */}

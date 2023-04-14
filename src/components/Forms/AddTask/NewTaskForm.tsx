@@ -1,5 +1,7 @@
 import React from "react"
 import { AiOutlineClose } from "react-icons/ai"
+import { AddColInput } from "../AddNewBoard/AddColInput"
+import { AiOutlinePlus } from "react-icons/ai"
 
 const NewTaskForm = () => {
   return (
@@ -45,6 +47,21 @@ const NewTaskForm = () => {
               placeholder="e.g its always good to take a small break from working to prevent burnouts"
             />
           </div>
+
+          <section className="subtasks flex flex-col gap-2">
+            <label
+              htmlFor=""
+              className="text-sm text-medium-gray font-bold dark:text-white"
+            >
+              Subtasks
+            </label>
+            <AddColInput defaultValue={""} />
+            <AddColInput defaultValue={""} />
+            <button className="flex items-center gap-2 text-dark-purple w-full justify-center mt-2 bg-bright-gray rounded-3xl h-12 font-bold">
+              <AiOutlinePlus className="font-bold" />
+              Add New Subtask
+            </button>
+          </section>
 
           {/* Select box for status  */}
           <div className="input-title-container flex flex-col gap-2">
