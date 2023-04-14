@@ -53,7 +53,7 @@ const Navbar = () => {
               Add New Task
             </span>
           </button>
-          <button className="three-points-ellipsis" onClick={openDropDown}>
+          <button className="three-points-ellipsis px-5" onClick={openDropDown}>
             <img src={threepointsicon} alt="ellipsis" className="" />
           </button>
         </div>
