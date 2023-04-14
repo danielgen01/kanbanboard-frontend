@@ -8,7 +8,7 @@ type props = {
 export const Kanbanbox: React.FC<props> = ({ title, subtasksCount }) => {
   return (
     <div
-      className="kanbanbox h-28 w-full md:w-[95%] bg-white rounded-md flex flex-col items-start justify-center shadow-md gap-2 px-5
+      className="kanbanbox h-28 w-72 md:w-[95%] bg-white rounded-md flex flex-col items-start justify-center shadow-md gap-2 px-5
           dark:bg-dark-gray"
     >
       <h1

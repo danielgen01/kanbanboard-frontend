@@ -10,10 +10,10 @@ export const DoingColumn: React.FC = () => {
         <h1 className="text-medium-gray -tracking-tighter text-md uppercase font-bold">
           Doing (0){" "}
         </h1>
-        <div className="swipe-icon-text md:hidden ml-auto">
+        {/* <div className="swipe-icon-text md:hidden ml-auto">
           <h1 className="">Swipe</h1>
           <MdSwipeLeft />
-        </div>
+        </div> */}
       </div>
       {/* HIER SPÄTER .map() einfügen */}
       <Kanbanbox title={"Drama"} subtasksCount={0} />
