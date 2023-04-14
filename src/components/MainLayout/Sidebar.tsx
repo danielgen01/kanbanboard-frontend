@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { RootState } from "../../Redux/rootReducer"
 import { toggleSidebar } from "../../Redux/features/Sidebar/sidebarSlice"
 import { useSelector, useDispatch } from "react-redux"
-
+import { toggleForm } from "../../Redux/features/NewBoardForm/NewBoardFormSlice"
 import LogoDark from "../../../assets/logo-dark.svg"
 import LogoLight from "../../../assets/logo-light.svg"
 import boardicon from "../../../assets/icon-board.svg"
@@ -20,6 +20,14 @@ const Sidebar = () => {
 
   const handleToggleSidebar = () => {
     dispatch(toggleSidebar())
+  }
+
+  const isFormOpen = useSelector(
+    (state: RootState) => state.newboardform.isFormOpen
+  )
+
+  const handleToggleBoardForm = () => {
+    dispatch(toggleForm())
   }
 
   const [isDarkMode, setIsDarkMode] = useState(
@@ -75,7 +83,8 @@ const Sidebar = () => {
           </span>
         </button>
 
-        <button className="flex items-center px-10 py-4 rounded-3xl -ml-5 gap-3 font-bold text-sm  hover:bg-bright-gray duration-200">
+        <button className="flex items-center px-10 py-4 rounded-3xl -ml-5 gap-3
+         font-bold text-sm  hover:bg-bright-gray duration-200" onClick={handleToggleBoardForm}>
           <img src={boardicon} alt="logo" className="fill-dark-purple" />
           <span className="flex items-center gap-2 text-dark-purple">
             {" "}

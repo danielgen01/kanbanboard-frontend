@@ -2,17 +2,34 @@ import React from "react"
 import { AiOutlinePlus } from "react-icons/ai"
 import { AddColInput } from "./AddColInput"
 
-const AddBoardForm = () => {
+import { useSelector, useDispatch } from "react-redux"
+import { toggleForm } from "../../../Redux/features/NewBoardForm/NewBoardFormSlice"
+import { useAppDispatch,useAppSelector } from "../../../Redux/store"
+import { RootState } from "../../../Redux/rootReducer"
+
+const AddBoardForm: React.FC = () => {
+  const isFormOpen = useAppSelector(
+    (state: RootState) => state.newboardform.isFormOpen
+  )
+  const dispatch = useAppDispatch()
+
+  const handleToggleForm = () => {
+    dispatch(toggleForm())
+  }
   return (
-    <section className="transparent-background bg-black/50 absolute h-screen w-screen top-0 left-0 ">
+    <section className="transparent-background bg-black/50 absolute h-screen w-screen top-0 left-0 "
+    style={{display:isFormOpen? "block" : "none"}} onClick={handleToggleForm}>
       <div
         className="form-container bg-white fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
      min-h-[550px] w-[90%] md:w-[50%] lg:w-[40%] xl:w-[30%] rounded-md
      dark:bg-dark-gray"
-      >
+     >
         <div className="form-content flex flex-col px-5 py-5 gap-4">
           <h1 className="font-bold text-xl dark:text-white">Add new board</h1>
-          <label htmlFor="" className="text-medium-gray font-bold text-sm dark:text-white">
+          <label
+            htmlFor=""
+            className="text-medium-gray font-bold text-sm dark:text-white"
+          >
             Board Name
           </label>
           <input
@@ -21,7 +38,10 @@ const AddBoardForm = () => {
             placeholder="e.g Web Design"
           />
           <section className="board-columns flex flex-col gap-2">
-            <label htmlFor="" className="text-sm text-medium-gray font-bold dark:text-white">
+            <label
+              htmlFor=""
+              className="text-sm text-medium-gray font-bold dark:text-white"
+            >
               Board Columns
             </label>
             <AddColInput defaultValue={"Todo"} />

@@ -19,7 +19,7 @@ function App() {
       <Board />
       {/* <NewTaskForm /> */}
       {/* <ViewTaskForm /> */}
-      {/* <AddBoardForm /> */}
+      <AddBoardForm />
       {/* <EditBoardForm /> */}
       {/* <DeleteBoard /> */}
       {/* <DeleteTask /> */}
