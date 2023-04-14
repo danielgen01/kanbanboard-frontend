@@ -9,6 +9,7 @@ import EditBoardForm from "./components/Forms/EditBoard/EditBoard"
 import DeleteBoard from "./components/Forms/DeleteBoard/DeleteBoard"
 import DeleteTask from "./components/Forms/DeleteTask/DeleteTask"
 import Sidebar from "./components/MainLayout/Sidebar"
+import EditTaskForm from "./components/Forms/EditTask/EditTaskForm"
 
 function App() {
   return (
@@ -20,8 +21,9 @@ function App() {
       {/* <ViewTaskForm /> */}
       {/* <AddBoardForm /> */}
       {/* <EditBoardForm /> */}
-      <DeleteBoard />
+      {/* <DeleteBoard /> */}
       {/* <DeleteTask /> */}
+      {/* <EditTaskForm /> */}
     </div>
   )
 }
