@@ -3,9 +3,27 @@ import { AiOutlineClose } from "react-icons/ai"
 import { AddColInput } from "../AddNewBoard/AddColInput"
 import { AiOutlinePlus } from "react-icons/ai"
 
+import { useAppDispatch, useAppSelector } from "../../../Redux/store"
+import { RootState } from "../../../Redux/rootReducer"
+import { toggleNewTaskForm } from "../../../Redux/features/NewTaskForm/NewTaskFormSlice"
+
+
 const NewTaskForm = () => {
+
+  const isTaskFormOpen = useAppSelector(
+    (state: RootState) => state.newTaskForm.isTaskFormOpen
+  )
+
+  const dispatch = useAppDispatch()
+
+  const handleToggleNewTaskForm = () => {
+    dispatch(toggleNewTaskForm())
+  }
+
+
   return (
-    <section className="transparent-background bg-black/50 absolute h-screen w-screen top-0 left-0 ">
+    <section className="transparent-background bg-black/50 absolute h-screen w-screen top-0 left-0"
+    style={{display:isTaskFormOpen? "block" : "none"}} onClick={handleToggleNewTaskForm}>
       <form
         className="form-container bg-white fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
      min-h-[550px] w-[90%] md:w-[50%] lg:w-[40%] xl:w-[30%]  rounded-md

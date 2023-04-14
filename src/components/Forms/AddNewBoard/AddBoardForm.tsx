@@ -8,7 +8,7 @@ import { useAppDispatch,useAppSelector } from "../../../Redux/store"
 import { RootState } from "../../../Redux/rootReducer"
 
 const AddBoardForm: React.FC = () => {
-  const isFormOpen = useAppSelector(
+  const isBoardFormOpen = useAppSelector(
     (state: RootState) => state.newboardform.isBoardFormOpen
   )
   const dispatch = useAppDispatch()
@@ -18,7 +18,7 @@ const AddBoardForm: React.FC = () => {
   }
   return (
     <section className="transparent-background bg-black/50 absolute h-screen w-screen top-0 left-0 "
-    style={{display:isFormOpen? "block" : "none"}} onClick={handleToggleForm}>
+    style={{display:isBoardFormOpen? "block" : "none"}} onClick={handleToggleForm}>
       <div
         className="form-container bg-white fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
      min-h-[550px] w-[90%] md:w-[50%] lg:w-[40%] xl:w-[30%] rounded-md

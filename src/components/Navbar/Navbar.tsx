@@ -6,7 +6,20 @@ import chevrondown from "../../../assets/icon-chevron-down.svg"
 import addicon from "../../../assets/icon-add-task-mobile.svg"
 import threepointsicon from "../../../assets/icon-vertical-ellipsis.svg"
 
+import { toggleNewTaskForm } from "../../Redux/features/NewTaskForm/NewTaskFormSlice"
+import { useAppDispatch, useAppSelector } from "../../Redux/store"
+import { RootState } from "../../Redux/rootReducer"
+
 const Navbar = () => {
+  const isTaskFormOpen = useAppSelector(
+    (state: RootState) => state.newTaskForm.isTaskFormOpen
+  )
+  const dispatch = useAppDispatch()
+
+  const handleToggleNewTaskForm = () => {
+    dispatch(toggleNewTaskForm())
+  }
+
   return (
     <nav
       className="h-20 shadow-sm nav-bar-ctn w-screen md:w-auto md:border-b-[1px] border-medium-gray border-none
@@ -26,7 +39,8 @@ const Navbar = () => {
           <img src={chevrondown} className="h-2" alt="chevron down" />
         </div>
         <div className="top-right-icons ml-auto flex  items-center gap-5">
-          <button className="add-btn flex bg-dark-purple py-3 px-5 rounded-2xl items-center gap-2 text-white font-bold">
+          <button className="add-btn flex bg-dark-purple py-3 px-5 rounded-2xl items-center gap-2 text-white font-bold"
+          onClick={handleToggleNewTaskForm}>
             <img
               src={addicon}
               alt="addicon"
