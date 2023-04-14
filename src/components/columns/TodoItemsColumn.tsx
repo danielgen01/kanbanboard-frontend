@@ -14,7 +14,7 @@ export const TodoItemsColumn: React.FC = () => {
           Todo (0){" "}
         </h1>
       </div>
-      <div className="swipe-icon-text lg:hidden ml-auto">
+      <div className="swipe-icon-text md:hidden ml-auto">
         <div className="swipe-icon-text md:hidden ml-auto">
           <h1 className="">Swipe</h1>
           <MdSwipeLeft />

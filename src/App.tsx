@@ -12,7 +12,7 @@ import Sidebar from "./components/MainLayout/Sidebar"
 
 function App() {
   return (
-    <div className="app min-h-screen w-screen grid grid-cols-1 md:grid-cols-5">
+    <div className="app min-h-screen w-screen grid grid-cols-1 md:grid-cols-6 ">
       {/* <Navbar /> */}
       <Sidebar />
       <Board />

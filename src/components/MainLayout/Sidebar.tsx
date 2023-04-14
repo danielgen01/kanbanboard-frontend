@@ -27,7 +27,7 @@ const Sidebar = () => {
     setIsDarkMode(newIsDarkMode)
   }
   return (
-    <aside className="hidden md:flex flex-col gap-4 min-h-screen py-5 dark:bg-dark-gray">
+    <aside className="hidden md:flex flex-col gap-4 min-h-screen py-5 dark:bg-dark-gray md:col-span-2 xl:col-span-1">
       <figure className="flex w-full justify-center">
         <img src={LogoLight} alt="" className="hidden dark:block" />
         <img src={LogoDark} alt="" className="block dark:hidden" />
@@ -93,9 +93,10 @@ const Sidebar = () => {
         <div className="toggle-side-bar-container w-[90%] flex items-center px-10 mt-5 hover:bg-white h-12 cursor-pointer duration-200 rounded-3xl -ml-5">
           <button className="toggle-side-bar-content flex items-center gap-2">
             <img src={iconHideSidebar} alt="icon" className="h-4" />
-            <p className="text-medium-gray font-bold text-sm hover:text-dark-purple">Hide Sidebar</p>
+            <p className="text-medium-gray font-bold text-sm hover:text-dark-purple">
+              Hide Sidebar
+            </p>
           </button>
-
         </div>
       </footer>
     </aside>
