@@ -14,11 +14,10 @@ import EditTaskForm from "./components/Forms/EditTask/EditTaskForm"
 function App() {
   return (
     <div className="app min-h-screen md:w-screen grid grid-cols-1 md:grid-cols-6 ">
-      {/* <Navbar /> */}
       <Sidebar />
       <Board />
       <NewTaskForm />
-      {/* <ViewTaskForm /> */}
+      <ViewTaskForm />
       <AddBoardForm />
       {/* <EditBoardForm /> */}
       {/* <DeleteBoard /> */}

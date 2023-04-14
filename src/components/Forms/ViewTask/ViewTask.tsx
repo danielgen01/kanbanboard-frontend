@@ -2,9 +2,24 @@ import React from "react"
 import { Subtask } from "./Subtask"
 import ellipsIcon from "../../../../assets/icon-vertical-ellipsis.svg"
 
+import { RootState } from "../../../Redux/rootReducer"
+import { useAppDispatch, useAppSelector } from "../../../Redux/store"
+import { toggleViewTaskForm } from "../../../Redux/features/ViewTaskForm/ViewTaskFormSlice"
+
 const ViewTaskForm = () => {
+
+  const isViewTaskFormOpen = useAppSelector(
+    (state: RootState) => state.viewTaskForm.isViewTaskFormOpen
+  )
+
+  const dispatch = useAppDispatch()
+
+  const handleToggleNewTaskForm = () => {
+    dispatch(toggleViewTaskForm())
+  }
+
   return (
-    <section className="transparent-background absolute top-0 left-0 h-screen w-screen bg-black/60">
+    <section className="transparent-background absolute top-0 left-0 h-screen w-screen bg-black/60" style={{display:isViewTaskFormOpen? "block" : "none"}}>
       <form
         className="edit-task-container px-10 w-[90%] md:w-[50%] lg:w-[40%] xl:w-[30%] min-h-[500px] bg-white dark:bg-dark-gray
        fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md"

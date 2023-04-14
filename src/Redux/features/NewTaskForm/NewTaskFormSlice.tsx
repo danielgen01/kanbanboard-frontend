@@ -1,23 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit"
 
 interface newTaskFormState {
-  isTaskFormOpen: boolean;
+  isTaskFormOpen: boolean
 }
 
 const initialState: newTaskFormState = {
   isTaskFormOpen: false,
-};
+}
 
 const newTaskForm = createSlice({
-  name: 'newTaskForm',
+  name: "newTaskForm",
   initialState,
   reducers: {
     toggleNewTaskForm: (state) => {
-      state.isTaskFormOpen = !state.isTaskFormOpen;
+      state.isTaskFormOpen = !state.isTaskFormOpen
     },
   },
-});
+})
 
-export const { toggleNewTaskForm } = newTaskForm.actions;
+export const { toggleNewTaskForm } = newTaskForm.actions
 
-export default newTaskForm.reducer;
+export default newTaskForm.reducer
