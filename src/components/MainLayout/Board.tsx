@@ -42,11 +42,13 @@ const Board = () => {
           <DoneColumn />
         </section>
 
-        <div className={`show-slidebar-container fixed z-50 bottom-10 -left-5
+        <div
+          className={`show-slidebar-container fixed z-50 bottom-10 -left-5
          bg-dark-purple px-10 py-5 rounded-3xl hover:bg-bright-purple cursor-pointer duration-100 
-         hidden md:${!isSideBarOpen? "block" : "none"}`}
-         onClick={handleToggleSidebar}>
-          <img src={showSlideBarIcon} alt="" className="w-6"/>
+         hidden md:${!isSideBarOpen ? "block" : "none"}`}
+          onClick={handleToggleSidebar}
+        >
+          <img src={showSlideBarIcon} alt="" className="w-6" />
         </div>
 
         {/* Render if no boxes here */}
