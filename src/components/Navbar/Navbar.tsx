@@ -9,7 +9,7 @@ import threepointsicon from "../../../assets/icon-vertical-ellipsis.svg"
 const Navbar = () => {
   return (
     <nav
-      className="h-20 shadow-sm nav-bar-ctn w-screen md:w-auto
+      className="h-20 shadow-sm nav-bar-ctn w-screen md:w-auto md:border-b-[1px] border-medium-gray border-none
      dark:bg-dark-gray px-5"
     >
       <div className="navbar-contentn px-5 flex  items-center w-full h-full">
