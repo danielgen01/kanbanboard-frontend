@@ -7,11 +7,17 @@ import addicon from "../../../assets/icon-add-task-mobile.svg"
 import threepointsicon from "../../../assets/icon-vertical-ellipsis.svg"
 
 import { toggleNewTaskForm } from "../../Redux/features/NewTaskForm/NewTaskFormSlice"
+import { toggleEditBoardForm } from "../../Redux/features/EditBoardForm/EditBoardFormSlice"
 import { useAppDispatch, useAppSelector } from "../../Redux/store"
 import { RootState } from "../../Redux/rootReducer"
 
 const Navbar = () => {
   const [isEllipsDropDownOpen, setIsEllipsDropDownOpen] = useState(false)
+
+  const handleToggleEditBoardForm = () => {
+    dispatch(toggleEditBoardForm())
+    setIsEllipsDropDownOpen(false)
+  }
 
   const openDropDown = () => {
     setIsEllipsDropDownOpen(!isEllipsDropDownOpen)
@@ -24,6 +30,8 @@ const Navbar = () => {
   const handleToggleNewTaskForm = () => {
     dispatch(toggleNewTaskForm())
   }
+
+
 
   return (
     <nav
@@ -54,7 +62,7 @@ const Navbar = () => {
             </span>
           </button>
           <button className="three-points-ellipsis px-5" onClick={openDropDown}>
-            <img src={threepointsicon} alt="ellipsis" className="" />
+            <img src={threepointsicon} alt="ellipsis" className=""/>
           </button>
         </div>
 
@@ -63,7 +71,7 @@ const Navbar = () => {
           style={{ display: isEllipsDropDownOpen ? "block" : "none" }}
         >
           <div className="content  flex flex-col justify-center px-5 whitespace-nowrap min-h-[80px] gap-4">
-            <button className="dark:font-bold text-medium-gray">
+            <button className="dark:font-bold text-medium-gray" type="button" onClick={handleToggleEditBoardForm}>
               Edit Board
             </button>
             <button className="dark:font-bold text-dark-red text-md">
