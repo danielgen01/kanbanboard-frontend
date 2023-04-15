@@ -13,25 +13,26 @@ const AddBoardForm: React.FC = () => {
   )
   const dispatch = useAppDispatch()
 
-  const handleToggleForm = () => {
+  const handleToggleAddBoardForm = () => {
     dispatch(toggleAddBoardForm())
   }
   return (
+    <>
     <section
       className="transparent-background bg-black/50 absolute h-screen w-screen top-0 left-0 "
-      style={{ display: isBoardFormOpen ? "block" : "none" }}
-    >
+      style={{ display: isBoardFormOpen ? "block" : "none" }} onClick={handleToggleAddBoardForm}
+    ></section>
       <div
         className="form-container bg-white fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
      min-h-[550px] w-[90%] md:w-[50%] lg:w-[40%] xl:w-[30%] rounded-md
      dark:bg-dark-gray"
-      >
+     style={{ display: isBoardFormOpen ? "block" : "none" }}>
         <div className="form-content flex flex-col px-5 py-5 gap-4">
           <div className="flex justify-between">
             <h1 className="font-bold text-xl dark:text-white">Add new board</h1>
             <AiOutlineClose
               className="text-medium-gray dark:text-white cursor-pointer"
-              onClick={handleToggleForm}
+              onClick={handleToggleAddBoardForm}
             />
           </div>
           <label
@@ -70,8 +71,8 @@ const AddBoardForm: React.FC = () => {
           </section>
         </div>
       </div>
-    </section>
-  )
+    
+    </>)
 }
 
 export default AddBoardForm
