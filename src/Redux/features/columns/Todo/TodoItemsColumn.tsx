@@ -28,10 +28,15 @@ export const TodoItemsColumn: React.FC = () => {
 
       {/* HIER SPÄTER .map() einfügen */}
 
-      {todoItems.map((box:any) => (
+      {todoItems.map((box: any) => (
         <div key={box.id}>
-        <Kanbanbox title={box.title} subtasksCount={1} subtasks={box.subtasks} description={box.description} id={box.id}>
-        </Kanbanbox>
+          <Kanbanbox
+            title={box.title}
+            subtasksCount={1}
+            subtasks={box.subtasks}
+            description={box.description}
+            id={box.id}
+          ></Kanbanbox>
         </div>
       ))}
 

@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react"
+import React, { useState, useRef } from "react"
 import { AiOutlineClose } from "react-icons/ai"
 import { AddColInput } from "../../../components/reusable/AddColInput"
 import { AiOutlinePlus } from "react-icons/ai"
@@ -9,10 +9,10 @@ import { toggleNewTaskForm } from "./NewTaskFormSlice"
 import { addBox } from "../columns/Todo/TodoSlice"
 
 const NewTaskForm = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const descriptionRef = useRef(null);
-  const titleRef = useRef(null);
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+  const descriptionRef: any = useRef(null)
+  const titleRef: any = useRef(null)
 
   const isTaskFormOpen = useAppSelector(
     (state: RootState) => state.newTaskForm.isTaskFormOpen
@@ -28,28 +28,34 @@ const NewTaskForm = () => {
     (state: RootState) => state.todoStates.todoItems
   )
 
-  
-
   const handleAddBox = () => {
-    const newBox = {
-      id:todoItems.length + 1,
-      title,
-      description,
-      subtasks:[]
-    }
-    dispatch(addBox(newBox))
-    setTitle('');
-    setDescription('');
+    if (titleRef.current.value && descriptionRef.current.value !== "") {
+      const newBox = {
+        id: todoItems.length + 1,
+        title,
+        description,
+        subtasks: [],
+      }
+      dispatch(addBox(newBox))
+    
     handleToggleNewTaskForm()
+    titleRef.current!.value = ""
+    descriptionRef.current!.value = ""
+  }else{
+    alert("Please fill all the fields")
+  }
+    
   }
 
-  function calculateTitle(){
+  function calculateTitle() {
     setTitle(titleRef.current?.value)
   }
 
-  function calculateDescription(){
+  function calculateDescription() {
     setDescription(descriptionRef.current?.value)
   }
+
+  function calculateWhichColumn() {}
 
   return (
     <>
@@ -84,7 +90,7 @@ const NewTaskForm = () => {
               name="input-title"
               id="input-title"
               className="border-bright-gray border-2 outline-bright-gray rounded-md h-10 px-2 text-sm
-              dark:bg-dark-gray dark:border-medium-gray"
+              dark:bg-dark-gray dark:border-medium-gray dark:text-white"
               placeholder="e.g Take coffee break"
               onChange={calculateTitle}
               required={true}
@@ -104,7 +110,7 @@ const NewTaskForm = () => {
               id="textarea-description"
               name="description"
               className="border-bright-gray border-2 outline-bright-gray rounded-md h-20 px-2 py-2 text-sm resize-none
-               dark:bg-dark-gray dark:border-medium-gray"
+               dark:bg-dark-gray dark:border-medium-gray dark:text-white"
               placeholder="e.g its always good to take a small break from working to prevent burnouts"
               onChange={calculateDescription}
               required={true}
@@ -140,6 +146,7 @@ const NewTaskForm = () => {
               name="select-status"
               className="border-bright-gray border-2 outline-bright-gray rounded-md h-10 px-2 text-sm
               dark:text-white dark:bg-dark-gray dark:border-medium-gray"
+              // onChange={console.log("test")}
             >
               <option className="text-black dark:text-white">Todo</option>
               <option className="text-black dark:text-white">Doing</option>
@@ -149,7 +156,11 @@ const NewTaskForm = () => {
 
           {/* Create task button */}
 
-          <button className="bg-dark-purple text-white font-bold text-sm py-3 rounded-3xl" type="button" onClick={handleAddBox}>
+          <button
+            className="bg-dark-purple text-white font-bold text-sm py-3 rounded-3xl"
+            type="button"
+            onClick={handleAddBox}
+          >
             Create Task
           </button>
         </div>
