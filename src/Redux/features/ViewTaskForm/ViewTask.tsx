@@ -91,18 +91,19 @@ const ViewTaskForm = () => {
             <select
               name="select-status"
               id="select-staus"
-              className="border-bright-gray border-2 h-10 rounded-md px-2"
+              className="border-bright-gray border-2 h-10 rounded-md cursor-pointer
+               px-2 dark:bg-transparent dark:outline-none dark:text-white"
             >
               <option
-                className="text-medium-gray dark:text-white"
+                className="text-medium-gray"
                 value="Doing"
               >
                 Doing
               </option>
-              <option className="text-medium-gray dark:text-white" value="Done">
+              <option className="text-medium-gray " value="Done">
                 Done
               </option>
-              <option className="text-medium-gray dark:text-white" value="Todo">
+              <option className="text-medium-gray " value="Todo">
                 Todo
               </option>
             </select>
