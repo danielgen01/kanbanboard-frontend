@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import { Subtask } from "./Subtask"
 import ellipsIcon from "../../../../assets/icon-vertical-ellipsis.svg"
 
@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../../Redux/store"
 import { toggleViewTaskForm } from "../../../Redux/features/ViewTaskForm/ViewTaskFormSlice"
 
 const ViewTaskForm = () => {
+  const [isEllipsDropDownOpen, setIsEllipsDropDownOpen] = useState<boolean>(false)
   const isViewTaskFormOpen = useAppSelector(
     (state: RootState) => state.viewTaskForm.isViewTaskFormOpen
   )
@@ -15,6 +16,10 @@ const ViewTaskForm = () => {
 
   const handleToggleViewTaskForm = () => {
     dispatch(toggleViewTaskForm())
+  }
+
+  const toggleEllipsDropDown = () => {
+    setIsEllipsDropDownOpen(!isEllipsDropDownOpen)
   }
 
   return (
@@ -35,7 +40,7 @@ const ViewTaskForm = () => {
               Lorem ipsum dolor sit amet cscdunt culpa, blanditiis quibusdam
               tempore!
             </h1>
-            <img src={ellipsIcon} alt="" />
+            <img src={ellipsIcon} alt="" onClick={toggleEllipsDropDown} className="px-5 py-5 cursor-pointer"/>
           </div>
 
           <p className="text-medium-gray">
@@ -83,6 +88,22 @@ const ViewTaskForm = () => {
             </select>
           </section>
         </div>
+
+        <form
+          className="absolute right-10 top-20 bg-bright-gray dark:bg-dark-black w-52 rounded-md"
+          style={{ display: isEllipsDropDownOpen? "block" : "none" }}
+        >
+          <div className="content  flex flex-col justify-center px-5 whitespace-nowrap min-h-[80px] gap-4">
+            <button className="dark:font-bold text-medium-gray">
+              Edit Task
+            </button>
+            <button className="dark:font-bold text-dark-red text-md">
+              Delete Task
+            </button>
+          </div>
+        </form>
+
+
       </form>
     </>
   )
