@@ -5,7 +5,7 @@ import newTaskFormReducer from "./features/NewTaskForm/NewTaskFormSlice"
 import viewTaskFormReducer from "./features/ViewTaskForm/ViewTaskFormSlice"
 import editTaskFormReducer from "./features/EditTaskForm/EditTaskFormSlice"
 import editBoardFormReducer from "./features/EditBoardForm/EditBoardFormSlice"
-
+import deleteBoardFormReducer from "./features/DeleteBoardForm/DeleteBoardFormSlice"
 
 const rootReducer = combineReducers({
   sidebar: sidebarReducer,
@@ -13,7 +13,8 @@ const rootReducer = combineReducers({
   newTaskForm: newTaskFormReducer,
   viewTaskForm: viewTaskFormReducer,
   editTaskForm:editTaskFormReducer,
-  editBoardForm:editBoardFormReducer
+  editBoardForm:editBoardFormReducer,
+  deleteBoardForm:deleteBoardFormReducer
   
  
 })

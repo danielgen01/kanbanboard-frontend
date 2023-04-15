@@ -8,6 +8,7 @@ import threepointsicon from "../../../assets/icon-vertical-ellipsis.svg"
 
 import { toggleNewTaskForm } from "../../Redux/features/NewTaskForm/NewTaskFormSlice"
 import { toggleEditBoardForm } from "../../Redux/features/EditBoardForm/EditBoardFormSlice"
+import { toggleDeleteBoardForm } from "../../Redux/features/DeleteBoardForm/DeleteBoardFormSlice"
 import { useAppDispatch, useAppSelector } from "../../Redux/store"
 import { RootState } from "../../Redux/rootReducer"
 
@@ -29,6 +30,10 @@ const Navbar = () => {
 
   const handleToggleNewTaskForm = () => {
     dispatch(toggleNewTaskForm())
+  }
+
+  const handleToggleDeleteBoardForm = () => {
+    dispatch(toggleDeleteBoardForm())
   }
 
 
@@ -74,7 +79,7 @@ const Navbar = () => {
             <button className="dark:font-bold text-medium-gray" type="button" onClick={handleToggleEditBoardForm}>
               Edit Board
             </button>
-            <button className="dark:font-bold text-dark-red text-md">
+            <button className="dark:font-bold text-dark-red text-md" type="button" onClick={handleToggleDeleteBoardForm}>
               Delete Board
             </button>
           </div>
