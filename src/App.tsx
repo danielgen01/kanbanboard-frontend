@@ -21,7 +21,7 @@ function App() {
       <AddBoardForm />
       <EditBoardForm />
       <DeleteBoard />
-      {/* <DeleteTask /> */}
+      <DeleteTask />
       <EditTaskForm />
     </div>
   )

@@ -6,6 +6,7 @@ import { RootState } from "../../rootReducer"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { toggleViewTaskForm } from "./ViewTaskFormSlice"
 import { toggleEditTaskForm } from "../EditTaskForm/EditTaskFormSlice"
+import { toggleDeleteTaskForm } from "../DeletTaskForm/DeleteTaskFormSlice"
 
 const ViewTaskForm = () => {
   const [isEllipsDropDownOpen, setIsEllipsDropDownOpen] =
@@ -29,6 +30,11 @@ const ViewTaskForm = () => {
 
   const toggleEllipsDropDown = () => {
     setIsEllipsDropDownOpen(!isEllipsDropDownOpen)
+  }
+
+  const handleToggleDeleteTaskForm = () => {
+    dispatch(toggleDeleteTaskForm())
+    setIsEllipsDropDownOpen(false)
   }
 
   return (
@@ -115,7 +121,7 @@ const ViewTaskForm = () => {
             >
               Edit Task
             </button>
-            <button className="dark:font-bold text-dark-red text-md">
+            <button className="dark:font-bold text-dark-red text-md" type="button" onClick={handleToggleDeleteTaskForm}>
               Delete Task
             </button>
           </div>

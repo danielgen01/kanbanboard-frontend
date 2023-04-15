@@ -4,6 +4,7 @@ import { RootState } from "../../Redux/rootReducer"
 import { useAppDispatch, useAppSelector } from "../../Redux/store"
 import { toggleViewTaskForm } from "../../Redux/features/ViewTaskForm/ViewTaskFormSlice"
 
+
 type props = {
   title: string
   subtasksCount: number
@@ -19,6 +20,8 @@ export const Kanbanbox: React.FC<props> = ({ title, subtasksCount }) => {
   const handleToggleViewTaskForm = () => {
     dispatch(toggleViewTaskForm())
   }
+
+  
 
   return (
     <div
