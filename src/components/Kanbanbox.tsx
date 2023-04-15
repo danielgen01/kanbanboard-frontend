@@ -19,6 +19,8 @@ export const Kanbanbox: React.FC<props> = ({ title, subtasksCount }) => {
   const handleToggleViewTaskForm = () => {
     dispatch(toggleViewTaskForm())
   }
+
+ 
   return (
     <div
       className="kanbanbox h-28 w-72 md:w-[95%] bg-white rounded-md flex flex-col items-start justify-center shadow-md gap-2 px-5

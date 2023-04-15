@@ -2,13 +2,32 @@ import React from "react"
 import { AiOutlinePlus } from "react-icons/ai"
 import { AddColInput } from "../AddNewBoard/AddColInput"
 
+import { RootState } from "../../../Redux/rootReducer"
+import { useAppDispatch, useAppSelector } from "../../../Redux/store"
+import { toggleEditTaskForm } from "../../../Redux/features/EditTaskForm/EditTaskFormSlice"
+
 const EditTaskForm = () => {
+  const dispatch = useAppDispatch()
+
+  const isEditTaskFormOpen = useAppSelector(
+    (state: RootState) => state.editTaskForm.isEditTaskFormOpen
+  )
+
+  const handleToggleEditTaskForm = () => {
+    dispatch(toggleEditTaskForm())
+  }
   return (
-    <section className="transparent-background bg-black/50 absolute h-screen w-screen top-0 left-0 ">
+    <>
+      <section
+        className="transparent-background bg-black/50 absolute h-screen w-screen top-0 left-0 "
+        style={{ display: isEditTaskFormOpen ? "block" : "none" }}
+        onClick={handleToggleEditTaskForm}
+      ></section>
       <div
         className="form-container bg-white fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
      min-h-[550px] w-[90%] md:w-[50%] lg:w-[40%] xl:w-[30%] rounded-md
      dark:bg-dark-gray"
+        style={{ display: isEditTaskFormOpen ? "block" : "none" }}
       >
         <div className="form-content flex flex-col px-5 py-5 gap-4">
           <h1 className="font-bold text-xl dark:text-white">Edit Task</h1>
@@ -64,7 +83,7 @@ const EditTaskForm = () => {
           </section>
         </div>
       </div>
-    </section>
+    </>
   )
 }
 

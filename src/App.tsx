@@ -22,7 +22,7 @@ function App() {
       {/* <EditBoardForm /> */}
       {/* <DeleteBoard /> */}
       {/* <DeleteTask /> */}
-      {/* <EditTaskForm /> */}
+      <EditTaskForm />
     </div>
   )
 }
