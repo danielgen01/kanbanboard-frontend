@@ -1,5 +1,5 @@
 import React from "react"
-import crossicon from "../../../../assets/icon-cross.svg"
+import crossicon from "../../../assets/icon-cross.svg"
 
 type props = {
   defaultValue: string

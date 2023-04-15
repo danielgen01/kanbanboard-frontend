@@ -1,8 +1,8 @@
 import React from "react"
 
-import { RootState } from "../Redux/rootReducer"
-import { useAppDispatch, useAppSelector } from "../Redux/store"
-import { toggleViewTaskForm } from "../Redux/features/ViewTaskForm/ViewTaskFormSlice"
+import { RootState } from "../../Redux/rootReducer"
+import { useAppDispatch, useAppSelector } from "../../Redux/store"
+import { toggleViewTaskForm } from "../../Redux/features/ViewTaskForm/ViewTaskFormSlice"
 
 type props = {
   title: string
@@ -20,7 +20,6 @@ export const Kanbanbox: React.FC<props> = ({ title, subtasksCount }) => {
     dispatch(toggleViewTaskForm())
   }
 
- 
   return (
     <div
       className="kanbanbox h-28 w-72 md:w-[95%] bg-white rounded-md flex flex-col items-start justify-center shadow-md gap-2 px-5

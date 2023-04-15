@@ -1,5 +1,5 @@
 import React from "react"
-import { Kanbanbox } from "../Kanbanbox"
+import { Kanbanbox } from "../reusable/Kanbanbox"
 import { MdSwipeLeft } from "react-icons/md"
 
 export const DoingColumn: React.FC = () => {

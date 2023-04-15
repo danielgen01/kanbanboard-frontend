@@ -1,11 +1,11 @@
 import React, { useState } from "react"
-import { Subtask } from "./Subtask"
+import { Subtask } from "../../../components/reusable/Subtask"
 import ellipsIcon from "../../../../assets/icon-vertical-ellipsis.svg"
 
-import { RootState } from "../../../Redux/rootReducer"
-import { useAppDispatch, useAppSelector } from "../../../Redux/store"
-import { toggleViewTaskForm } from "../../../Redux/features/ViewTaskForm/ViewTaskFormSlice"
-import { toggleEditTaskForm } from "../../../Redux/features/EditTaskForm/EditTaskFormSlice"
+import { RootState } from "../../rootReducer"
+import { useAppDispatch, useAppSelector } from "../../store"
+import { toggleViewTaskForm } from "./ViewTaskFormSlice"
+import { toggleEditTaskForm } from "../EditTaskForm/EditTaskFormSlice"
 
 const ViewTaskForm = () => {
   const [isEllipsDropDownOpen, setIsEllipsDropDownOpen] =

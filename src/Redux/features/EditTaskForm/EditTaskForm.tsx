@@ -1,10 +1,10 @@
 import React from "react"
 import { AiOutlinePlus } from "react-icons/ai"
-import { AddColInput } from "../AddNewBoard/AddColInput"
+import { AddColInput } from "../../../components/reusable/AddColInput"
 
-import { RootState } from "../../../Redux/rootReducer"
-import { useAppDispatch, useAppSelector } from "../../../Redux/store"
-import { toggleEditTaskForm } from "../../../Redux/features/EditTaskForm/EditTaskFormSlice"
+import { RootState } from "../../rootReducer"
+import { useAppDispatch, useAppSelector } from "../../store"
+import { toggleEditTaskForm } from "./EditTaskFormSlice"
 
 const EditTaskForm = () => {
   const dispatch = useAppDispatch()

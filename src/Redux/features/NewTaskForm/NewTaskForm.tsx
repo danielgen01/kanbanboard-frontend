@@ -1,11 +1,11 @@
 import React from "react"
 import { AiOutlineClose } from "react-icons/ai"
-import { AddColInput } from "../AddNewBoard/AddColInput"
+import { AddColInput } from "../../../components/reusable/AddColInput"
 import { AiOutlinePlus } from "react-icons/ai"
 
-import { useAppDispatch, useAppSelector } from "../../../Redux/store"
-import { RootState } from "../../../Redux/rootReducer"
-import { toggleNewTaskForm } from "../../../Redux/features/NewTaskForm/NewTaskFormSlice"
+import { useAppDispatch, useAppSelector } from "../../store"
+import { RootState } from "../../rootReducer"
+import { toggleNewTaskForm } from "./NewTaskFormSlice"
 
 const NewTaskForm = () => {
   const isTaskFormOpen = useAppSelector(

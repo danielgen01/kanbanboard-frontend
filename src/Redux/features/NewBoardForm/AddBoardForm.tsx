@@ -1,11 +1,11 @@
 import React from "react"
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai"
-import { AddColInput } from "./AddColInput"
+import { AddColInput } from "../../../components/reusable/AddColInput"
 
 import { useSelector, useDispatch } from "react-redux"
-import { toggleAddBoardForm } from "../../../Redux/features/NewBoardForm/NewBoardFormSlice"
-import { useAppDispatch, useAppSelector } from "../../../Redux/store"
-import { RootState } from "../../../Redux/rootReducer"
+import { toggleAddBoardForm } from "./NewBoardFormSlice"
+import { useAppDispatch, useAppSelector } from "../../store"
+import { RootState } from "../../rootReducer"
 
 const AddBoardForm: React.FC = () => {
   const isBoardFormOpen = useAppSelector(

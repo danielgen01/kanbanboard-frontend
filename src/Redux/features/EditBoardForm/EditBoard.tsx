@@ -1,6 +1,6 @@
 import React from "react"
 import { AiOutlinePlus } from "react-icons/ai"
-import { AddColInput } from "../AddNewBoard/AddColInput"
+import { AddColInput } from "../../../components/reusable/AddColInput"
 
 const EditBoardForm = () => {
   return (
@@ -12,7 +12,10 @@ const EditBoardForm = () => {
       >
         <div className="form-content flex flex-col px-5 py-5 gap-4">
           <h1 className="font-bold text-xl dark:text-white">Edit Board</h1>
-          <label htmlFor="" className="text-medium-gray font-bold text-sm dark:text-white">
+          <label
+            htmlFor=""
+            className="text-medium-gray font-bold text-sm dark:text-white"
+          >
             Board Name
           </label>
           <input
@@ -22,7 +25,10 @@ const EditBoardForm = () => {
             readOnly={true}
           />
           <section className="board-columns flex flex-col gap-2">
-            <label htmlFor="" className="text-sm text-medium-gray font-bold dark:text-white">
+            <label
+              htmlFor=""
+              className="text-sm text-medium-gray font-bold dark:text-white"
+            >
               Board Columns
             </label>
             <AddColInput defaultValue={"Todo"} />
