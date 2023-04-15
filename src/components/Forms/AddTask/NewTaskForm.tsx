@@ -7,9 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../../Redux/store"
 import { RootState } from "../../../Redux/rootReducer"
 import { toggleNewTaskForm } from "../../../Redux/features/NewTaskForm/NewTaskFormSlice"
 
-
 const NewTaskForm = () => {
-
   const isTaskFormOpen = useAppSelector(
     (state: RootState) => state.newTaskForm.isTaskFormOpen
   )
@@ -20,17 +18,24 @@ const NewTaskForm = () => {
     dispatch(toggleNewTaskForm())
   }
 
-
   return (
-    <section className="transparent-background bg-black/50 absolute h-screen w-screen top-0 left-0"
-    style={{display:isTaskFormOpen? "block" : "none"}}>
+    <>
+      <section
+        className="transparent-background bg-black/50 absolute h-screen w-screen top-0 left-0"
+        style={{ display: isTaskFormOpen ? "block" : "none" }}
+        onClick={handleToggleNewTaskForm}
+      ></section>
       <form
         className="form-container bg-white fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
      min-h-[550px] w-[90%] md:w-[50%] lg:w-[40%] xl:w-[30%]  rounded-md
      dark:bg-dark-gray"
+        style={{ display: isTaskFormOpen ? "block" : "none" }}
       >
         <div className="form-content flex flex-col h-full w-full px-5 py-5 gap-5">
-          <AiOutlineClose className="ml-auto dark:text-white text-black cursor-pointer"  onClick={handleToggleNewTaskForm}/>
+          <AiOutlineClose
+            className="ml-auto dark:text-white text-black cursor-pointer"
+            onClick={handleToggleNewTaskForm}
+          />
           <h1 className="font-bold text-xl dark:text-white">Add new Task</h1>
           {/* First input field  */}
           <div className="input-title-container flex flex-col gap-2">
@@ -108,7 +113,7 @@ const NewTaskForm = () => {
           </button>
         </div>
       </form>
-    </section>
+    </>
   )
 }
 
