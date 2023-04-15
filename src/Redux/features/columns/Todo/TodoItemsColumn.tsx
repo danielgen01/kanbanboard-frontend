@@ -1,9 +1,16 @@
 import React from "react"
-import { Kanbanbox } from "../reusable/Kanbanbox"
+import { Kanbanbox } from "../../../../components/reusable/Kanbanbox"
 import { MdSwipeLeft } from "react-icons/md"
-import datajson from "../../../data.json"
+
+import { useSelector, useDispatch } from "react-redux"
+import { RootState } from "../../../rootReducer"
 
 export const TodoItemsColumn: React.FC = () => {
+  const dispatch = useDispatch()
+  const todoItems = useSelector(
+    (state: RootState) => state.todoStates.todoItems
+  )
+
   return (
     <div className="grid-item-1(todoItems) flex flex-col gap-4">
       <div className="headline flex items-center gap-2">
@@ -21,8 +28,15 @@ export const TodoItemsColumn: React.FC = () => {
 
       {/* HIER SPÄTER .map() einfügen */}
 
-      <Kanbanbox title={"Drama"} subtasksCount={0} />
-      <Kanbanbox title={"ostblock"} subtasksCount={0} />
+      {todoItems.map((box:any) => (
+        <div key={box.id}>
+        <Kanbanbox title={box.title} subtasksCount={1} subtasks={box.subtasks} description={box.description} id={box.id}>
+        </Kanbanbox>
+        </div>
+      ))}
+
+      {/* <Kanbanbox title={"Drama"} subtasksCount={0} />
+      <Kanbanbox title={"ostblock"} subtasksCount={0} /> */}
     </div>
   )
 }

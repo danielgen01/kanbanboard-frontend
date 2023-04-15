@@ -4,16 +4,24 @@ import { RootState } from "../../Redux/rootReducer"
 import { useAppDispatch, useAppSelector } from "../../Redux/store"
 import { toggleViewTaskForm } from "../../Redux/features/ViewTaskForm/ViewTaskFormSlice"
 
-
-type props = {
-  title: string
-  subtasksCount: number
+interface Subtask {
+  id: string;
+  title: string;
+  completed: boolean;
 }
 
-export const Kanbanbox: React.FC<props> = ({ title, subtasksCount }) => {
-  const isViewTaskFormOpen = useAppSelector(
-    (state: RootState) => state.viewTaskForm.isViewTaskFormOpen
-  )
+
+type TodoBox = {
+  id: any;
+  title: string;
+  description: string;
+  subtasks: Subtask[];
+  subtasksCount:number
+};
+
+export const Kanbanbox: React.FC<TodoBox> = ({ title, subtasksCount, id, description, subtasks:Subtask }) => {
+
+ 
 
   const dispatch = useAppDispatch()
 
