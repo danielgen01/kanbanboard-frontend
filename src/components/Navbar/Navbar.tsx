@@ -34,6 +34,7 @@ const Navbar = () => {
 
   const handleToggleDeleteBoardForm = () => {
     dispatch(toggleDeleteBoardForm())
+    setIsEllipsDropDownOpen(false)
   }
 
 
