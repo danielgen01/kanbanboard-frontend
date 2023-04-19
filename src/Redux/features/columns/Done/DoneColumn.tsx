@@ -2,9 +2,22 @@ import React from "react"
 import { Kanbanbox } from "../../../../components/reusable/Kanbanbox"
 import { MdSwipeLeft } from "react-icons/md"
 import data from "../../../../../data.json"
+import { useSelector } from "react-redux"
+import { RootState } from "../../../rootReducer"
 
 export const DoneColumn: React.FC = () => {
+  const currentBoard = useSelector(
+    (state: RootState) => state.currentBoard.currentBoard
+  )
+  const board = data.boards.find((board: any) => board.name === currentBoard)
+  console.log(board)
+  const boardIndex = data.boards.findIndex(
+    (board: any) => board.name === currentBoard
+  )
+  console.log(boardIndex)
+
   let num = data.boards[0].columns[2].tasks.length
+
   return (
     <div className="grid-item-3(doneItems) flex flex-col gap-4">
       <div className="headline flex items-center gap-2">
@@ -17,8 +30,8 @@ export const DoneColumn: React.FC = () => {
           <MdSwipeLeft />
         </div> */}
       </div>
-      
-      {data.boards[0].columns.map((column: any) => (
+
+      {data.boards[boardIndex].columns.map((column: any) => (
         <div key={column.id} className="flex flex-col gap-3">
           {column.tasks
             .filter((task: any) => task.status === "Done")

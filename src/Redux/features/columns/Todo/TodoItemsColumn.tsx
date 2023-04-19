@@ -7,9 +7,14 @@ import data from "../../../../../data.json"
 
 export const TodoItemsColumn: React.FC = () => {
   const dispatch = useDispatch()
-  const todoItems = useSelector(
-    (state: RootState) => state.todoStates.todoItems
+ 
+  const currentBoard = useSelector(
+    (state: RootState) => state.currentBoard.currentBoard
   )
+  const board = data.boards.find((board: any) => board.name === currentBoard);
+    console.log(board)
+    const boardIndex = data.boards.findIndex((board: any) => board.name === currentBoard);
+    console.log(boardIndex)
 
   return (
     <div className="grid-item-1(todoItems) flex flex-col gap-4">
@@ -22,7 +27,7 @@ export const TodoItemsColumn: React.FC = () => {
 
       {/* HIER SPÄTER .map() einfügen */}
 
-      {data.boards[0].columns.map((column: any) => (
+      {data.boards[boardIndex].columns.map((column: any) => (
         <div key={column.id} className="flex flex-col gap-3">
           {column.tasks
             .filter((task: any) => task.status === "Todo")

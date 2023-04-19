@@ -11,9 +11,6 @@ type props = {
 const CustomBoardName: React.FC<props> = ({ name }) => {
   const dispatch = useDispatch()
 
-  const currentBoard = useSelector(
-    (state: RootState) => state.currentBoard.currentBoard
-  )
 
   const changeCurrentBoard = (name: string) => {
     dispatch(setCurrentBoard(name))
