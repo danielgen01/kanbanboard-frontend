@@ -6,11 +6,16 @@ import { RootState } from "../../../rootReducer"
 import data from "../../../../../data.json"
 
 export const TodoItemsColumn: React.FC = () => {
+
   const dispatch = useDispatch()
  
   const currentBoard = useSelector(
     (state: RootState) => state.currentBoard.currentBoard
   )
+
+
+
+
   const board = data.boards.find((board: any) => board.name === currentBoard);
     console.log(board)
     const boardIndex = data.boards.findIndex((board: any) => board.name === currentBoard);
@@ -27,7 +32,9 @@ export const TodoItemsColumn: React.FC = () => {
 
       {/* HIER SPÄTER .map() einfügen */}
 
-      {data.boards[boardIndex].columns.map((column: any) => (
+
+
+      { boardIndex >= 0 && data.boards[boardIndex].columns.map((column: any) => (
         <div key={column.id} className="flex flex-col gap-3">
           {column.tasks
             .filter((task: any) => task.status === "Todo")
@@ -44,8 +51,6 @@ export const TodoItemsColumn: React.FC = () => {
         </div>
       ))}
 
-      {/* <Kanbanbox title={"Drama"} subtasksCount={0} />
-      <Kanbanbox title={"ostblock"} subtasksCount={0} /> */}
     </div>
   )
 }

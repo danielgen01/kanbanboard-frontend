@@ -31,7 +31,8 @@ export const DoneColumn: React.FC = () => {
         </div> */}
       </div>
 
-      {data.boards[boardIndex].columns.map((column: any) => (
+
+      { boardIndex >= 0 && data.boards[boardIndex].columns.map((column: any) => (
         <div key={column.id} className="flex flex-col gap-3">
           {column.tasks
             .filter((task: any) => task.status === "Done")
@@ -47,6 +48,7 @@ export const DoneColumn: React.FC = () => {
             ))}
         </div>
       ))}
+
     </div>
   )
 }

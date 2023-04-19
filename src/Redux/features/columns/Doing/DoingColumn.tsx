@@ -2,19 +2,19 @@ import React from "react"
 import { Kanbanbox } from "../../../../components/reusable/Kanbanbox"
 import { MdSwipeLeft } from "react-icons/md"
 import data from "../../../../../data.json"
-import { useSelector, } from "react-redux"
+import { useSelector } from "react-redux"
 import { RootState } from "../../../rootReducer"
 
 export const DoingColumn: React.FC = () => {
-
   const currentBoard = useSelector(
     (state: RootState) => state.currentBoard.currentBoard
   )
-  const board = data.boards.find((board: any) => board.name === currentBoard);
-    console.log(board)
-    const boardIndex = data.boards.findIndex((board: any) => board.name === currentBoard);
-    console.log(boardIndex)
-
+  const board = data.boards.find((board: any) => board.name === currentBoard)
+  console.log(board)
+  const boardIndex = data.boards.findIndex(
+    (board: any) => board.name === currentBoard
+  )
+  console.log(boardIndex)
 
   return (
     <div className="grid-item-2(doingItems) flex flex-col gap-4">
@@ -28,7 +28,8 @@ export const DoingColumn: React.FC = () => {
           <MdSwipeLeft />
         </div> */}
       </div>
-      {data.boards[boardIndex].columns.map((column: any) => (
+
+      { boardIndex >= 0 && data.boards[boardIndex].columns.map((column: any) => (
         <div key={column.id} className="flex flex-col gap-3">
           {column.tasks
             .filter((task: any) => task.status === "Doing")
@@ -44,6 +45,7 @@ export const DoingColumn: React.FC = () => {
             ))}
         </div>
       ))}
+
     </div>
   )
 }
