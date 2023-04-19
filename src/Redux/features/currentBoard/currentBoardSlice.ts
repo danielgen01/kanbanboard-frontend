@@ -5,7 +5,7 @@ interface CurrentBoard {
 }
 
 const initialState: CurrentBoard = {
-  currentBoard: '0',
+  currentBoard: 'Platform Launch',
 };
 
 const currentBoardSlice = createSlice({

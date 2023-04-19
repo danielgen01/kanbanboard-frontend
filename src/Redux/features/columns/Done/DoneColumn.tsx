@@ -16,7 +16,10 @@ export const DoneColumn: React.FC = () => {
   )
   console.log(boardIndex)
 
-  let num = data.boards[0].columns[2].tasks.length
+  let num = 0
+  if (boardIndex >= 0) {
+    let num = data.boards[boardIndex].columns[2].tasks.length
+  }
 
   return (
     <div className="grid-item-3(doneItems) flex flex-col gap-4">
@@ -31,24 +34,23 @@ export const DoneColumn: React.FC = () => {
         </div> */}
       </div>
 
-
-      { boardIndex >= 0 && data.boards[boardIndex].columns.map((column: any) => (
-        <div key={column.id} className="flex flex-col gap-3">
-          {column.tasks
-            .filter((task: any) => task.status === "Done")
-            .map((task: any) => (
-              <Kanbanbox
-                key={task.name}
-                title={task.title}
-                subtasksCount={task.subtasks.length}
-                subtasks={task.subtasks}
-                description={task.description}
-                id={task.id}
-              />
-            ))}
-        </div>
-      ))}
-
+      {boardIndex >= 0 &&
+        data.boards[boardIndex].columns.map((column: any) => (
+          <div key={column.id} className="flex flex-col gap-3">
+            {column.tasks
+              .filter((task: any) => task.status === "Done")
+              .map((task: any) => (
+                <Kanbanbox
+                  key={task.name}
+                  title={task.title}
+                  subtasksCount={task.subtasks.length}
+                  subtasks={task.subtasks}
+                  description={task.description}
+                  id={task.id}
+                />
+              ))}
+          </div>
+        ))}
     </div>
   )
 }
