@@ -1,6 +1,7 @@
 import React from "react"
 import { Kanbanbox } from "../../../../components/reusable/Kanbanbox"
 import { MdSwipeLeft } from "react-icons/md"
+import data from "../../../../../data.json"
 
 export const DoingColumn: React.FC = () => {
   return (
@@ -15,9 +16,22 @@ export const DoingColumn: React.FC = () => {
           <MdSwipeLeft />
         </div> */}
       </div>
-      {/* HIER SPÄTER .map() einfügen */}
-      {/* <Kanbanbox title={"Drama"} subtasksCount={0} />
-      <Kanbanbox title={"ostblock"} subtasksCount={0} /> */}
+      {data.boards[0].columns.map((column: any) => (
+        <div key={column.id} className="flex flex-col gap-3">
+          {column.tasks
+            .filter((task: any) => task.status === "Doing")
+            .map((task: any) => (
+              <Kanbanbox
+                key={task.name}
+                title={task.title}
+                subtasksCount={task.subtasks.length}
+                subtasks={task.subtasks}
+                description={task.description}
+                id={task.id}
+              />
+            ))}
+        </div>
+      ))}
     </div>
   )
 }

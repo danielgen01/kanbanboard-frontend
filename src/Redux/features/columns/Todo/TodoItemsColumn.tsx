@@ -1,9 +1,9 @@
 import React from "react"
 import { Kanbanbox } from "../../../../components/reusable/Kanbanbox"
 import { MdSwipeLeft } from "react-icons/md"
-
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../rootReducer"
+import data from "../../../../../data.json"
 
 export const TodoItemsColumn: React.FC = () => {
   const dispatch = useDispatch()
@@ -19,24 +19,23 @@ export const TodoItemsColumn: React.FC = () => {
           Todo (0){" "}
         </h1>
       </div>
-      {/* <div className="swipe-icon-text md:hidden ml-auto">
-        <div className="swipe-icon-text md:hidden ml-auto">
-          <h1 className="">Swipe</h1>
-          <MdSwipeLeft />
-        </div>
-      </div> */}
 
       {/* HIER SPÄTER .map() einfügen */}
 
-      {todoItems.map((box: any) => (
-        <div key={box.id}>
-          <Kanbanbox
-            title={box.title}
-            subtasksCount={1}
-            subtasks={box.subtasks}
-            description={box.description}
-            id={box.id}
-          ></Kanbanbox>
+      {data.boards[0].columns.map((column: any) => (
+        <div key={column.id} className="flex flex-col gap-3">
+          {column.tasks
+            .filter((task: any) => task.status === "Todo")
+            .map((task: any) => (
+              <Kanbanbox
+                key={task.name}
+                title={task.title}
+                subtasksCount={task.subtasks.length}
+                subtasks={task.subtasks}
+                description={task.description}
+                id={task.id}
+              />
+            ))}
         </div>
       ))}
 

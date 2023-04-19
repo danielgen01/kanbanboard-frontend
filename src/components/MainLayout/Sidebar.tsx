@@ -11,10 +11,11 @@ import iconLight from "../../../assets/icon-light-theme.svg"
 import iconDark from "../../../assets/icon-dark-theme.svg"
 import iconShowSidebar from "../../../assets/icon-show-sidebar.svg"
 import iconHideSidebar from "../../../assets/icon-hide-sidebar.svg"
-import CustomBoard from "../reusable/CustomBoard"
+import CustomBoardName from "../reusable/CustomBoardName"
 import data from "../../../data.json"
+import { setCurrentBoard } from "../../Redux/features/currentBoard/currentBoardSlice"
 
-const Sidebar = () => {
+const Sidebar: React.FC = () => {
   const isSideBarOpen = useSelector(
     (state: RootState) => state.sidebar.isSideBarOpen
   )
@@ -52,7 +53,9 @@ const Sidebar = () => {
 
   const boardTitles = data.boards.map((board) => board.name)
 
-  console.log(boardTitles)
+  
+
+
   return (
     <>
       <aside
@@ -69,10 +72,15 @@ const Sidebar = () => {
           all boards ({boardTitles.length})
         </h2>
 
+        {/* Render the BoardList */}
         <section className="boards-list-buttons flex flex-col gap-2">
           {data.boards.map((board) => (
             <React.Fragment key={board.name}>
-              <CustomBoard name={board.name} />
+              <CustomBoardName //CustomBoard is each boardtitle
+                name={board.name}
+                
+
+              />
             </React.Fragment>
           ))}
 
