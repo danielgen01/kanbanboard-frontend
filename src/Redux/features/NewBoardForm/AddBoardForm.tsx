@@ -9,7 +9,7 @@ import { RootState } from "../../rootReducer"
 import data from "../../../../data.json"
 
 const AddBoardForm: React.FC = () => {
-  const [boardTitle, setBoardTitle] = useState<string>("");
+  const [boardTitle, setBoardTitle] = useState<string>("New Board");
 
 
   const isBoardFormOpen = useAppSelector(
