@@ -9,7 +9,6 @@ import { RootState } from "../../rootReducer"
 import data from "../../../../data.json"
 
 const AddBoardForm: React.FC = () => {
-  const boardTitleRef = useRef(null)
   const [boardTitle, setBoardTitle] = useState<string>("");
 
 
@@ -96,7 +95,6 @@ const AddBoardForm: React.FC = () => {
             type="text"
             className="px-5 border-2 border-bright-gray rounded-md h-12 dark:bg-dark-gray dark:border-medium-gray dark:border dark:text-white"
             placeholder="e.g Web Design"
-            ref={boardTitleRef}
             onChange={e => setBoardTitle(e.target.value)}
           />
           <section className="board-columns flex flex-col gap-2">
