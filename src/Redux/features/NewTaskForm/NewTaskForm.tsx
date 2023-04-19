@@ -28,24 +28,7 @@ const NewTaskForm = () => {
     (state: RootState) => state.todoStates.todoItems
   )
 
-  const handleAddBox = () => {
-    if (titleRef.current.value && descriptionRef.current.value !== "") {
-      const newBox = {
-        id: todoItems.length + 1,
-        title,
-        description,
-        subtasks: [],
-      }
-      dispatch(addBox(newBox))
-    
-    handleToggleNewTaskForm()
-    titleRef.current!.value = ""
-    descriptionRef.current!.value = ""
-  }else{
-    alert("Please fill all the fields")
-  }
-    
-  }
+ 
 
   function calculateTitle() {
     setTitle(titleRef.current?.value)
@@ -55,7 +38,7 @@ const NewTaskForm = () => {
     setDescription(descriptionRef.current?.value)
   }
 
-  function calculateWhichColumn() {}
+
 
   return (
     <>
@@ -94,7 +77,7 @@ const NewTaskForm = () => {
               placeholder="e.g Take coffee break"
               onChange={calculateTitle}
               required={true}
-              ref={titleRef}
+              
             />
           </div>
           {/* description textarea field */}
@@ -114,7 +97,7 @@ const NewTaskForm = () => {
               placeholder="e.g its always good to take a small break from working to prevent burnouts"
               onChange={calculateDescription}
               required={true}
-              ref={descriptionRef}
+              
             />
           </div>
 
@@ -159,7 +142,7 @@ const NewTaskForm = () => {
           <button
             className="bg-dark-purple text-white font-bold text-sm py-3 rounded-3xl"
             type="button"
-            onClick={handleAddBox}
+            
           >
             Create Task
           </button>
