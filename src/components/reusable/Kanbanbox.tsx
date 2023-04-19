@@ -38,12 +38,12 @@ export const Kanbanbox: React.FC<TodoBox> = ({
       onClick={handleToggleViewTaskForm}
     >
       <h1
-        className="text-black font-bold text-xl 
+        className="text-black font-bold text-md 
             dark:text-white"
       >
         {title}
       </h1>
-      <p className="text-medium-gray font-bold">
+      <p className="text-medium-gray font-bold text-sm">
         0 of {subtasksCount} subtasks
       </p>
     </div>
