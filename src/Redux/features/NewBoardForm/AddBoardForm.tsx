@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useRef , useState} from "react"
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai"
 import { AddColInput } from "../../../components/reusable/AddColInput"
 
@@ -6,8 +6,13 @@ import { useSelector, useDispatch } from "react-redux"
 import { toggleAddBoardForm } from "./NewBoardFormSlice"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { RootState } from "../../rootReducer"
+import data from "../../../../data.json"
 
 const AddBoardForm: React.FC = () => {
+  const boardTitleRef = useRef(null)
+  const [boardTitle, setBoardTitle] = useState<string>("");
+
+
   const isBoardFormOpen = useAppSelector(
     (state: RootState) => state.newboardform.isBoardFormOpen
   )
@@ -15,6 +20,50 @@ const AddBoardForm: React.FC = () => {
 
   const handleToggleAddBoardForm = () => {
     dispatch(toggleAddBoardForm())
+  }
+
+ 
+
+
+  const addBoard = () => {
+    data.boards.push({
+      name: boardTitle,
+      columns: [
+        {
+          name: "Todo",
+          tasks: [
+            {
+              title: "Plan Product Hunt launch",
+              description: "",
+              status: "Todo",
+              subtasks: [],
+            },
+            {
+              title: "Share on Show HN",
+              description: "Any",
+              status: "Todo",
+              subtasks: [],
+            },
+            {
+              title: "Write launch article to publish on multiple channels",
+              description: "Any",
+              status: "Todo",
+              subtasks: [],
+            },
+          ],
+        },
+        {
+          name: "Doing",
+          tasks: [],
+        },
+        {
+          name: "Done",
+          tasks: [],
+        },
+      ],
+    })
+    handleToggleAddBoardForm()
+    
   }
   return (
     <>
@@ -47,6 +96,8 @@ const AddBoardForm: React.FC = () => {
             type="text"
             className="px-5 border-2 border-bright-gray rounded-md h-12 dark:bg-dark-gray dark:border-medium-gray dark:border dark:text-white"
             placeholder="e.g Web Design"
+            ref={boardTitleRef}
+            onChange={e => setBoardTitle(e.target.value)}
           />
           <section className="board-columns flex flex-col gap-2">
             <label
@@ -67,7 +118,10 @@ const AddBoardForm: React.FC = () => {
               <AiOutlinePlus className="text-dark-purple font-bold" /> Add new
               Column
             </button>
-            <button className="w-full text-white font-bold bg-dark-purple h-10 gap-2 rounded-3xl">
+            <button
+              className="w-full text-white font-bold bg-dark-purple h-10 gap-2 rounded-3xl"
+              onClick={addBoard}
+            >
               Create new Board
             </button>
           </section>
