@@ -8,6 +8,7 @@ import editBoardFormReducer from "./features/EditBoardForm/EditBoardFormSlice"
 import deleteBoardFormReducer from "./features/DeleteBoardForm/DeleteBoardFormSlice"
 import deleteTaskFormReducer from "./features/DeletTaskForm/DeleteTaskFormSlice"
 import todoSliceReducer from "./features/columns/Todo/TodoSlice"
+import currentBoardReducer from "./features/currentBoard/currentBoardSlice"
 
 const rootReducer = combineReducers({
   sidebar: sidebarReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   editBoardForm:editBoardFormReducer,
   deleteBoardForm:deleteBoardFormReducer,
   deletetTaskForm:deleteTaskFormReducer,
-  todoStates:todoSliceReducer
+  todoStates:todoSliceReducer,
+  currentBoard:currentBoardReducer
   
  
 })

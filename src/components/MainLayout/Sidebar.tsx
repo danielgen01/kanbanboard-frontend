@@ -11,8 +11,11 @@ import iconLight from "../../../assets/icon-light-theme.svg"
 import iconDark from "../../../assets/icon-dark-theme.svg"
 import iconShowSidebar from "../../../assets/icon-show-sidebar.svg"
 import iconHideSidebar from "../../../assets/icon-hide-sidebar.svg"
+import CustomBoardName from "../reusable/CustomBoardName"
+import data from "../../../data.json"
+import { setCurrentBoard } from "../../Redux/features/currentBoard/currentBoardSlice"
 
-const Sidebar = () => {
+const Sidebar: React.FC = () => {
   const isSideBarOpen = useSelector(
     (state: RootState) => state.sidebar.isSideBarOpen
   )
@@ -47,6 +50,12 @@ const Sidebar = () => {
     localStorage.setItem("theme", newIsDarkMode ? "dark" : "light")
     setIsDarkMode(newIsDarkMode)
   }
+
+  const boardTitles = data.boards.map((board) => board.name)
+
+  
+
+
   return (
     <>
       <aside
@@ -60,28 +69,20 @@ const Sidebar = () => {
           <img src={LogoDark} alt="" className="block dark:hidden" />
         </figure>
         <h2 className="uppercase px-10 mt-4 text-medium-gray font-bold tracking-widest text-sm">
-          all boards (1)
+          all boards ({boardTitles.length})
         </h2>
 
+        {/* Render the BoardList */}
         <section className="boards-list-buttons flex flex-col gap-2">
-          <button className="flex items-center px-10 bg-dark-purple py-4 rounded-3xl -ml-5 gap-3 font-bold text-sm">
-            <img src={boardicon} alt="icon" />
-            <span className="text-white">Platform Launch</span>
-          </button>
+          {data.boards.map((board) => (
+            <React.Fragment key={board.name}>
+              <CustomBoardName //CustomBoard is each boardtitle
+                name={board.name}
+                
 
-          <button className="flex items-center px-10 py-4 rounded-3xl -ml-5 gap-3 font-bold text-sm  hover:bg-bright-gray duration-200">
-            <img src={boardicon} alt="logo" />
-            <span className="text-medium-gray hover:text-dark-purple">
-              Blablablaba
-            </span>
-          </button>
-
-          <button className="flex items-center px-10 py-4 rounded-3xl -ml-5 gap-3 font-bold text-sm  hover:bg-bright-gray duration-200">
-            <img src={boardicon} alt="logo" />
-            <span className="text-medium-gray hover:text-dark-purple">
-              Blablablaba
-            </span>
-          </button>
+              />
+            </React.Fragment>
+          ))}
 
           <button
             className="flex items-center px-10 py-4 rounded-3xl -ml-5 gap-3

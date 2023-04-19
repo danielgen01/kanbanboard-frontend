@@ -37,6 +37,9 @@ const Navbar = () => {
     setIsEllipsDropDownOpen(false)
   }
 
+  const currentBoard = useAppSelector(
+    (state: RootState) => state.currentBoard.currentBoard
+  )
 
 
   return (
@@ -53,7 +56,7 @@ const Navbar = () => {
             className="font-bold text-lg
            dark:text-white"
           >
-            Platform Launch
+            {currentBoard}
           </h1>
           <img src={chevrondown} className="h-2 md:hidden" alt="chevron down" />
         </button>
