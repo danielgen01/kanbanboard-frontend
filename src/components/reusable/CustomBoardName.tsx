@@ -11,17 +11,24 @@ type props = {
 const CustomBoardName: React.FC<props> = ({ name }) => {
   const dispatch = useDispatch()
 
-
   const changeCurrentBoard = (name: string) => {
     dispatch(setCurrentBoard(name))
-    
   }
+
+  const currentBoard = useSelector(
+    (state: RootState) => state.currentBoard.currentBoard
+  )
 
   return (
     <button
-      className="flex items-center px-10 py-4 rounded-3xl -ml-5 gap-3 
-    font-bold text-sm  hover:bg-bright-gray duration-200
-     text-medium-gray hover:text-dark-purple"
+      className={`flex items-center px-10 py-4 rounded-3xl -ml-5 gap-3 
+      font-bold text-sm hover:bg-bright-gray duration-200
+      text-medium-gray ${
+        currentBoard === name ? "bg-dark-purple" : "bg-transparent"
+      }
+      
+      ${currentBoard === name ? "text-white" : "text-medium-gray"}
+      `}
       onClick={() => changeCurrentBoard(name)}
     >
       <img src={boardicon} alt="logo" />
