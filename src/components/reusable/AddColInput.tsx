@@ -7,8 +7,11 @@ type props = {
   onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export const AddColInput: React.FC<props> = ({ defaultValue,
-   onRemove , onInputChange}) => {
+export const AddColInput: React.FC<props> = ({
+  defaultValue,
+  onRemove,
+  onInputChange,
+}) => {
   return (
     <div className="input-element flex justify-between items-center gap-2">
       <input
