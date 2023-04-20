@@ -42,6 +42,13 @@ const AddBoardForm: React.FC = () => {
       tasks: [],
     }))
 
+    const boardExists = data.boards.some((board) => board.name === boardTitle);
+    if (boardExists) {
+      console.log("Board with the same name already exists");
+      return;
+    }
+
+    
     data.boards.push({
       name: boardTitle,
       columns,
@@ -52,12 +59,11 @@ const AddBoardForm: React.FC = () => {
 
   function handleColumnNameChange(index: number, value: string) {
     setColumnNames((prevColumnNames) => {
-      const newColumnNames = [...prevColumnNames];
-      newColumnNames[index] = value;
-      return newColumnNames;
-    });
+      const newColumnNames = [...prevColumnNames]
+      newColumnNames[index] = value
+      return newColumnNames
+    })
   }
-  
 
   return (
     <>
@@ -78,8 +84,6 @@ const AddBoardForm: React.FC = () => {
             <AiOutlineClose
               className="text-medium-gray dark:text-white cursor-pointer"
               onClick={handleToggleAddBoardForm}
-              
-
             />
           </div>
           <label
@@ -106,8 +110,10 @@ const AddBoardForm: React.FC = () => {
                 key={index}
                 defaultValue={name}
                 onRemove={() => removeColumn(name)}
-                onInputChange={(event) => handleColumnNameChange(index, event.target.value)}
-                />
+                onInputChange={(event) =>
+                  handleColumnNameChange(index, event.target.value)
+                }
+              />
             ))}
           </section>
           <section className="buttons flex flex-col gap-5">
