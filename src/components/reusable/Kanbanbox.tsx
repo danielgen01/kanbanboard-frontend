@@ -33,7 +33,8 @@ export const Kanbanbox: React.FC<TodoBox> = ({
 
   return (
     <div
-      className="kanbanbox min-h-28 xl:h-28 w-72 md:w-[90%]  xl:w-[70%] bg-white rounded-md flex flex-col items-start justify-center shadow-md gap-2 px-5
+      className="kanbanbox min-h-[5rem] xl:h-28 w-72  md:w-52
+       xl:w-72 bg-white rounded-md flex flex-col items-start justify-center shadow-md gap-2 px-5
           dark:bg-dark-gray cursor-pointer"
       onClick={handleToggleViewTaskForm}
     >
