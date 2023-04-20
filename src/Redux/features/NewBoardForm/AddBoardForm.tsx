@@ -21,6 +21,7 @@ const AddBoardForm: React.FC = () => {
     dispatch(toggleAddBoardForm())
   }
 
+  
  
 
 
@@ -30,26 +31,7 @@ const AddBoardForm: React.FC = () => {
       columns: [
         {
           name: "Todo",
-          tasks: [
-            {
-              title: "Plan Product Hunt launch",
-              description: "",
-              status: "Todo",
-              subtasks: [],
-            },
-            {
-              title: "Share on Show HN",
-              description: "Any",
-              status: "Todo",
-              subtasks: [],
-            },
-            {
-              title: "Write launch article to publish on multiple channels",
-              description: "Any",
-              status: "Todo",
-              subtasks: [],
-            },
-          ],
+          tasks: [],
         },
         {
           name: "Doing",
@@ -96,6 +78,7 @@ const AddBoardForm: React.FC = () => {
             className="px-5 border-2 border-bright-gray rounded-md h-12 dark:bg-dark-gray dark:border-medium-gray dark:border dark:text-white"
             placeholder="e.g Web Design"
             onChange={e => setBoardTitle(e.target.value)}
+            
           />
           <section className="board-columns flex flex-col gap-2">
             <label
@@ -104,9 +87,9 @@ const AddBoardForm: React.FC = () => {
             >
               Board Columns
             </label>
-            <AddColInput defaultValue={"Todo"} />
-            <AddColInput defaultValue={"Doing"} />
-            <AddColInput defaultValue={"Done"} />
+            <AddColInput defaultValue={"Todo"}/>
+            <AddColInput defaultValue={"Doing"}/>
+            <AddColInput defaultValue={"Done"}/>
           </section>
           <section className="buttons flex flex-col gap-5">
             <button
