@@ -24,8 +24,6 @@ const Board = () => {
     (board: any) => board.name === currentBoardName
   )
 
-
-
   return (
     <>
       <main
@@ -39,18 +37,17 @@ const Board = () => {
 
         <section
           className="columns 
-           flex flex-row gap-5  overflow-x-scroll
-           md:grid md:grid-cols-3  px-5 mt-5 md:overflow-x-hidden "
+           flex flex-row gap-20 md:gap-40 lg:gap-60 xl:gap-80  overflow-x-scroll
+             px-5 mt-5 xl:overflow-x-hidden "
         >
           {board &&
             board.columns.map((column: any) => (
               <BoardColumn
-              key={column.name}
-              statusName={column.name}
-              columnName={`${column.name}`}
-              batchColor="bg-teal-500"
-              
-            />
+                key={column.name}
+                statusName={column.name}
+                columnName={`${column.name}`}
+                batchColor="bg-teal-500"
+              />
             ))}
         </section>
 
