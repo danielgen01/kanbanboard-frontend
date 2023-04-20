@@ -7,6 +7,7 @@ import { toggleAddBoardForm } from "./NewBoardFormSlice"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { RootState } from "../../rootReducer"
 import data from "../../../../data.json"
+import { setCurrentBoard } from "../currentBoard/currentBoardSlice"
 
 const AddBoardForm: React.FC = () => {
   const [boardTitle, setBoardTitle] = useState<string>("New Board")
