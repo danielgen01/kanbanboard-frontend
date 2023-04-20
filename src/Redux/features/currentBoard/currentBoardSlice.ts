@@ -9,7 +9,7 @@ const initialState: CurrentBoard = {
 };
 
 const currentBoardSlice = createSlice({
-  name: 'currentBoard',
+  name: 'currentBoardName',
   initialState,
   reducers: {
     setCurrentBoard: (state, action) => {

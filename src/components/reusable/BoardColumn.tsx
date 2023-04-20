@@ -1,44 +1,44 @@
-import React from "react"
-import { Kanbanbox } from "../../../../components/reusable/Kanbanbox"
+import React, { useEffect } from "react"
+import { Kanbanbox } from "./Kanbanbox"
 import { MdSwipeLeft } from "react-icons/md"
-import data from "../../../../../data.json"
+import data from "../../../data.json"
 import { useSelector } from "react-redux"
-import { RootState } from "../../../rootReducer"
+import { RootState } from "../../Redux/rootReducer"
 
-export const DoneColumn: React.FC = () => {
+type props = {
+    statusName:string
+    columnName:string
+    batchColor:string
+}
+
+export const BoardColumn: React.FC<props> = ({statusName,
+    columnName, batchColor}) => {
+
+
   const currentBoard = useSelector(
     (state: RootState) => state.currentBoard.currentBoard
   )
   const board = data.boards.find((board: any) => board.name === currentBoard)
-  console.log(board)
+  
   const boardIndex = data.boards.findIndex(
     (board: any) => board.name === currentBoard
   )
-  console.log(boardIndex)
-
-  let num = 0
-  if (boardIndex >= 0) {
-    let num = data.boards[boardIndex].columns[2].tasks.length
-  }
-
+  
   return (
-    <div className="grid-item-3(doneItems) flex flex-col gap-4">
+    <div className="grid-item-2(doingItems) flex flex-col gap-4">
       <div className="headline flex items-center gap-2">
-        <div className="h-5 w-5 rounded-full bg-green-500 dark:bg-green-500"></div>
+        <div className={`h-5 w-5 rounded-full ${batchColor} `}></div>
         <h1 className="text-medium-gray -tracking-tighter text-md uppercase font-bold">
-          Done ({num}){" "}
+        {columnName}  (0){" "}
         </h1>
-        {/* <div className="swipe-icon-text md:hidden ml-auto">
-          <h1 className="">Swipe</h1>
-          <MdSwipeLeft />
-        </div> */}
+      
       </div>
 
       {boardIndex >= 0 &&
         data.boards[boardIndex].columns.map((column: any) => (
           <div key={column.id} className="flex flex-col gap-3">
             {column.tasks
-              .filter((task: any) => task.status === "Done")
+              .filter((task: any) => task.status === statusName)
               .map((task: any) => (
                 <Kanbanbox
                   key={task.name}

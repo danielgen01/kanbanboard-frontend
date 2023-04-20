@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai"
 import { AddColInput } from "../../../components/reusable/AddColInput"
 
@@ -6,8 +6,28 @@ import { useSelector, useDispatch } from "react-redux"
 import { toggleAddBoardForm } from "./NewBoardFormSlice"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { RootState } from "../../rootReducer"
+import data from "../../../../data.json"
+import { setCurrentBoard } from "../currentBoard/currentBoardSlice"
 
 const AddBoardForm: React.FC = () => {
+  const [boardTitle, setBoardTitle] = useState<string>("New Board")
+  const [columnNames, setColumnNames] = useState<string[]>([
+    "Todo",
+    "Doing",
+    "Done",
+  ])
+
+  function addNewColumn() {
+    setColumnNames([...columnNames, ""])
+  }
+
+  function removeColumn(name: string) {
+    const index = columnNames.findIndex((columnName) => columnName === name)
+    if (index !== -1) {
+      setColumnNames(columnNames.filter((_, i) => i !== index))
+    }
+  }
+
   const isBoardFormOpen = useAppSelector(
     (state: RootState) => state.newboardform.isBoardFormOpen
   )
@@ -16,6 +36,36 @@ const AddBoardForm: React.FC = () => {
   const handleToggleAddBoardForm = () => {
     dispatch(toggleAddBoardForm())
   }
+
+  const addBoard = () => {
+    const columns = columnNames.map((name) => ({
+      name,
+      tasks: [],
+    }))
+
+    const boardExists = data.boards.some((board) => board.name === boardTitle);
+    if (boardExists) {
+      console.log("Board with the same name already exists");
+      return;
+    }
+
+    
+    data.boards.push({
+      name: boardTitle,
+      columns,
+    })
+
+    handleToggleAddBoardForm()
+  }
+
+  function handleColumnNameChange(index: number, value: string) {
+    setColumnNames((prevColumnNames) => {
+      const newColumnNames = [...prevColumnNames]
+      newColumnNames[index] = value
+      return newColumnNames
+    })
+  }
+
   return (
     <>
       <section
@@ -47,6 +97,7 @@ const AddBoardForm: React.FC = () => {
             type="text"
             className="px-5 border-2 border-bright-gray rounded-md h-12 dark:bg-dark-gray dark:border-medium-gray dark:border dark:text-white"
             placeholder="e.g Web Design"
+            onChange={(e) => setBoardTitle(e.target.value)}
           />
           <section className="board-columns flex flex-col gap-2">
             <label
@@ -55,19 +106,30 @@ const AddBoardForm: React.FC = () => {
             >
               Board Columns
             </label>
-            <AddColInput defaultValue={"Todo"} />
-            <AddColInput defaultValue={"Doing"} />
-            <AddColInput defaultValue={"Done"} />
+            {columnNames.map((name, index) => (
+              <AddColInput
+                key={index}
+                defaultValue={name}
+                onRemove={() => removeColumn(name)}
+                onInputChange={(event) =>
+                  handleColumnNameChange(index, event.target.value)
+                }
+              />
+            ))}
           </section>
           <section className="buttons flex flex-col gap-5">
             <button
               className="flex items-center justify-center w-full text-dark-purple font-bold bg-bright-gray h-10 gap-2 rounded-3xl 
             dark:bg-white"
+              onClick={addNewColumn}
             >
               <AiOutlinePlus className="text-dark-purple font-bold" /> Add new
               Column
             </button>
-            <button className="w-full text-white font-bold bg-dark-purple h-10 gap-2 rounded-3xl">
+            <button
+              className="w-full text-white font-bold bg-dark-purple h-10 gap-2 rounded-3xl"
+              onClick={addBoard}
+            >
               Create new Board
             </button>
           </section>

@@ -3,8 +3,12 @@ import crossicon from "../../../assets/icon-cross.svg"
 
 type props = {
   defaultValue: string
+  onRemove: () => void
+  onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
-export const AddColInput: React.FC<props> = ({ defaultValue }) => {
+
+export const AddColInput: React.FC<props> = ({ defaultValue,
+   onRemove , onInputChange}) => {
   return (
     <div className="input-element flex justify-between items-center gap-2">
       <input
@@ -13,8 +17,9 @@ export const AddColInput: React.FC<props> = ({ defaultValue }) => {
         w-full"
         placeholder="e.g 2"
         defaultValue={defaultValue}
+        onChange={onInputChange}
       />
-      <img src={crossicon} alt="cross icon" />
+      <img src={crossicon} alt="cross icon" onClick={onRemove} />
     </div>
   )
 }

@@ -28,7 +28,7 @@ const CustomBoardName: React.FC<props> = ({ name }) => {
       }
       
       ${currentBoard === name ? "text-white" : "text-medium-gray"}
-      `}
+      w-[90%]` }
       onClick={() => changeCurrentBoard(name)}
     >
       <img src={boardicon} alt="logo" />

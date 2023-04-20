@@ -13,23 +13,22 @@ export const TodoItemsColumn: React.FC = () => {
   )
 
   const board = data.boards.find((board: any) => board.name === currentBoard)
-  console.log(board)
   const boardIndex = data.boards.findIndex(
     (board: any) => board.name === currentBoard
   )
-  console.log(boardIndex)
+  
 
   let num = 0
   if (boardIndex >= 0) {
     let num = data.boards[boardIndex].columns[2].tasks.length
   }
-
+  
   return (
     <div className="grid-item-1(todoItems) flex flex-col gap-4">
       <div className="headline flex items-center gap-2">
         <div className="h-5 w-5 rounded-full bg-sky-500 dark:bg-teal-500"></div>
         <h1 className="text-medium-gray -tracking-tighter text-md uppercase font-bold">
-          Todo ({num}){" "}
+          {board?.columns[0].name} ({num}){" "}
         </h1>
       </div>
 

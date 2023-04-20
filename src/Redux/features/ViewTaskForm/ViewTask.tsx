@@ -110,7 +110,7 @@ const ViewTaskForm = () => {
           </section>
         </div>
 
-        <form
+        <div
           className="absolute right-10 top-20 bg-bright-gray dark:bg-dark-black w-52 rounded-md"
           style={{ display: isEllipsDropDownOpen ? "block" : "none" }}
         >
@@ -126,7 +126,7 @@ const ViewTaskForm = () => {
               Delete Task
             </button>
           </div>
-        </form>
+        </div>
       </form>
     </>
   )

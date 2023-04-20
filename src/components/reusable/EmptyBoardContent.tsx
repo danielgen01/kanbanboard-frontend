@@ -1,9 +1,11 @@
 import React from "react"
-import addicon from "../../assets/icon-add-task-mobile.svg"
+import addicon from "../../../assets/icon-add-task-mobile.svg"
 
-function EmptyBoardContent() {
+ const EmptyBoardContent = ()=> {
   return (
-    <div className="empty-board-content w-full flex min-h-screen items-center justify-center flex-col overflow-y-hidden">
+    <div className="empty-board-content w-full
+     flex pt-[20%] items-center justify-center
+      flex-col ">
       <h1 className="text-center text-medium-gray font-bold text-xl">
         This board is empty. Create a new <br />
         column to get started.
@@ -19,3 +21,5 @@ function EmptyBoardContent() {
     </div>
   )
 }
+
+export default EmptyBoardContent
