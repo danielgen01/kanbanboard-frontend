@@ -1,12 +1,11 @@
 import React from "react"
 import { TodoItemsColumn } from "../../Redux/features/columns/Todo/TodoItemsColumn"
-import { DoingColumn } from "../../Redux/features/columns/Doing/DoingColumn"
-import { DoneColumn } from "../../Redux/features/columns/Done/DoneColumn"
 import showSlideBarIcon from "../../../assets/icon-show-sidebar.svg"
 import { toggleSidebar } from "../../Redux/features/Sidebar/sidebarSlice"
 import { RootState } from "../../Redux/rootReducer"
 import { useSelector, useDispatch } from "react-redux"
-
+import { BoardColumn } from "../reusable/BoardColumn"
+import data from "../../../data.json"
 import Navbar from "../Navbar/Navbar"
 
 const Board = () => {
@@ -17,6 +16,15 @@ const Board = () => {
   const handleToggleSidebar = () => {
     dispatch(toggleSidebar())
   }
+
+  const currentBoardName = useSelector(
+    (state: RootState) => state.currentBoard.currentBoard
+  )
+  const board = data.boards.find(
+    (board: any) => board.name === currentBoardName
+  )
+
+
 
   return (
     <>
@@ -34,12 +42,16 @@ const Board = () => {
            flex flex-row gap-5  overflow-x-scroll
            md:grid md:grid-cols-3  px-5 mt-5 md:overflow-x-hidden "
         >
-          {/* First grid item */}
-          <TodoItemsColumn />
-          {/* Second grid item */}
-          <DoingColumn />
-          {/* Third grid item */}
-          <DoneColumn />
+          {board &&
+            board.columns.map((column: any) => (
+              <BoardColumn
+              key={column.name}
+              statusName={column.name}
+              columnName={`${column.name}`}
+              batchColor="bg-teal-500"
+              
+            />
+            ))}
         </section>
 
         <div

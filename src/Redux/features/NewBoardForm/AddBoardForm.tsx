@@ -50,6 +50,15 @@ const AddBoardForm: React.FC = () => {
     handleToggleAddBoardForm()
   }
 
+  function handleColumnNameChange(index: number, value: string) {
+    setColumnNames((prevColumnNames) => {
+      const newColumnNames = [...prevColumnNames];
+      newColumnNames[index] = value;
+      return newColumnNames;
+    });
+  }
+  
+
   return (
     <>
       <section
@@ -69,6 +78,8 @@ const AddBoardForm: React.FC = () => {
             <AiOutlineClose
               className="text-medium-gray dark:text-white cursor-pointer"
               onClick={handleToggleAddBoardForm}
+              
+
             />
           </div>
           <label
@@ -95,7 +106,8 @@ const AddBoardForm: React.FC = () => {
                 key={index}
                 defaultValue={name}
                 onRemove={() => removeColumn(name)}
-              />
+                onInputChange={(event) => handleColumnNameChange(index, event.target.value)}
+                />
             ))}
           </section>
           <section className="buttons flex flex-col gap-5">

@@ -1,11 +1,20 @@
 import React, { useEffect } from "react"
-import { Kanbanbox } from "../../../../components/reusable/Kanbanbox"
+import { Kanbanbox } from "./Kanbanbox"
 import { MdSwipeLeft } from "react-icons/md"
-import data from "../../../../../data.json"
+import data from "../../../data.json"
 import { useSelector } from "react-redux"
-import { RootState } from "../../../rootReducer"
+import { RootState } from "../../Redux/rootReducer"
 
-export const DoingColumn: React.FC = () => {
+type props = {
+    statusName:string
+    columnName:string
+    batchColor:string
+}
+
+export const BoardColumn: React.FC<props> = ({statusName,
+    columnName, batchColor}) => {
+
+
   const currentBoard = useSelector(
     (state: RootState) => state.currentBoard.currentBoard
   )
@@ -26,21 +35,18 @@ export const DoingColumn: React.FC = () => {
   return (
     <div className="grid-item-2(doingItems) flex flex-col gap-4">
       <div className="headline flex items-center gap-2">
-        <div className="h-5 w-5 rounded-full bg-dark-purple dark:bg-dark-purple"></div>
+        <div className={`h-5 w-5 rounded-full ${batchColor} `}></div>
         <h1 className="text-medium-gray -tracking-tighter text-md uppercase font-bold">
-        {board?.columns[1].name}  ({num}){" "}
+        {columnName}  ({num}){" "}
         </h1>
-        {/* <div className="swipe-icon-text md:hidden ml-auto">
-          <h1 className="">Swipe</h1>
-          <MdSwipeLeft />
-        </div> */}
+      
       </div>
 
       {boardIndex >= 0 &&
         data.boards[boardIndex].columns.map((column: any) => (
           <div key={column.id} className="flex flex-col gap-3">
             {column.tasks
-              .filter((task: any) => task.status === "Doing")
+              .filter((task: any) => task.status === statusName)
               .map((task: any) => (
                 <Kanbanbox
                   key={task.name}
