@@ -1,4 +1,4 @@
-import React, { useEffect, useRef , useState} from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai"
 import { AddColInput } from "../../../components/reusable/AddColInput"
 
@@ -9,8 +9,23 @@ import { RootState } from "../../rootReducer"
 import data from "../../../../data.json"
 
 const AddBoardForm: React.FC = () => {
-  const [boardTitle, setBoardTitle] = useState<string>("New Board");
+  const [boardTitle, setBoardTitle] = useState<string>("New Board")
+  const [columnNames, setColumnNames] = useState<string[]>([
+    "Todo",
+    "Doing",
+    "Done",
+  ])
 
+  function addNewColumn() {
+    setColumnNames([...columnNames, ""])
+  }
+
+  function removeColumn(name: string) {
+    const index = columnNames.findIndex((columnName) => columnName === name)
+    if (index !== -1) {
+      setColumnNames(columnNames.filter((_, i) => i !== index))
+    }
+  }
 
   const isBoardFormOpen = useAppSelector(
     (state: RootState) => state.newboardform.isBoardFormOpen
@@ -21,31 +36,20 @@ const AddBoardForm: React.FC = () => {
     dispatch(toggleAddBoardForm())
   }
 
-  
- 
-
-
   const addBoard = () => {
+    const columns = columnNames.map((name) => ({
+      name,
+      tasks: [],
+    }))
+
     data.boards.push({
       name: boardTitle,
-      columns: [
-        {
-          name: "Todo",
-          tasks: [],
-        },
-        {
-          name: "Doing",
-          tasks: [],
-        },
-        {
-          name: "Done",
-          tasks: [],
-        },
-      ],
+      columns,
     })
+
     handleToggleAddBoardForm()
-    
   }
+
   return (
     <>
       <section
@@ -77,8 +81,7 @@ const AddBoardForm: React.FC = () => {
             type="text"
             className="px-5 border-2 border-bright-gray rounded-md h-12 dark:bg-dark-gray dark:border-medium-gray dark:border dark:text-white"
             placeholder="e.g Web Design"
-            onChange={e => setBoardTitle(e.target.value)}
-            
+            onChange={(e) => setBoardTitle(e.target.value)}
           />
           <section className="board-columns flex flex-col gap-2">
             <label
@@ -87,14 +90,19 @@ const AddBoardForm: React.FC = () => {
             >
               Board Columns
             </label>
-            <AddColInput defaultValue={"Todo"}/>
-            <AddColInput defaultValue={"Doing"}/>
-            <AddColInput defaultValue={"Done"}/>
+            {columnNames.map((name, index) => (
+              <AddColInput
+                key={index}
+                defaultValue={name}
+                onRemove={() => removeColumn(name)}
+              />
+            ))}
           </section>
           <section className="buttons flex flex-col gap-5">
             <button
               className="flex items-center justify-center w-full text-dark-purple font-bold bg-bright-gray h-10 gap-2 rounded-3xl 
             dark:bg-white"
+              onClick={addNewColumn}
             >
               <AiOutlinePlus className="text-dark-purple font-bold" /> Add new
               Column
