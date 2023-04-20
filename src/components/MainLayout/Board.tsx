@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { BoardColumn } from "../reusable/BoardColumn"
 import data from "../../../data.json"
 import Navbar from "../Navbar/Navbar"
+import EmptyBoardContent from "../reusable/EmptyBoardContent"
 
 const Board = () => {
   const isSideBarOpen = useSelector(
@@ -40,7 +41,7 @@ const Board = () => {
            flex flex-row gap-20 md:gap-40 lg:gap-60 xl:gap-80  overflow-x-scroll
              px-5 mt-5 xl:overflow-x-hidden "
         >
-          {board &&
+          {board && board.columns.length > 0 ? (
             board.columns.map((column: any) => (
               <BoardColumn
                 key={column.name}
@@ -48,7 +49,10 @@ const Board = () => {
                 columnName={`${column.name}`}
                 batchColor="bg-teal-500"
               />
-            ))}
+            ))
+          ) : (
+            <EmptyBoardContent />
+          )}
         </section>
 
         <div
@@ -59,9 +63,6 @@ const Board = () => {
         >
           <img src={showSlideBarIcon} alt="" className="w-6" />
         </div>
-
-        {/* Render if no boxes here */}
-        {/* <EmptyBoardContent   addicon={addicon}  /> */}
       </main>
     </>
   )

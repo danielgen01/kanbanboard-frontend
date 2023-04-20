@@ -23,21 +23,13 @@ export const BoardColumn: React.FC<props> = ({statusName,
   const boardIndex = data.boards.findIndex(
     (board: any) => board.name === currentBoard
   )
-  console.log(currentBoard)
-
-  let num = 0
-
-    if (boardIndex >= 0) {
-      let num = data.boards[boardIndex].columns[2].tasks.length
-    }
   
-
   return (
     <div className="grid-item-2(doingItems) flex flex-col gap-4">
       <div className="headline flex items-center gap-2">
         <div className={`h-5 w-5 rounded-full ${batchColor} `}></div>
         <h1 className="text-medium-gray -tracking-tighter text-md uppercase font-bold">
-        {columnName}  ({num}){" "}
+        {columnName}  (0){" "}
         </h1>
       
       </div>
