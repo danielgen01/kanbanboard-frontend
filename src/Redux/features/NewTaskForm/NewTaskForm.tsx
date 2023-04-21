@@ -1,44 +1,98 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { AiOutlineClose } from "react-icons/ai"
 import { AddColInput } from "../../../components/reusable/AddColInput"
 import { AiOutlinePlus } from "react-icons/ai"
-
 import { useAppDispatch, useAppSelector } from "../../store"
 import { RootState } from "../../rootReducer"
 import { toggleNewTaskForm } from "./NewTaskFormSlice"
 import { addBox } from "../columns/Todo/TodoSlice"
+import data from "../../../../data.json"
 
 const NewTaskForm = () => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
+  const [status, setStatus] = useState("Todo")
+  const [subtasks, setSubtasks] = useState<string[]>(["eg.1"])
   const descriptionRef: any = useRef(null)
   const titleRef: any = useRef(null)
+  const selectRef: any = useRef(null)
+
+  const dispatch = useAppDispatch()
 
   const isTaskFormOpen = useAppSelector(
     (state: RootState) => state.newTaskForm.isTaskFormOpen
   )
 
-  const dispatch = useAppDispatch()
+  const currentBoardName = useAppSelector(
+    (state: RootState) => state.currentBoard.currentBoard
+  )
+
+  const currentBoard = data.boards.find(
+    (board) => board.name === currentBoardName
+  )
+
+  const currentBoardIndex = data.boards.findIndex(
+    (board) => board.name === currentBoardName
+  )
+
+  const matchingColumn = currentBoard?.columns.find(
+    (column) => column.name === status
+  )
+
+  const matchingColumnIndex: any = currentBoard?.columns.findIndex(
+    (column) => column.name === status
+  )
+
+  function addNewSubTask() {
+    setSubtasks([...subtasks, ""])
+  }
+
+  function removeSubTask(title: string) {
+    const index = subtasks.findIndex((subtaskname) => subtaskname === title)
+    if (index !== -1) {
+      setSubtasks(subtasks.filter((_, i) => i !== index))
+    }
+  }
+
+  function handleSubTaskNameChange(index: number, value: string) {
+    setSubtasks((prevSubtasks) => {
+      const newSubtasks = [...prevSubtasks]
+      newSubtasks[index] = value
+      return newSubtasks
+    })
+  }
+
+  const addTask = () => {
+    currentBoard?.columns[matchingColumnIndex].tasks.push({
+      title: title,
+      description: description,
+      status: status,
+      subtasks: subtasks.map(subtaskTitle => ({
+        title: subtaskTitle,
+        isCompleted: false
+      }))
+      
+    })
+    console.log(currentBoard)
+    handleToggleNewTaskForm()
+    setSubtasks(["", ""])
+  }
 
   const handleToggleNewTaskForm = () => {
     dispatch(toggleNewTaskForm())
   }
 
-  const todoItems = useAppSelector(
-    (state: RootState) => state.todoStates.todoItems
-  )
-
- 
-
-  function calculateTitle() {
-    setTitle(titleRef.current?.value)
+  function updateTitle() {
+    setTitle(titleRef.current.value)
   }
 
-  function calculateDescription() {
-    setDescription(descriptionRef.current?.value)
+  function updateDescription() {
+    setDescription(descriptionRef.current.value)
   }
 
-
+  function updateStatus() {
+    setStatus(selectRef.current.value)
+  }
 
   return (
     <>
@@ -75,9 +129,9 @@ const NewTaskForm = () => {
               className="border-bright-gray border-2 outline-bright-gray rounded-md h-10 px-2 text-sm
               dark:bg-dark-gray dark:border-medium-gray dark:text-white"
               placeholder="e.g Take coffee break"
-              onChange={calculateTitle}
+              ref={titleRef}
+              onChange={updateTitle}
               required={true}
-              
             />
           </div>
           {/* description textarea field */}
@@ -95,9 +149,9 @@ const NewTaskForm = () => {
               className="border-bright-gray border-2 outline-bright-gray rounded-md h-20 px-2 py-2 text-sm resize-none
                dark:bg-dark-gray dark:border-medium-gray dark:text-white"
               placeholder="e.g its always good to take a small break from working to prevent burnouts"
-              onChange={calculateDescription}
               required={true}
-              
+              onChange={updateDescription}
+              ref={descriptionRef}
             />
           </div>
 
@@ -108,9 +162,21 @@ const NewTaskForm = () => {
             >
               Subtasks
             </label>
-            <AddColInput defaultValue={""} />
-            <AddColInput defaultValue={""} />
-            <button className="flex items-center gap-2 text-dark-purple w-full justify-center mt-2 bg-bright-gray rounded-3xl h-12 font-bold">
+            {subtasks.map((title, index) => (
+              <AddColInput
+                key={index}
+                defaultValue={title}
+                onRemove={() => removeSubTask(title)}
+                onInputChange={(event) =>
+                  handleSubTaskNameChange(index, event.target.value)
+                }
+              />
+            ))}
+            <button
+              className="flex items-center gap-2 text-dark-purple w-full justify-center mt-2 bg-bright-gray rounded-3xl h-12 font-bold"
+              type="button"
+              onClick={addNewSubTask}
+            >
               <AiOutlinePlus className="font-bold" />
               Add New Subtask
             </button>
@@ -129,7 +195,8 @@ const NewTaskForm = () => {
               name="select-status"
               className="border-bright-gray border-2 outline-bright-gray rounded-md h-10 px-2 text-sm
               dark:text-white dark:bg-dark-gray dark:border-medium-gray"
-              // onChange={console.log("test")}
+              ref={selectRef}
+              onChange={updateStatus}
             >
               <option className="text-black dark:text-white">Todo</option>
               <option className="text-black dark:text-white">Doing</option>
@@ -142,7 +209,7 @@ const NewTaskForm = () => {
           <button
             className="bg-dark-purple text-white font-bold text-sm py-3 rounded-3xl"
             type="button"
-            
+            onClick={addTask}
           >
             Create Task
           </button>

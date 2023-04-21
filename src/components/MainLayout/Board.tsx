@@ -21,9 +21,9 @@ const Board = () => {
   const currentBoardName = useSelector(
     (state: RootState) => state.currentBoard.currentBoard
   )
-  const board = data.boards.find(
+  const currentBoard = data.boards.find(
     (board: any) => board.name === currentBoardName
-  )
+  ) 
 
   return (
     <>
@@ -41,8 +41,8 @@ const Board = () => {
            flex flex-row gap-20 md:gap-40 lg:gap-60 xl:gap-80  overflow-x-scroll
              px-5 mt-5 xl:overflow-x-hidden "
         >
-          {board && board.columns.length > 0 ? (
-            board.columns.map((column: any) => (
+          {currentBoard && currentBoard.columns.length > 0 ? (
+            currentBoard.columns.map((column: any) => (
               <BoardColumn
                 key={column.name}
                 statusName={column.name}

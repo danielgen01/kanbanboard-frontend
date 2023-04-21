@@ -7,7 +7,6 @@ import { toggleAddBoardForm } from "./NewBoardFormSlice"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { RootState } from "../../rootReducer"
 import data from "../../../../data.json"
-import { setCurrentBoard } from "../currentBoard/currentBoardSlice"
 
 const AddBoardForm: React.FC = () => {
   const [boardTitle, setBoardTitle] = useState<string>("New Board")
@@ -31,6 +30,9 @@ const AddBoardForm: React.FC = () => {
   const isBoardFormOpen = useAppSelector(
     (state: RootState) => state.newboardform.isBoardFormOpen
   )
+
+ 
+
   const dispatch = useAppDispatch()
 
   const handleToggleAddBoardForm = () => {
@@ -43,9 +45,9 @@ const AddBoardForm: React.FC = () => {
       tasks: [],
     }))
 
-    const boardExists = data.boards.some((board) => board.name === boardTitle);
+    const boardExists = data.boards.find((board) => board.name === boardTitle);
     if (boardExists) {
-      console.log("Board with the same name already exists");
+      alert("Board with the same name already exists");
       return;
     }
 
