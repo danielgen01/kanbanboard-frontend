@@ -13,6 +13,7 @@ const NewTaskForm = () => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [status, setStatus] = useState("Todo")
+  const [subtasks, setSubtasks] = useState<string[]>(["eg.1"])
   const descriptionRef: any = useRef(null)
   const titleRef: any = useRef(null)
   const selectRef: any = useRef(null)
@@ -43,12 +44,35 @@ const NewTaskForm = () => {
     (column) => column.name === status
   )
 
+  function addNewSubTask() {
+    setSubtasks([...subtasks, ""])
+  }
+
+  function removeSubTask(name: string) {
+    const index = subtasks.findIndex((subtaskname) => subtaskname === title)
+    if (index !== -1) {
+      setSubtasks(subtasks.filter((_, i) => i !== index))
+    }
+  }
+
+  function handleSubTaskNameChange(index: number, value: string) {
+    setSubtasks((prevSubtasks) => {
+      const newSubtasks = [...prevSubtasks]
+      newSubtasks[index] = value
+      return newSubtasks
+    })
+  }
+
   const addTask = () => {
     currentBoard?.columns[matchingColumnIndex].tasks.push({
       title: title,
       description: description,
       status: status,
-      subtasks: [],
+      subtasks: subtasks.map(subtaskTitle => ({
+        title: subtaskTitle,
+        isCompleted: false
+      }))
+      
     })
     console.log(currentBoard)
   }
@@ -137,9 +161,21 @@ const NewTaskForm = () => {
             >
               Subtasks
             </label>
-            <AddColInput defaultValue={""} />
-            <AddColInput defaultValue={""} />
-            <button className="flex items-center gap-2 text-dark-purple w-full justify-center mt-2 bg-bright-gray rounded-3xl h-12 font-bold">
+            {subtasks.map((title, index) => (
+              <AddColInput
+                key={index}
+                defaultValue={title}
+                onRemove={() => removeSubTask(title)}
+                onInputChange={(event) =>
+                  handleSubTaskNameChange(index, event.target.value)
+                }
+              />
+            ))}
+            <button
+              className="flex items-center gap-2 text-dark-purple w-full justify-center mt-2 bg-bright-gray rounded-3xl h-12 font-bold"
+              type="button"
+              onClick={addNewSubTask}
+            >
               <AiOutlinePlus className="font-bold" />
               Add New Subtask
             </button>
