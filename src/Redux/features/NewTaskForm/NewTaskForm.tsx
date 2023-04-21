@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react"
 import { AiOutlineClose } from "react-icons/ai"
 import { AddColInput } from "../../../components/reusable/AddColInput"
 import { AiOutlinePlus } from "react-icons/ai"
-
 import { useAppDispatch, useAppSelector } from "../../store"
 import { RootState } from "../../rootReducer"
 import { toggleNewTaskForm } from "./NewTaskFormSlice"
@@ -40,7 +39,7 @@ const NewTaskForm = () => {
     (column) => column.name === status
   )
 
-  const matchingColumnIndex: number = currentBoard?.columns.findIndex(
+  const matchingColumnIndex: any = currentBoard?.columns.findIndex(
     (column) => column.name === status
   )
 
