@@ -48,7 +48,7 @@ const NewTaskForm = () => {
     setSubtasks([...subtasks, ""])
   }
 
-  function removeSubTask(name: string) {
+  function removeSubTask(title: string) {
     const index = subtasks.findIndex((subtaskname) => subtaskname === title)
     if (index !== -1) {
       setSubtasks(subtasks.filter((_, i) => i !== index))
@@ -75,6 +75,8 @@ const NewTaskForm = () => {
       
     })
     console.log(currentBoard)
+    handleToggleNewTaskForm()
+    setSubtasks(["", ""])
   }
 
   const handleToggleNewTaskForm = () => {
