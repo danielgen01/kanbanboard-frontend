@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { AiOutlineClose } from "react-icons/ai"
 import { AddColInput } from "../../../components/reusable/AddColInput"
 import { AiOutlinePlus } from "react-icons/ai"
@@ -12,11 +12,13 @@ import data from "../../../../data.json"
 const NewTaskForm = () => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
+  const [status, setStatus] = useState("Todo")
   const descriptionRef: any = useRef(null)
   const titleRef: any = useRef(null)
+  const selectRef: any = useRef(null)
 
   const dispatch = useAppDispatch()
-  
+
   const isTaskFormOpen = useAppSelector(
     (state: RootState) => state.newTaskForm.isTaskFormOpen
   )
@@ -25,33 +27,47 @@ const NewTaskForm = () => {
     (state: RootState) => state.currentBoard.currentBoard
   )
 
-  const currentBoard = data.boards.find((board) => board.name === currentBoardName);
+  const currentBoard = data.boards.find(
+    (board) => board.name === currentBoardName
+  )
 
-  const currentBoardIndex = data.boards.findIndex((board) => board.name === currentBoardName);
+  const currentBoardIndex = data.boards.findIndex(
+    (board) => board.name === currentBoardName
+  )
 
+  const matchingColumn = currentBoard?.columns.find(
+    (column) => column.name === status
+  )
 
-  
+  const matchingColumnIndex: number = currentBoard?.columns.findIndex(
+    (column) => column.name === status
+  )
+
   const addTask = () => {
-    currentBoard?.columns[currentBoardIndex].tasks.push({
-      title: "Baki Hanma",
-      description: "description",
-      status: "Todo",
-      subtasks:[]
+    currentBoard?.columns[matchingColumnIndex].tasks.push({
+      title: title,
+      description: description,
+      status: status,
+      subtasks: [],
     })
     console.log(currentBoard)
   }
-  
 
   const handleToggleNewTaskForm = () => {
     dispatch(toggleNewTaskForm())
-    
   }
 
- 
+  function updateTitle() {
+    setTitle(titleRef.current.value)
+  }
 
-  
+  function updateDescription() {
+    setDescription(descriptionRef.current.value)
+  }
 
-
+  function updateStatus() {
+    setStatus(selectRef.current.value)
+  }
 
   return (
     <>
@@ -88,9 +104,9 @@ const NewTaskForm = () => {
               className="border-bright-gray border-2 outline-bright-gray rounded-md h-10 px-2 text-sm
               dark:bg-dark-gray dark:border-medium-gray dark:text-white"
               placeholder="e.g Take coffee break"
-              
+              ref={titleRef}
+              onChange={updateTitle}
               required={true}
-              
             />
           </div>
           {/* description textarea field */}
@@ -108,9 +124,9 @@ const NewTaskForm = () => {
               className="border-bright-gray border-2 outline-bright-gray rounded-md h-20 px-2 py-2 text-sm resize-none
                dark:bg-dark-gray dark:border-medium-gray dark:text-white"
               placeholder="e.g its always good to take a small break from working to prevent burnouts"
-              
               required={true}
-              
+              onChange={updateDescription}
+              ref={descriptionRef}
             />
           </div>
 
@@ -142,7 +158,8 @@ const NewTaskForm = () => {
               name="select-status"
               className="border-bright-gray border-2 outline-bright-gray rounded-md h-10 px-2 text-sm
               dark:text-white dark:bg-dark-gray dark:border-medium-gray"
-              // onChange={console.log("test")}
+              ref={selectRef}
+              onChange={updateStatus}
             >
               <option className="text-black dark:text-white">Todo</option>
               <option className="text-black dark:text-white">Doing</option>

@@ -15,13 +15,13 @@ export const BoardColumn: React.FC<props> = ({statusName,
     columnName, batchColor}) => {
 
 
-  const currentBoard = useSelector(
+  const currentBoardName = useSelector(
     (state: RootState) => state.currentBoard.currentBoard
   )
-  const board = data.boards.find((board: any) => board.name === currentBoard)
+  const currentBoard = data.boards.find((board: any) => board.name === currentBoardName)
   
   const boardIndex = data.boards.findIndex(
-    (board: any) => board.name === currentBoard
+    (board: any) => board.name === currentBoardName
   )
   
   return (

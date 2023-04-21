@@ -23,7 +23,7 @@ const Board = () => {
   )
   const currentBoard = data.boards.find(
     (board: any) => board.name === currentBoardName
-  )
+  ) 
 
   return (
     <>
