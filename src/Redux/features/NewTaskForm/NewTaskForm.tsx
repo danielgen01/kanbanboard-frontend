@@ -11,8 +11,9 @@ import data from "../../../../data.json"
 const NewTaskForm = () => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
-  const [status, setStatus] = useState("Todo")
   const [subtasks, setSubtasks] = useState<string[]>(["eg.1"])
+  
+
   const descriptionRef: any = useRef(null)
   const titleRef: any = useRef(null)
   const selectRef: any = useRef(null)
@@ -26,11 +27,15 @@ const NewTaskForm = () => {
   const currentBoardName = useAppSelector(
     (state: RootState) => state.currentBoard.currentBoard
   )
-
+  
   const currentBoard = data.boards.find(
     (board) => board.name === currentBoardName
   )
 
+  const firstColumnName:any = currentBoard?.columns[0].name
+
+  const [status, setStatus] = useState(firstColumnName)
+ 
   const currentBoardIndex = data.boards.findIndex(
     (board) => board.name === currentBoardName
   )
@@ -39,10 +44,11 @@ const NewTaskForm = () => {
     (column) => column.name === status
   )
 
-  const matchingColumnIndex: any = currentBoard?.columns.findIndex(
-    (column) => column.name === status
-  )
+  const matchingColumnIndex: number =
+    currentBoard?.columns.findIndex((column) => column.name === status) ?? 0
 
+  const columnNames = currentBoard?.columns.map((column) => column.name)
+  
   function addNewSubTask() {
     setSubtasks([...subtasks, ""])
   }
@@ -61,19 +67,19 @@ const NewTaskForm = () => {
       return newSubtasks
     })
   }
+  console.log(currentBoard)
 
   const addTask = () => {
     currentBoard?.columns[matchingColumnIndex].tasks.push({
       title: title,
       description: description,
       status: status,
-      subtasks: subtasks.map(subtaskTitle => ({
+      subtasks: subtasks.map((subtaskTitle) => ({
         title: subtaskTitle,
-        isCompleted: false
-      }))
-      
+        isCompleted: false,
+      })),
     })
-    console.log(currentBoard)
+
     handleToggleNewTaskForm()
     setSubtasks(["", ""])
   }
@@ -197,10 +203,13 @@ const NewTaskForm = () => {
               dark:text-white dark:bg-dark-gray dark:border-medium-gray"
               ref={selectRef}
               onChange={updateStatus}
+              value={status}
             >
-              <option className="text-black dark:text-white">Todo</option>
-              <option className="text-black dark:text-white">Doing</option>
-              <option className="text-black dark:text-white">Done</option>
+              {columnNames?.map((name) => (
+                <option key={name} value={name}>
+                  {name}
+                </option>
+              ))}
             </select>
           </div>
 
