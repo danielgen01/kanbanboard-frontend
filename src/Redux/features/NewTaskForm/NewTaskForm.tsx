@@ -197,7 +197,9 @@ const NewTaskForm = () => {
               />
             ))}
             <button
-              className="flex items-center gap-2 text-dark-purple w-full justify-center mt-2 bg-bright-gray rounded-3xl h-12 font-bold"
+              className="flex items-center gap-2 text-dark-purple
+               w-full justify-center mt-2 bg-bright-gray rounded-3xl
+                h-12 font-bold hover:opacity-70 duration-150"
               type="button"
               onClick={addNewSubTask}
             >
@@ -234,7 +236,8 @@ const NewTaskForm = () => {
           {/* Create task button */}
 
           <button
-            className="bg-dark-purple text-white font-bold text-sm py-3 rounded-3xl"
+            className="bg-dark-purple text-white font-bold text-sm py-3
+             rounded-3xl hover:bg-bright-purple duration-200"
             type="button"
             onClick={handleAddTask}
           >

@@ -97,7 +97,10 @@ const AddBoardForm: React.FC = () => {
           </label>
           <input
             type="text"
-            className="px-5 border-2 border-bright-gray rounded-md h-12 dark:bg-dark-gray dark:border-medium-gray dark:border dark:text-white"
+            className="px-5 border-2 border-bright-gray rounded-md h-12
+            outline-white
+             dark:bg-dark-gray dark:border-medium-gray
+              dark:border dark:text-white"
             placeholder="e.g Web Design"
             onChange={(e) => setBoardTitle(e.target.value)}
           />
@@ -122,14 +125,15 @@ const AddBoardForm: React.FC = () => {
           <section className="buttons flex flex-col gap-5">
             <button
               className="flex items-center justify-center w-full text-dark-purple font-bold bg-bright-gray h-10 gap-2 rounded-3xl 
-            dark:bg-white"
+            dark:bg-white hover:opacity-70 duration-150"
               onClick={addNewColumn}
             >
               <AiOutlinePlus className="text-dark-purple font-bold" /> Add new
               Column
             </button>
             <button
-              className="w-full text-white font-bold bg-dark-purple h-10 gap-2 rounded-3xl"
+              className="w-full text-white font-bold bg-dark-purple
+               h-10 gap-2 rounded-3xl  hover:bg-bright-purple duration-200"
               onClick={addNewBoard}
             >
               Create new Board
