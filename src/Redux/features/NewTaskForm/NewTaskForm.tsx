@@ -7,16 +7,12 @@ import { RootState } from "../../rootReducer"
 import { toggleNewTaskForm } from "./NewTaskFormSlice"
 import { addTask } from "../Data/DataSlice"
 
-
 const NewTaskForm = () => {
-  const data = useAppSelector(
-    (state: RootState) => state.data
-  )
-  
+  const data = useAppSelector((state: RootState) => state.data)
+
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
-  const [subtasks, setSubtasks] = useState<string[]>(["eg.1"])
-  
+  const [subtasks, setSubtasks] = useState<string[]>([""])
 
   const descriptionRef: any = useRef(null)
   const titleRef: any = useRef(null)
@@ -31,15 +27,15 @@ const NewTaskForm = () => {
   const currentBoardName = useAppSelector(
     (state: RootState) => state.currentBoard.currentBoard
   )
-  
+
   const currentBoard = data.boards.find(
     (board) => board.name === currentBoardName
   )
 
-  const firstColumnName:any = currentBoard?.columns[0].name
+  const firstColumnName: any = currentBoard?.columns[0].name
 
   const [status, setStatus] = useState(firstColumnName)
- 
+
   const currentBoardIndex = data.boards.findIndex(
     (board) => board.name === currentBoardName
   )
@@ -52,7 +48,7 @@ const NewTaskForm = () => {
     currentBoard?.columns.findIndex((column) => column.name === status) ?? 0
 
   const columnNames = currentBoard?.columns.map((column) => column.name)
-  
+
   function addNewSubTask() {
     setSubtasks([...subtasks, ""])
   }
@@ -74,24 +70,31 @@ const NewTaskForm = () => {
   console.log(currentBoard)
 
   const handleAddTask = () => {
-    dispatch(addTask({
-      boardIndex: currentBoardIndex,
-      columnIndex: matchingColumnIndex,
-      task: {
-        title: title,
-        description: description,
-        status: status,
-        subtasks: subtasks.map((subtaskTitle) => ({
-          title: subtaskTitle,
-          isCompleted: false,
-        })),
-      },
-    }));
-    
-    handleToggleNewTaskForm();
-    setSubtasks(["", ""]);
-  };
+    if (title && description && subtasks && subtasks.length > 0) {
+      dispatch(
+        addTask({
+          boardIndex: currentBoardIndex,
+          columnIndex: matchingColumnIndex,
+          task: {
+            title: title,
+            description: description,
+            status: status,
+            subtasks: subtasks.map((subtaskTitle) => ({
+              title: subtaskTitle,
+              isCompleted: false,
+            })),
+          },
+        })
+      )
 
+      handleToggleNewTaskForm()
+      setSubtasks([""])
+      titleRef.current.value = ""
+      descriptionRef.current.value = ""
+    } else {
+      return alert("All fields are required")
+    }
+  }
 
   const handleToggleNewTaskForm = () => {
     dispatch(toggleNewTaskForm())
@@ -180,7 +183,7 @@ const NewTaskForm = () => {
             {subtasks.map((title, index) => (
               <AddColInput
                 key={index}
-                defaultValue={title}
+                defaultValue={"Subtask " + (index + 1)}
                 onRemove={() => removeSubTask(title)}
                 onInputChange={(event) =>
                   handleSubTaskNameChange(index, event.target.value)
