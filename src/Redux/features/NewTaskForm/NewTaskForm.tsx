@@ -5,10 +5,14 @@ import { AiOutlinePlus } from "react-icons/ai"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { RootState } from "../../rootReducer"
 import { toggleNewTaskForm } from "./NewTaskFormSlice"
-import { addBox } from "../columns/Todo/TodoSlice"
-import data from "../../../../data.json"
+import { addTask } from "../Data/DataSlice"
+
 
 const NewTaskForm = () => {
+  const data = useAppSelector(
+    (state: RootState) => state.data
+  )
+  
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [subtasks, setSubtasks] = useState<string[]>(["eg.1"])
@@ -69,20 +73,25 @@ const NewTaskForm = () => {
   }
   console.log(currentBoard)
 
-  const addTask = () => {
-    currentBoard?.columns[matchingColumnIndex].tasks.push({
-      title: title,
-      description: description,
-      status: status,
-      subtasks: subtasks.map((subtaskTitle) => ({
-        title: subtaskTitle,
-        isCompleted: false,
-      })),
-    })
+  const handleAddTask = () => {
+    dispatch(addTask({
+      boardIndex: currentBoardIndex,
+      columnIndex: matchingColumnIndex,
+      task: {
+        title: title,
+        description: description,
+        status: status,
+        subtasks: subtasks.map((subtaskTitle) => ({
+          title: subtaskTitle,
+          isCompleted: false,
+        })),
+      },
+    }));
+    
+    handleToggleNewTaskForm();
+    setSubtasks(["", ""]);
+  };
 
-    handleToggleNewTaskForm()
-    setSubtasks(["", ""])
-  }
 
   const handleToggleNewTaskForm = () => {
     dispatch(toggleNewTaskForm())
@@ -218,7 +227,7 @@ const NewTaskForm = () => {
           <button
             className="bg-dark-purple text-white font-bold text-sm py-3 rounded-3xl"
             type="button"
-            onClick={addTask}
+            onClick={handleAddTask}
           >
             Create Task
           </button>

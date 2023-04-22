@@ -5,11 +5,15 @@ import { toggleSidebar } from "../../Redux/features/Sidebar/sidebarSlice"
 import { RootState } from "../../Redux/rootReducer"
 import { useSelector, useDispatch } from "react-redux"
 import { BoardColumn } from "../reusable/BoardColumn"
-import data from "../../../data.json"
+
 import Navbar from "../Navbar/Navbar"
 import EmptyBoardContent from "../reusable/EmptyBoardContent"
 
 const Board = () => {
+
+  const data = useSelector((state: RootState) => state.data)
+
+
   const isSideBarOpen = useSelector(
     (state: RootState) => state.sidebar.isSideBarOpen
   )

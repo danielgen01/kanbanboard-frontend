@@ -6,9 +6,10 @@ import { useSelector, useDispatch } from "react-redux"
 import { toggleAddBoardForm } from "./NewBoardFormSlice"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { RootState } from "../../rootReducer"
-import data from "../../../../data.json"
+import { addBoard } from "../Data/DataSlice"
 
 const AddBoardForm: React.FC = () => {
+  const data = useAppSelector((state: RootState) => state.data)
   const [boardTitle, setBoardTitle] = useState<string>("New Board")
   const [columnNames, setColumnNames] = useState<string[]>([
     "Todo",
@@ -31,31 +32,30 @@ const AddBoardForm: React.FC = () => {
     (state: RootState) => state.newboardform.isBoardFormOpen
   )
 
- 
-
   const dispatch = useAppDispatch()
 
   const handleToggleAddBoardForm = () => {
     dispatch(toggleAddBoardForm())
   }
 
-  const addBoard = () => {
+  const addNewBoard = () => {
     const columns = columnNames.map((name) => ({
       name,
       tasks: [],
     }))
 
-    const boardExists = data.boards.find((board) => board.name === boardTitle);
+    const boardExists = data.boards.find((board) => board.name === boardTitle)
     if (boardExists) {
-      alert("Board with the same name already exists");
-      return;
+      alert("Board with the same name already exists")
+      return
     }
 
-    
-    data.boards.push({
-      name: boardTitle,
-      columns,
-    })
+    dispatch(
+      addBoard({
+        name: boardTitle,
+        columns,
+      })
+    )
 
     handleToggleAddBoardForm()
   }
@@ -130,7 +130,7 @@ const AddBoardForm: React.FC = () => {
             </button>
             <button
               className="w-full text-white font-bold bg-dark-purple h-10 gap-2 rounded-3xl"
-              onClick={addBoard}
+              onClick={addNewBoard}
             >
               Create new Board
             </button>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Kanbanbox } from "./Kanbanbox"
 import { MdSwipeLeft } from "react-icons/md"
-import data from "../../../data.json"
 import { useSelector } from "react-redux"
 import { RootState } from "../../Redux/rootReducer"
 
@@ -16,6 +15,10 @@ export const BoardColumn: React.FC<props> = ({
   columnName,
   batchColor,
 }) => {
+
+  const data = useSelector(
+    (state: RootState) => state.data
+  )
 
   const currentBoardName = useSelector(
     (state: RootState) => state.currentBoard.currentBoard
