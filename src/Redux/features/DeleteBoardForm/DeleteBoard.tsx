@@ -18,18 +18,15 @@ const DeleteBoard: React.FC = () => {
     (state: RootState) => state.currentBoard.currentBoard
   )
 
-
   const deleteCurrentBoard = () => {
     const updatedBoards = data.boards.filter(
       (board) => board.name !== currentBoardName
     )
-    dispatch(removeBoard(currentBoardName));
+    dispatch(removeBoard(currentBoardName))
     handleToggleDeleteBoardForm()
     // window.location.reload()
     dispatch(setCurrentBoard(data.boards[1].name))
-
   }
-  
 
   const handleToggleDeleteBoardForm = () => {
     dispatch(toggleDeleteBoardForm())
