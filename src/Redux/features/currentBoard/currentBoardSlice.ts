@@ -1,23 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit"
 
-interface CurrentBoard {
-  currentBoard: string;
+interface CurrentBoardName {
+  currentBoard: string
 }
 
-const initialState: CurrentBoard = {
-  currentBoard: 'Platform Launch',
-};
+const initialState: CurrentBoardName = {
+  currentBoard: "Platform Launch",
+}
 
 const currentBoardSlice = createSlice({
-  name: 'currentBoardName',
+  name: "currentBoardName",
   initialState,
   reducers: {
-    setCurrentBoard: (state, action) => {
-      state.currentBoard = action.payload;
+    setCurrentBoardName: (state, action) => {
+      state.currentBoard = action.payload
     },
   },
-});
+})
 
-export const { setCurrentBoard } = currentBoardSlice.actions;
+export const { setCurrentBoardName } = currentBoardSlice.actions
 
-export default currentBoardSlice.reducer;
+export default currentBoardSlice.reducer

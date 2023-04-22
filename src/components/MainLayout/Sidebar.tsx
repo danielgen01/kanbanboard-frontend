@@ -12,14 +12,10 @@ import iconDark from "../../../assets/icon-dark-theme.svg"
 import iconShowSidebar from "../../../assets/icon-show-sidebar.svg"
 import iconHideSidebar from "../../../assets/icon-hide-sidebar.svg"
 import CustomBoardName from "../reusable/CustomBoardName"
-import { setCurrentBoard } from "../../Redux/features/currentBoard/currentBoardSlice"
+import { setCurrentBoardName } from "../../Redux/features/currentBoard/currentBoardSlice"
 
 const Sidebar: React.FC = () => {
-
-  const data = useSelector(
-    (state: RootState) => state.data
-  )
-
+  const data = useSelector((state: RootState) => state.data)
 
   const isSideBarOpen = useSelector(
     (state: RootState) => state.sidebar.isSideBarOpen
@@ -58,9 +54,6 @@ const Sidebar: React.FC = () => {
 
   const boardTitles = data.boards.map((board) => board.name)
 
-  
-
-
   return (
     <>
       <aside
@@ -83,8 +76,6 @@ const Sidebar: React.FC = () => {
             <React.Fragment key={board.name}>
               <CustomBoardName //CustomBoard is each boardtitle
                 name={board.name}
-                
-
               />
             </React.Fragment>
           ))}

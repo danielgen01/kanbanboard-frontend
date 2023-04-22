@@ -4,7 +4,7 @@ import { toggleDeleteBoardForm } from "./DeleteBoardFormSlice"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { RootState } from "../../rootReducer"
 import { removeBoard } from "../Data/DataSlice"
-import { setCurrentBoard } from "../currentBoard/currentBoardSlice"
+import { setCurrentBoardName } from "../currentBoard/currentBoardSlice"
 
 const DeleteBoard: React.FC = () => {
   const data = useAppSelector((state: RootState) => state.data)
@@ -22,7 +22,7 @@ const DeleteBoard: React.FC = () => {
     dispatch(removeBoard(currentBoardName))
     handleToggleDeleteBoardForm()
     // window.location.reload()
-    dispatch(setCurrentBoard(data.boards[1].name))
+    dispatch(setCurrentBoardName(data.boards[1].name))
   }
 
   const handleToggleDeleteBoardForm = () => {

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import boardicon from "../../../assets/icon-board.svg"
-import { setCurrentBoard } from "../../Redux/features/currentBoard/currentBoardSlice"
+import { setCurrentBoardName } from "../../Redux/features/currentBoard/currentBoardSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../Redux/rootReducer"
 
@@ -12,7 +12,7 @@ const CustomBoardName: React.FC<props> = ({ name }) => {
   const dispatch = useDispatch()
 
   const changeCurrentBoard = (name: string) => {
-    dispatch(setCurrentBoard(name))
+    dispatch(setCurrentBoardName(name))
   }
 
   const currentBoard = useSelector(
@@ -28,7 +28,7 @@ const CustomBoardName: React.FC<props> = ({ name }) => {
       }
       
       ${currentBoard === name ? "text-white" : "text-medium-gray"}
-      w-[90%]` }
+      w-[90%]`}
       onClick={() => changeCurrentBoard(name)}
     >
       <img src={boardicon} alt="logo" />
