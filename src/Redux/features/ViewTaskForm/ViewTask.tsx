@@ -17,6 +17,37 @@ const ViewTaskForm = () => {
 
   const dispatch = useAppDispatch()
 
+  const data = useAppSelector((state: RootState) => state.data)
+
+  const currentBoardName = useAppSelector(
+    (state: RootState) => state.currentBoardName.currentBoardName
+  )
+
+  const currentTaskTitle = useAppSelector(
+    (state: RootState) => state.currentTaskTitle.currentTaskTitle
+  )
+
+  const currentBoard = data?.boards.find(
+    (board: any) => board.name === currentBoardName
+  )
+
+  let currentTask = null
+
+  if (currentBoard) {
+    for (const column of currentBoard.columns) {
+      currentTask = column.tasks.find(
+        (task: any) => task.title === currentTaskTitle
+      )
+      if (currentTask) {
+        break
+      }
+    }
+  }
+
+  const currentTaskDescription = currentTask?.description
+
+  console.log(currentTask)
+
   const handleToggleViewTaskForm = () => {
     dispatch(toggleViewTaskForm())
     setIsEllipsDropDownOpen(false)
@@ -50,10 +81,9 @@ const ViewTaskForm = () => {
         style={{ display: isViewTaskFormOpen ? "block" : "none" }}
       >
         <div className="container-content flex flex-col px-1 py-5 gap-6">
-          <div className="headline-and-edit-task-icon flex items-center">
+          <div className="headline-and-edit-task-icon flex items-center justify-between">
             <h1 className="text-black dark:text-white font-bold task-title">
-              Lorem ipsum dolor sit amet cscdunt culpa, blanditiis quibusdam
-              tempore!
+              {currentTaskTitle}
             </h1>
             <img
               src={ellipsIcon}
@@ -63,22 +93,18 @@ const ViewTaskForm = () => {
             />
           </div>
 
-          <p className="text-medium-gray">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi quia
-            molestias debitis facilis ea
-          </p>
+          <p className="text-medium-gray">{currentTaskDescription}</p>
 
           <section className="subtasks flex flex-col justify-center gap-2">
             <label
               htmlFor="check-task"
               className="text-medium-gray dark:text-white font-bold text-sm"
             >
-              Subtasks (2 of 3)
+              Subtasks (0 of {currentTask?.subtasks.length})
             </label>
-
-            <Subtask />
-            <Subtask />
-            <Subtask />
+            {currentTask?.subtasks.map((subtask: any, index: number) => (
+              <Subtask key={index} title={subtask.title} />
+            ))}
           </section>
 
           <section className="status-container flex flex-col gap-2">
@@ -94,18 +120,11 @@ const ViewTaskForm = () => {
               className="border-bright-gray border-2 h-10 rounded-md cursor-pointer
                px-2 dark:bg-transparent dark:outline-none dark:text-white"
             >
-              <option
-                className="text-medium-gray"
-                value="Doing"
-              >
-                Doing
-              </option>
-              <option className="text-medium-gray " value="Done">
-                Done
-              </option>
-              <option className="text-medium-gray " value="Todo">
-                Todo
-              </option>
+              {currentBoard?.columns.map((column: any) => (
+                <option className="text-medium-gray" value={column.name}>
+                  {column.name}
+                </option>
+              ))}
             </select>
           </section>
         </div>
@@ -122,7 +141,11 @@ const ViewTaskForm = () => {
             >
               Edit Task
             </button>
-            <button className="dark:font-bold text-dark-red text-md" type="button" onClick={handleToggleDeleteTaskForm}>
+            <button
+              className="dark:font-bold text-dark-red text-md"
+              type="button"
+              onClick={handleToggleDeleteTaskForm}
+            >
               Delete Task
             </button>
           </div>

@@ -1,5 +1,4 @@
 import React from "react"
-
 import { toggleDeleteBoardForm } from "./DeleteBoardFormSlice"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { RootState } from "../../rootReducer"

@@ -3,6 +3,7 @@ import React from "react"
 import { RootState } from "../../Redux/rootReducer"
 import { useAppDispatch, useAppSelector } from "../../Redux/store"
 import { toggleViewTaskForm } from "../../Redux/features/ViewTaskForm/ViewTaskFormSlice"
+import { setCurrentTaskTitle } from "../../Redux/features/currentTaskTitle/currentTaskTitleSlice"
 
 interface Subtask {
   id: string
@@ -27,8 +28,23 @@ export const Kanbanbox: React.FC<TodoBox> = ({
 }) => {
   const dispatch = useAppDispatch()
 
+  const data = useAppSelector((state: RootState) => state.data)
+
+
+  const currentTaskTitle = useAppSelector(
+    (state: RootState) => state.currentTaskTitle.currentTaskTitle
+  )
+
+
+
   const handleToggleViewTaskForm = () => {
     dispatch(toggleViewTaskForm())
+  }
+
+  const changeCurrentTaskTitle = (title: string) => {
+    dispatch(setCurrentTaskTitle(title))
+    handleToggleViewTaskForm()
+    console.log(currentTaskTitle)
   }
 
   return (
@@ -36,7 +52,8 @@ export const Kanbanbox: React.FC<TodoBox> = ({
       className="kanbanbox min-h-[5rem] xl:h-28 w-72  md:w-52
        xl:w-72 bg-white rounded-md flex flex-col items-start justify-center shadow-md gap-2 px-5
           dark:bg-dark-gray cursor-pointer"
-      onClick={handleToggleViewTaskForm}
+      // onClick={handleToggleViewTaskForm}
+      onClick={() => changeCurrentTaskTitle(title)}
     >
       <h1
         className="text-black font-bold text-md 
