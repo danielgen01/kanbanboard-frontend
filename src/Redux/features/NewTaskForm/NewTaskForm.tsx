@@ -33,8 +33,11 @@ const NewTaskForm = () => {
   )
 
   const firstColumnName: any = currentBoard?.columns[0].name
-
   const [status, setStatus] = useState(firstColumnName)
+
+  useEffect(() => {
+    setStatus(firstColumnName)
+  }, [currentBoard])
 
   const currentBoardIndex = data.boards.findIndex(
     (board) => board.name === currentBoardName
@@ -68,6 +71,7 @@ const NewTaskForm = () => {
     })
   }
   console.log(currentBoard)
+  console.log(status)
 
   const handleAddTask = () => {
     if (title && description && subtasks && subtasks.length > 0) {
@@ -91,7 +95,6 @@ const NewTaskForm = () => {
       setSubtasks([""])
       titleRef.current.value = ""
       descriptionRef.current.value = ""
-     
     } else {
       return alert("All fields are required")
     }
