@@ -12,10 +12,15 @@ import iconDark from "../../../assets/icon-dark-theme.svg"
 import iconShowSidebar from "../../../assets/icon-show-sidebar.svg"
 import iconHideSidebar from "../../../assets/icon-hide-sidebar.svg"
 import CustomBoardName from "../reusable/CustomBoardName"
-import data from "../../../data.json"
 import { setCurrentBoard } from "../../Redux/features/currentBoard/currentBoardSlice"
 
 const Sidebar: React.FC = () => {
+
+  const data = useSelector(
+    (state: RootState) => state.data
+  )
+
+
   const isSideBarOpen = useSelector(
     (state: RootState) => state.sidebar.isSideBarOpen
   )
