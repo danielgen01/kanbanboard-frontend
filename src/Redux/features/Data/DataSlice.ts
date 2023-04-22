@@ -45,10 +45,14 @@ const dataSlice = createSlice({
       const { boardIndex, columnIndex, task } = action.payload;
       state.boards[boardIndex].columns[columnIndex].tasks.push(task);
     },
+    removeBoard: (state, action: PayloadAction<string>) => {
+      const boardNameToRemove = action.payload;
+      state.boards = state.boards.filter(board => board.name !== boardNameToRemove);
+    },
   },
 
 });
 
-export const { addBoard, addTask } = dataSlice.actions;
+export const { addBoard, addTask, removeBoard } = dataSlice.actions;
 
 export default dataSlice.reducer;

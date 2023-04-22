@@ -3,28 +3,32 @@ import React from "react"
 import { toggleDeleteBoardForm } from "./DeleteBoardFormSlice"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { RootState } from "../../rootReducer"
-import data from "../../../../data.json"
+import { removeBoard } from "../Data/DataSlice"
+import { setCurrentBoard } from "../currentBoard/currentBoardSlice"
 
 const DeleteBoard: React.FC = () => {
+  const data = useAppSelector((state: RootState) => state.data)
   const dispatch = useAppDispatch()
 
   const isDeleteBoardFormOpen = useAppSelector(
     (state: RootState) => state.deleteBoardForm.isDeleteBoardFormOpen
   )
 
-  // const currentBoardName = useAppSelector(
-  //   (state: RootState) => state.currentBoard.currentBoard
-  // );
-  
-  // const deleteCurrentBoard = () => {
-  //   const updatedBoards = data.boards.filter(
-  //     (board: any) => board.name !== currentBoardName
-  //   );
-  //   const newData = { ...data, boards: updatedBoards };
-  //   console.log(newData);
-  //   // hier können Sie newData speichern oder verwenden
-  // };
-  
+  const currentBoardName = useAppSelector(
+    (state: RootState) => state.currentBoard.currentBoard
+  )
+
+
+  const deleteCurrentBoard = () => {
+    const updatedBoards = data.boards.filter(
+      (board) => board.name !== currentBoardName
+    )
+    dispatch(removeBoard(currentBoardName));
+    handleToggleDeleteBoardForm()
+    // window.location.reload()
+    dispatch(setCurrentBoard(data.boards[1].name))
+
+  }
   
 
   const handleToggleDeleteBoardForm = () => {
@@ -57,12 +61,14 @@ const DeleteBoard: React.FC = () => {
             <button
               className="bg-dark-red text-white font-bold py-2 px-4 rounded-3xl hover:bg-bright-red duration-100"
               type="button"
-              // onClick={deleteCurrentBoard}
+              onClick={deleteCurrentBoard}
             >
               Delete
             </button>
             <button
-               className=" bg-bright-gray dark:bg-white text-dark-purple font-bold py-2 px-4 rounded-3xl hover:bg-[#F4F7FD] dark:hover:bg-white duration-100"
+              className=" bg-bright-gray dark:bg-white
+               text-dark-purple font-bold py-2 px-4 rounded-3xl
+                hover:opacity-70 dark:hover:bg-white duration-100"
               type="button"
               onClick={handleToggleDeleteBoardForm}
             >
