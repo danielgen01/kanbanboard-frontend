@@ -91,9 +91,12 @@ const NewTaskForm = () => {
       setSubtasks([""])
       titleRef.current.value = ""
       descriptionRef.current.value = ""
+     
     } else {
       return alert("All fields are required")
     }
+    setTitle("")
+    setDescription("")
   }
 
   const handleToggleNewTaskForm = () => {
