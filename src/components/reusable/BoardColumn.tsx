@@ -15,13 +15,10 @@ export const BoardColumn: React.FC<props> = ({
   columnName,
   batchColor,
 }) => {
-
-  const data = useSelector(
-    (state: RootState) => state.data
-  )
+  const data = useSelector((state: RootState) => state.data)
 
   const currentBoardName = useSelector(
-    (state: RootState) => state.currentBoard.currentBoard
+    (state: RootState) => state.currentBoardName.currentBoardName
   )
   const currentBoard = data.boards.find(
     (board: any) => board.name === currentBoardName
@@ -30,8 +27,6 @@ export const BoardColumn: React.FC<props> = ({
   const boardIndex = data.boards.findIndex(
     (board: any) => board.name === currentBoardName
   )
-
-  
 
   return (
     <div className="grid-item-2(doingItems) flex flex-col gap-4">

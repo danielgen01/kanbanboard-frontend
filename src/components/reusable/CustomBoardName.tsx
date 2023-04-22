@@ -16,7 +16,7 @@ const CustomBoardName: React.FC<props> = ({ name }) => {
   }
 
   const currentBoard = useSelector(
-    (state: RootState) => state.currentBoard.currentBoard
+    (state: RootState) => state.currentBoardName.currentBoardName
   )
 
   return (

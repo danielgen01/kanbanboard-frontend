@@ -9,20 +9,19 @@ export const TodoItemsColumn: React.FC = () => {
   const dispatch = useDispatch()
 
   const currentBoard = useSelector(
-    (state: RootState) => state.currentBoard.currentBoard
+    (state: RootState) => state.currentBoardName.currentBoardName
   )
 
   const board = data.boards.find((board: any) => board.name === currentBoard)
   const boardIndex = data.boards.findIndex(
     (board: any) => board.name === currentBoard
   )
-  
 
   let num = 0
   if (boardIndex >= 0) {
     let num = data.boards[boardIndex].columns[2].tasks.length
   }
-  
+
   return (
     <div className="grid-item-1(todoItems) flex flex-col gap-4">
       <div className="headline flex items-center gap-2">

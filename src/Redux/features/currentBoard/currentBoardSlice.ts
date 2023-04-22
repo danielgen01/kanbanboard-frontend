@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 interface CurrentBoardName {
-  currentBoard: string
+  currentBoardName: string
 }
 
 const initialState: CurrentBoardName = {
-  currentBoard: "Platform Launch",
+  currentBoardName: "Platform Launch",
 }
 
 const currentBoardSlice = createSlice({
@@ -13,7 +13,7 @@ const currentBoardSlice = createSlice({
   initialState,
   reducers: {
     setCurrentBoardName: (state, action) => {
-      state.currentBoard = action.payload
+      state.currentBoardName = action.payload
     },
   },
 })

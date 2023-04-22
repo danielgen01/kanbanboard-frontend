@@ -10,9 +10,7 @@ import Navbar from "../Navbar/Navbar"
 import EmptyBoardContent from "../reusable/EmptyBoardContent"
 
 const Board = () => {
-
   const data = useSelector((state: RootState) => state.data)
-
 
   const isSideBarOpen = useSelector(
     (state: RootState) => state.sidebar.isSideBarOpen
@@ -23,11 +21,11 @@ const Board = () => {
   }
 
   const currentBoardName = useSelector(
-    (state: RootState) => state.currentBoard.currentBoard
+    (state: RootState) => state.currentBoardName.currentBoardName
   )
   const currentBoard = data.boards.find(
     (board: any) => board.name === currentBoardName
-  ) 
+  )
 
   return (
     <>

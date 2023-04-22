@@ -38,9 +38,8 @@ const Navbar = () => {
   }
 
   const currentBoard = useAppSelector(
-    (state: RootState) => state.currentBoard.currentBoard
+    (state: RootState) => state.currentBoardName.currentBoardName
   )
-
 
   return (
     <nav
@@ -71,7 +70,7 @@ const Navbar = () => {
             </span>
           </button>
           <button className="three-points-ellipsis px-5" onClick={openDropDown}>
-            <img src={threepointsicon} alt="ellipsis" className=""/>
+            <img src={threepointsicon} alt="ellipsis" className="" />
           </button>
         </div>
 
@@ -80,10 +79,18 @@ const Navbar = () => {
           style={{ display: isEllipsDropDownOpen ? "block" : "none" }}
         >
           <div className="content  flex flex-col justify-center px-5 whitespace-nowrap min-h-[80px] gap-4">
-            <button className="dark:font-bold text-medium-gray" type="button" onClick={handleToggleEditBoardForm}>
+            <button
+              className="dark:font-bold text-medium-gray"
+              type="button"
+              onClick={handleToggleEditBoardForm}
+            >
               Edit Board
             </button>
-            <button className="dark:font-bold text-dark-red text-md" type="button" onClick={handleToggleDeleteBoardForm}>
+            <button
+              className="dark:font-bold text-dark-red text-md"
+              type="button"
+              onClick={handleToggleDeleteBoardForm}
+            >
               Delete Board
             </button>
           </div>
