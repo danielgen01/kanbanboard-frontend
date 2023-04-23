@@ -9,6 +9,28 @@ import { toggleEditTaskForm } from "../EditTaskForm/EditTaskFormSlice"
 import { toggleDeleteTaskForm } from "../DeletTaskForm/DeleteTaskFormSlice"
 
 const ViewTaskForm = () => {
+  const [completedSubtasks, setCompletedSubtasks] = useState(0)
+
+  const handleToggleViewTaskForm = () => {
+    dispatch(toggleViewTaskForm())
+    setIsEllipsDropDownOpen(false)
+  }
+
+  const handleToggleEditTaskForm = () => {
+    dispatch(toggleEditTaskForm())
+    handleToggleViewTaskForm()
+    setIsEllipsDropDownOpen(false)
+  }
+
+  const toggleEllipsDropDown = () => {
+    setIsEllipsDropDownOpen(!isEllipsDropDownOpen)
+  }
+
+  const handleToggleDeleteTaskForm = () => {
+    dispatch(toggleDeleteTaskForm())
+    setIsEllipsDropDownOpen(false)
+  }
+
   const [isEllipsDropDownOpen, setIsEllipsDropDownOpen] =
     useState<boolean>(false)
   const isViewTaskFormOpen = useAppSelector(
@@ -31,7 +53,7 @@ const ViewTaskForm = () => {
     (board: any) => board.name === currentBoardName
   )
 
-  let currentTask = null
+  let currentTask: any = null
 
   if (currentBoard) {
     for (const column of currentBoard.columns) {
@@ -44,29 +66,9 @@ const ViewTaskForm = () => {
     }
   }
 
+ 
+
   const currentTaskDescription = currentTask?.description
-
-  console.log(currentTask)
-
-  const handleToggleViewTaskForm = () => {
-    dispatch(toggleViewTaskForm())
-    setIsEllipsDropDownOpen(false)
-  }
-
-  const handleToggleEditTaskForm = () => {
-    dispatch(toggleEditTaskForm())
-    handleToggleViewTaskForm()
-    setIsEllipsDropDownOpen(false)
-  }
-
-  const toggleEllipsDropDown = () => {
-    setIsEllipsDropDownOpen(!isEllipsDropDownOpen)
-  }
-
-  const handleToggleDeleteTaskForm = () => {
-    dispatch(toggleDeleteTaskForm())
-    setIsEllipsDropDownOpen(false)
-  }
 
   return (
     <>
@@ -100,10 +102,15 @@ const ViewTaskForm = () => {
               htmlFor="check-task"
               className="text-medium-gray dark:text-white font-bold text-sm"
             >
-              Subtasks (0 of {currentTask?.subtasks.length})
+              Subtasks ({completedSubtasks} of {currentTask?.subtasks.length})
             </label>
             {currentTask?.subtasks.map((subtask: any, index: number) => (
-              <Subtask key={index} title={subtask.title} />
+              <Subtask
+                key={index}
+                title={subtask.title}
+               
+               
+              />
             ))}
           </section>
 

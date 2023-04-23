@@ -70,8 +70,6 @@ const NewTaskForm = () => {
       return newSubtasks
     })
   }
-  console.log(currentBoard)
-  console.log(status)
 
   const handleAddTask = () => {
     if (title && description && subtasks && subtasks.length > 0) {

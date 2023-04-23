@@ -14,6 +14,48 @@ const DeleteTask: React.FC = () => {
   const handleToggleDeleteTaskForm = () => {
     dispatch(toggleDeleteTaskForm())
   }
+
+  const data = useAppSelector((state: RootState) => state.data)
+
+  const currentBoardName = useAppSelector(
+    (state: RootState) => state.currentBoardName.currentBoardName
+  )
+
+  const currentTaskTitle = useAppSelector(
+    (state: RootState) => state.currentTaskTitle.currentTaskTitle
+  )
+
+  const currentBoard = data?.boards.find(
+    (board: any) => board.name === currentBoardName
+  )
+
+  let currentTask = null
+
+  if (currentBoard) {
+    for (const column of currentBoard.columns) {
+      currentTask = column.tasks.find(
+        (task: any) => task.title === currentTaskTitle
+      )
+      if (currentTask) {
+        break
+      }
+    }
+  }
+
+  const deleteCurrentTask = () => {
+    if (currentBoard) {
+      for (const column of currentBoard.columns) {
+        const index = column.tasks.findIndex(
+          (task: any) => task.title === currentTaskTitle
+        )
+        if (index !== -1) {
+          column.tasks.splice(index, 1)
+          break
+        }
+      }
+    }
+  }
+
   return (
     <>
       <section
@@ -44,14 +86,14 @@ const DeleteTask: React.FC = () => {
             <button
               className="bg-dark-red text-white font-bold py-2 px-4 rounded-3xl hover:bg-bright-red duration-100"
               type="button"
-              onClick={() => window.location.reload()}
+              onClick={deleteCurrentTask}
             >
               Delete
             </button>
             <button
               className=" bg-bright-gray dark:bg-white text-dark-purple font-bold py-2 px-4 rounded-3xl dark:hover:bg-white"
               type="button"
-              onClick={() => window.location.reload()}
+              onClick={handleToggleDeleteTaskForm}
             >
               Cancel
             </button>
