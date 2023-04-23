@@ -9,7 +9,6 @@ import { toggleEditTaskForm } from "../EditTaskForm/EditTaskFormSlice"
 import { toggleDeleteTaskForm } from "../DeletTaskForm/DeleteTaskFormSlice"
 
 const ViewTaskForm = () => {
-  const [completedSubtasks, setCompletedSubtasks] = useState(0)
 
   const handleToggleViewTaskForm = () => {
     dispatch(toggleViewTaskForm())
@@ -52,6 +51,7 @@ const ViewTaskForm = () => {
   const currentBoard = data?.boards.find(
     (board: any) => board.name === currentBoardName
   )
+  
 
   let currentTask: any = null
 
@@ -65,8 +65,10 @@ const ViewTaskForm = () => {
       }
     }
   }
+  
+  const [completedSubtasks, setCompletedSubtasks] = useState(0)
 
- 
+  
 
   const currentTaskDescription = currentTask?.description
 
@@ -105,12 +107,11 @@ const ViewTaskForm = () => {
               Subtasks ({completedSubtasks} of {currentTask?.subtasks.length})
             </label>
             {currentTask?.subtasks.map((subtask: any, index: number) => (
-              <Subtask
-                key={index}
-                title={subtask.title}
-               
-               
-              />
+              <Subtask key={index}
+               title={subtask.title}
+               completedSubtasks={completedSubtasks}
+               setCompletedSubtasks={setCompletedSubtasks}
+                />
             ))}
           </section>
 
@@ -126,6 +127,7 @@ const ViewTaskForm = () => {
               id="select-staus"
               className="border-bright-gray border-2 h-10 rounded-md cursor-pointer
                px-2 dark:bg-transparent dark:outline-none dark:text-white"
+              value={currentTask?.status}
             >
               {currentBoard?.columns.map((column: any) => (
                 <option className="text-medium-gray" value={column.name}>
