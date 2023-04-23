@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { useAppSelector } from "../../Redux/store"
 import { RootState } from "../../Redux/rootReducer"
 
+
 type props = {
   title: string
   completedSubtasks: number
@@ -66,6 +67,7 @@ const handleCheckboxChange = () => {
   })
 
   setIsChecked(!isChecked)
+  // currentTask.subtasks = newSubtasks
 }
 
 

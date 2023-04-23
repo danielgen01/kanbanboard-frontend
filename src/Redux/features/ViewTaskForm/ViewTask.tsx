@@ -7,9 +7,9 @@ import { useAppDispatch, useAppSelector } from "../../store"
 import { toggleViewTaskForm } from "./ViewTaskFormSlice"
 import { toggleEditTaskForm } from "../EditTaskForm/EditTaskFormSlice"
 import { toggleDeleteTaskForm } from "../DeletTaskForm/DeleteTaskFormSlice"
+import { setCurrentTaskTitle } from "../currentTaskTitle/currentTaskTitleSlice"
 
 const ViewTaskForm = () => {
-
   const handleToggleViewTaskForm = () => {
     dispatch(toggleViewTaskForm())
     setIsEllipsDropDownOpen(false)
@@ -51,7 +51,6 @@ const ViewTaskForm = () => {
   const currentBoard = data?.boards.find(
     (board: any) => board.name === currentBoardName
   )
-  
 
   let currentTask: any = null
 
@@ -65,12 +64,12 @@ const ViewTaskForm = () => {
       }
     }
   }
-  
+
   const [completedSubtasks, setCompletedSubtasks] = useState(0)
 
-  
-
   const currentTaskDescription = currentTask?.description
+
+
 
   return (
     <>
@@ -107,11 +106,12 @@ const ViewTaskForm = () => {
               Subtasks ({completedSubtasks} of {currentTask?.subtasks.length})
             </label>
             {currentTask?.subtasks.map((subtask: any, index: number) => (
-              <Subtask key={index}
-               title={subtask.title}
-               completedSubtasks={completedSubtasks}
-               setCompletedSubtasks={setCompletedSubtasks}
-                />
+              <Subtask
+                key={index}
+                title={subtask.title}
+                completedSubtasks={completedSubtasks}
+                setCompletedSubtasks={setCompletedSubtasks}
+              />
             ))}
           </section>
 
