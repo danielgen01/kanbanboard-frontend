@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../store"
 import { toggleViewTaskForm } from "./ViewTaskFormSlice"
 import { toggleEditTaskForm } from "../EditTaskForm/EditTaskFormSlice"
 import { toggleDeleteTaskForm } from "../DeletTaskForm/DeleteTaskFormSlice"
-import { setCurrentTaskTitle } from "../currentTaskTitle/currentTaskTitleSlice"
+import { setCurrentTask } from "../currentTaskTitle/currentTaskTitleSlice"
 
 const ViewTaskForm = () => {
   const handleToggleViewTaskForm = () => {
@@ -44,32 +44,17 @@ const ViewTaskForm = () => {
     (state: RootState) => state.currentBoardName.currentBoardName
   )
 
-  const currentTaskTitle = useAppSelector(
-    (state: RootState) => state.currentTaskTitle.currentTaskTitle
-  )
-
   const currentBoard = data?.boards.find(
     (board: any) => board.name === currentBoardName
   )
 
-  let currentTask: any = null
+  const currentTask = useAppSelector((state: RootState) => state.currentTask)
 
-  if (currentBoard) {
-    for (const column of currentBoard.columns) {
-      currentTask = column.tasks.find(
-        (task: any) => task.title === currentTaskTitle
-      )
-      if (currentTask) {
-        break
-      }
-    }
-  }
+  const currentTaskDescription = currentTask.description
+  const currentTaskTitle = currentTask.title
+ 
 
   const [completedSubtasks, setCompletedSubtasks] = useState(0)
-
-  const currentTaskDescription = currentTask?.description
-
-
 
   return (
     <>

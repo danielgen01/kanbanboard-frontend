@@ -1,23 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-interface currentTaskTitle {
-  currentTaskTitle: string
+interface CurrentTask {
+  title: string
+  description: string
+  status: string
+  subtasks: any[]
 }
 
-const initialState: currentTaskTitle = {
-  currentTaskTitle: "",
+const initialState: CurrentTask = {
+  title: "",
+  description: "",
+  status: "",
+  subtasks: [],
 }
 
 const currentTaskSlice = createSlice({
-  name: "currentTaskTitle",
+  name: "currentTask",
   initialState,
   reducers: {
-    setCurrentTaskTitle: (state, action) => {
-      state.currentTaskTitle = action.payload
+    setCurrentTask: (state, action: PayloadAction<CurrentTask>) => {
+      return { ...state, ...action.payload }
     },
   },
 })
 
-export const { setCurrentTaskTitle } = currentTaskSlice.actions
+export const { setCurrentTask } = currentTaskSlice.actions
 
 export default currentTaskSlice.reducer

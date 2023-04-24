@@ -22,7 +22,7 @@ const DeleteTask: React.FC = () => {
   )
 
   const currentTaskTitle = useAppSelector(
-    (state: RootState) => state.currentTaskTitle.currentTaskTitle
+    (state: RootState) => state.currentTask.currentTask
   )
 
   const currentBoard = data?.boards.find(

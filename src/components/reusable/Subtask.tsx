@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import { useAppSelector } from "../../Redux/store"
 import { RootState } from "../../Redux/rootReducer"
 
-
 type props = {
   title: string
   completedSubtasks: number
@@ -23,14 +22,12 @@ export const Subtask: React.FC<props> = ({
   )
 
   const currentTaskTitle = useAppSelector(
-    (state: RootState) => state.currentTaskTitle.currentTaskTitle
+    (state: RootState) => state.currentTask.currentTask
   )
 
   const currentBoard = data?.boards.find(
     (board: any) => board.name === currentBoardName
   )
-
-  
 
   let currentTask: any = null
 
@@ -42,34 +39,29 @@ export const Subtask: React.FC<props> = ({
       if (currentTask) {
         break
       }
-      
-  }
-
-}
-
-
-
-const handleCheckboxChange = () => {
-  if (!isChecked) {
-    setCompletedSubtasks(completedSubtasks + 1)
-  } else {
-    setCompletedSubtasks(completedSubtasks - 1)
-  }
-
-  const newSubtasks = currentTask?.subtasks.map((subtask: any) => {
-    if (subtask.title === title) {
-      return {
-        ...subtask,
-        isCompleted: !isChecked,
-      }
     }
-    return subtask
-  })
+  }
 
-  setIsChecked(!isChecked)
-  // currentTask.subtasks = newSubtasks
-}
+  const handleCheckboxChange = () => {
+    if (!isChecked) {
+      setCompletedSubtasks(completedSubtasks + 1)
+    } else {
+      setCompletedSubtasks(completedSubtasks - 1)
+    }
 
+    const newSubtasks = currentTask?.subtasks.map((subtask: any) => {
+      if (subtask.title === title) {
+        return {
+          ...subtask,
+          isCompleted: !isChecked,
+        }
+      }
+      return subtask
+    })
+
+    setIsChecked(!isChecked)
+    // currentTask.subtasks = newSubtasks
+  }
 
   return (
     <div
