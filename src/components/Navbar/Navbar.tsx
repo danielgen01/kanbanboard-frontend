@@ -11,9 +11,11 @@ import { toggleEditBoardForm } from "../../Redux/features/EditBoardForm/EditBoar
 import { toggleDeleteBoardForm } from "../../Redux/features/DeleteBoardForm/DeleteBoardFormSlice"
 import { useAppDispatch, useAppSelector } from "../../Redux/store"
 import { RootState } from "../../Redux/rootReducer"
+import SelectBoardFormMobile from "./SelectBoardFormMobile"
 
 const Navbar = () => {
   const [isEllipsDropDownOpen, setIsEllipsDropDownOpen] = useState(false)
+  const [isSelectBoardOpen, setIsSelectBoardOpen] = useState(false)
 
   const handleToggleEditBoardForm = () => {
     dispatch(toggleEditBoardForm())
@@ -22,6 +24,9 @@ const Navbar = () => {
 
   const openDropDown = () => {
     setIsEllipsDropDownOpen(!isEllipsDropDownOpen)
+  }
+  const toggleSelectBoardForm = () => {
+    setIsSelectBoardOpen(!isSelectBoardOpen)
   }
   const isTaskFormOpen = useAppSelector(
     (state: RootState) => state.newTaskForm.isTaskFormOpen
@@ -50,14 +55,17 @@ const Navbar = () => {
         <figure className="logo-ctn">
           <img src={logomobile} className="h-8 md:hidden" alt="logo" />
         </figure>
-        <button className="chosen-board ml-2 flex items-center gap-2 md:cursor-default">
+        <button
+          className="chosen-board ml-2 flex items-center gap-2 md:cursor-default"
+          onClick={toggleSelectBoardForm}
+        >
           <h1
             className="font-bold text-lg
            dark:text-white"
           >
             {currentBoard}
           </h1>
-          <img src={chevrondown} className="h-2 md:hidden" alt="chevron down" />
+          <img src={chevrondown} className="h-2 md:hidden" alt="chevron down"/>
         </button>
         <div className="top-right-icons ml-auto flex  items-center gap-5">
           <button
@@ -96,6 +104,10 @@ const Navbar = () => {
           </div>
         </form>
       </section>
+      <SelectBoardFormMobile
+        isSelectBoardOpen={isSelectBoardOpen}
+        setIsSelectBoardOpen={setIsSelectBoardOpen}
+      />
     </nav>
   )
 }
