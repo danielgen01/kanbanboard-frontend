@@ -3,6 +3,8 @@ import React from "react"
 import { RootState } from "../../rootReducer"
 import { toggleDeleteTaskForm } from "./DeleteTaskFormSlice"
 import { useAppDispatch, useAppSelector } from "../../store"
+import { removeTask } from "../Data/DataSlice"
+import { toggleViewTaskForm } from "../ViewTaskForm/ViewTaskFormSlice"
 
 const DeleteTask: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -21,39 +23,39 @@ const DeleteTask: React.FC = () => {
     (state: RootState) => state.currentBoardName.currentBoardName
   )
 
-  const currentTaskTitle = useAppSelector(
-    (state: RootState) => state.currentTask.currentTask
-  )
+  const currentTask = useAppSelector((state: RootState) => state.currentTask)
+
+  const currentTaskTitle = currentTask.title
 
   const currentBoard = data?.boards.find(
     (board: any) => board.name === currentBoardName
   )
 
-  let currentTask = null
+  const getColumnIndexByStatus = (status: string): number | undefined => {
+    const columnIndex = currentBoard?.columns.findIndex(
+      (col: any) => col.name.toLowerCase() === status.toLowerCase()
+    )
 
-  if (currentBoard) {
-    for (const column of currentBoard.columns) {
-      currentTask = column.tasks.find(
-        (task: any) => task.title === currentTaskTitle
-      )
-      if (currentTask) {
-        break
-      }
-    }
+    return columnIndex !== undefined ? columnIndex : undefined
   }
 
-  const deleteCurrentTask = () => {
-    if (currentBoard) {
-      for (const column of currentBoard.columns) {
-        const index = column.tasks.findIndex(
-          (task: any) => task.title === currentTaskTitle
-        )
-        if (index !== -1) {
-          column.tasks.splice(index, 1)
-          break
-        }
-      }
+  const removeCurrentTask = () => {
+    const columnIndex = getColumnIndexByStatus(currentTask.status)
+    const taskIndex = currentBoard?.columns[columnIndex!].tasks.findIndex(
+      (task: any) => task.title === currentTaskTitle
+    )
+
+    if (currentBoard && columnIndex !== undefined && taskIndex !== undefined) {
+      dispatch(
+        removeTask({
+          boardIndex: data.boards.indexOf(currentBoard),
+          columnIndex,
+          taskIndex,
+        })
+      )
     }
+    handleToggleDeleteTaskForm()
+    dispatch(toggleViewTaskForm())
   }
 
   return (
@@ -86,7 +88,7 @@ const DeleteTask: React.FC = () => {
             <button
               className="bg-dark-red text-white font-bold py-2 px-4 rounded-3xl hover:bg-bright-red duration-100"
               type="button"
-              onClick={deleteCurrentTask}
+              onClick={removeCurrentTask}
             >
               Delete
             </button>

@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../store"
 import { toggleViewTaskForm } from "./ViewTaskFormSlice"
 import { toggleEditTaskForm } from "../EditTaskForm/EditTaskFormSlice"
 import { toggleDeleteTaskForm } from "../DeletTaskForm/DeleteTaskFormSlice"
-import { setCurrentTask } from "../currentTaskTitle/currentTaskTitleSlice"
+import { setCurrentTask } from "../currentTask/currentTaskSlice"
 
 const ViewTaskForm = () => {
   const handleToggleViewTaskForm = () => {
@@ -52,7 +52,6 @@ const ViewTaskForm = () => {
 
   const currentTaskDescription = currentTask.description
   const currentTaskTitle = currentTask.title
- 
 
   const [completedSubtasks, setCompletedSubtasks] = useState(0)
 

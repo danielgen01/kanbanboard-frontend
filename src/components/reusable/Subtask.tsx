@@ -21,26 +21,18 @@ export const Subtask: React.FC<props> = ({
     (state: RootState) => state.currentBoardName.currentBoardName
   )
 
-  const currentTaskTitle = useAppSelector(
-    (state: RootState) => state.currentTask.currentTask
+  const currentTask = useAppSelector(
+    (state: RootState) => state.currentTask
   )
+
+  const currentTaskTitle = currentTask.title
+
 
   const currentBoard = data?.boards.find(
     (board: any) => board.name === currentBoardName
   )
 
-  let currentTask: any = null
-
-  if (currentBoard) {
-    for (const column of currentBoard.columns) {
-      currentTask = column.tasks.find(
-        (task: any) => task.title === currentTaskTitle
-      )
-      if (currentTask) {
-        break
-      }
-    }
-  }
+ 
 
   const handleCheckboxChange = () => {
     if (!isChecked) {

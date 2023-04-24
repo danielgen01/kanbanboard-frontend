@@ -3,7 +3,7 @@ import React from "react"
 import { RootState } from "../../Redux/rootReducer"
 import { useAppDispatch, useAppSelector } from "../../Redux/store"
 import { toggleViewTaskForm } from "../../Redux/features/ViewTaskForm/ViewTaskFormSlice"
-import { setCurrentTask } from "../../Redux/features/currentTaskTitle/currentTaskTitleSlice"
+import { setCurrentTask } from "../../Redux/features/currentTask/currentTaskSlice"
 
 interface Subtask {
   id: string

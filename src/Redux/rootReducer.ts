@@ -9,7 +9,7 @@ import deleteBoardFormReducer from "./features/DeleteBoardForm/DeleteBoardFormSl
 import deleteTaskFormReducer from "./features/DeletTaskForm/DeleteTaskFormSlice"
 import todoSliceReducer from "./features/columns/Todo/TodoSlice"
 import currentBoardNameReducer from "./features/currentBoard/currentBoardSlice"
-import currentTaskReducer from "./features/currentTaskTitle/currentTaskTitleSlice"
+import currentTaskReducer from "./features/currentTask/currentTaskSlice"
 import dataReducer from "./features/Data/DataSlice"
 
 const rootReducer = combineReducers({
