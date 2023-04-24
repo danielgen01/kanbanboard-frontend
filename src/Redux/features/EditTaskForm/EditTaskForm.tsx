@@ -4,10 +4,11 @@ import { AddColInput } from "../../../components/reusable/AddColInput"
 import { RootState } from "../../rootReducer"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { toggleEditTaskForm } from "./EditTaskFormSlice"
-import { setCurrentTask } from "../currentTask/currentTaskSlice"
+import { updateTask } from "../Data/DataSlice"
 
 const EditTaskForm = () => {
   const data = useAppSelector((state: RootState) => state.data)
+  const currentTask = useAppSelector((state: RootState) => state.currentTask)
 
   const dispatch = useAppDispatch()
 
@@ -15,7 +16,6 @@ const EditTaskForm = () => {
     (state: RootState) => state.editTaskForm.isEditTaskFormOpen
   )
 
-  const currentTask = useAppSelector((state: RootState) => state.currentTask)
   const currentTaskDescription = useAppSelector(
     (state: RootState) => state.currentTask.description
   )
@@ -24,6 +24,14 @@ const EditTaskForm = () => {
   )
   const currentSubtasks = useAppSelector(
     (state: RootState) => state.currentTask.subtasks
+  )
+
+  const currentBoardName = useAppSelector(
+    (state: RootState) => state.currentBoardName.currentBoardName
+  )
+
+  const currentBoard = data?.boards.find(
+    (board: any) => board.name === currentBoardName
   )
 
   const handleToggleEditTaskForm = () => {
@@ -80,18 +88,7 @@ const EditTaskForm = () => {
     )
   }
 
-  const updateCurrentTask = () => {
-    dispatch(
-      setCurrentTask({
-        title: title,
-        description: description,
-        subtasks: subtasks,
-        status: currentTask.status,
-      })
-    )
-    handleToggleEditTaskForm()
-  }
-
+ 
   return (
     <>
       <section
@@ -174,7 +171,7 @@ const EditTaskForm = () => {
             </button>
             <button
               className="w-full text-white font-bold bg-dark-purple h-10 gap-2 rounded-3xl"
-              onClick={updateCurrentTask}
+              // onClick={updateCurrentTask}
             >
               Save Changes
             </button>
