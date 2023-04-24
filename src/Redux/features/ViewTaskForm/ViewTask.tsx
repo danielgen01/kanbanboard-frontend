@@ -53,6 +53,11 @@ const ViewTaskForm = () => {
   const currentTaskDescription = currentTask.description
   const currentTaskTitle = currentTask.title
 
+  const updateStatus = (status: string, e: any) => {
+    dispatch(setCurrentTask({ ...currentTask, status: e.target.value }))
+    handleToggleViewTaskForm()
+  }
+
   const [completedSubtasks, setCompletedSubtasks] = useState(0)
 
   return (
@@ -111,7 +116,8 @@ const ViewTaskForm = () => {
               id="select-staus"
               className="border-bright-gray border-2 h-10 rounded-md cursor-pointer
                px-2 dark:bg-transparent dark:outline-none dark:text-white"
-              value={currentTask?.status}
+              defaultValue={currentTask?.status}
+              onChange={(e: any) => updateStatus(e.target.value, e)}
             >
               {currentBoard?.columns.map((column: any) => (
                 <option className="text-medium-gray" value={column.name}>

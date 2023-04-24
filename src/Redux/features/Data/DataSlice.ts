@@ -68,9 +68,22 @@ const dataSlice = createSlice({
       const { boardIndex, columnIndex, taskIndex } = action.payload
       state.boards[boardIndex].columns[columnIndex].tasks.splice(taskIndex, 1)
     },
+    updateTask: (
+      state,
+      action: PayloadAction<{
+        boardIndex: number
+        columnIndex: number
+        taskIndex: number
+        updatedTask: Task
+      }>
+    ) => {
+      const { boardIndex, columnIndex, taskIndex, updatedTask } = action.payload
+      state.boards[boardIndex].columns[columnIndex].tasks[taskIndex] =
+        updatedTask
+    },
   },
 })
 
-export const { addBoard, addTask, removeBoard, removeTask } = dataSlice.actions
+export const { addBoard, addTask, removeBoard, removeTask,updateTask } = dataSlice.actions
 
 export default dataSlice.reducer
