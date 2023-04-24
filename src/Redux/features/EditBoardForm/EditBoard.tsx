@@ -1,17 +1,52 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { AiOutlinePlus } from "react-icons/ai"
 import { AddColInput } from "../../../components/reusable/AddColInput"
-
 import { useAppDispatch, useAppSelector } from "../../store"
 import { toggleEditBoardForm } from "./EditBoardFormSlice"
 import { RootState } from "../../rootReducer"
+import { setCurrentBoardName } from "../currentBoard/currentBoardSlice"
 
 const EditBoardForm = () => {
   const dispatch = useAppDispatch()
 
+  const data = useAppSelector((state: RootState) => state.data)
+
   const isEditBoardFormOpen = useAppSelector(
     (state: RootState) => state.editBoardForm.isEditBoardFormOpen
   )
+
+  const currentBoardName = useAppSelector(
+    (state: RootState) => state.currentBoardName.currentBoardName
+  )
+
+  const currentBoard = data?.boards.find(
+    (board: any) => board.name === currentBoardName
+  )
+
+  const [columnNames, setColumnNames] = useState<string[]>(
+    currentBoard?.columns.map((column) => column.name) || []
+  )
+
+  function addNewColumn() {
+    setColumnNames([...columnNames, ""])
+  }
+
+  function removeColumn(name: string) {
+    const index = columnNames.findIndex((columnName) => columnName === name)
+    if (index !== -1) {
+      setColumnNames(columnNames.filter((_, i) => i !== index))
+    }
+  }
+
+  const [boardName, setBoardName] = useState(currentBoardName)
+
+  useEffect(() => {
+    setBoardName(currentBoardName)
+  }, [currentBoardName])
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBoardName(event.target.value)
+  }
 
   const handleToggleEditBoardForm = () => {
     dispatch(toggleEditBoardForm())
@@ -40,9 +75,11 @@ const EditBoardForm = () => {
           </label>
           <input
             type="text"
-            className="px-5 border-2 border-bright-gray rounded-md h-12 dark:bg-dark-gray dark:border-medium-gray dark:border dark:text-white"
-            placeholder="e.g Web Design"
-            readOnly={true}
+            className="px-5 border-2 border-bright-gray rounded-md
+             h-12 dark:bg-dark-gray dark:border-medium-gray 
+             dark:border dark:text-white outline-white"
+            placeholder={currentBoardName}
+            onChange={handleInputChange}
           />
           <section className="board-columns flex flex-col gap-2">
             <label
@@ -51,14 +88,19 @@ const EditBoardForm = () => {
             >
               Board Columns
             </label>
-            <AddColInput defaultValue={"Todo"} />
-            <AddColInput defaultValue={"Doing"} />
-            <AddColInput defaultValue={"Done"} />
+            {columnNames.map((columnName) => (
+              <AddColInput
+                key={columnName}
+                defaultValue={columnName}
+                onRemove={() => removeColumn(columnName)}
+              />
+            ))}
           </section>
           <section className="buttons flex flex-col gap-5">
             <button
               className="flex items-center justify-center w-full text-dark-purple font-bold bg-bright-gray h-10 gap-2 rounded-3xl 
             dark:bg-white"
+              onClick={addNewColumn}
             >
               <AiOutlinePlus className="text-dark-purple font-bold" /> Add new
               Column

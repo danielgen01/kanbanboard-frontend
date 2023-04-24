@@ -15,7 +15,7 @@ const CustomBoardName: React.FC<props> = ({ name }) => {
     dispatch(setCurrentBoardName(name))
   }
 
-  const currentBoard = useSelector(
+  const currentBoardName = useSelector(
     (state: RootState) => state.currentBoardName.currentBoardName
   )
 
@@ -24,10 +24,10 @@ const CustomBoardName: React.FC<props> = ({ name }) => {
       className={`flex items-center px-10 py-4 rounded-3xl -ml-5 gap-3 
       font-bold text-sm hover:bg-bright-gray duration-200
       text-medium-gray ${
-        currentBoard === name ? "bg-dark-purple" : "bg-transparent"
+        currentBoardName === name ? "bg-dark-purple" : "bg-transparent"
       }
       
-      ${currentBoard === name ? "text-white" : "text-medium-gray"}
+      ${currentBoardName === name ? "text-white" : "text-medium-gray"}
       w-[90%]`}
       onClick={() => changeCurrentBoard(name)}
     >
