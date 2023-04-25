@@ -27,14 +27,12 @@ const EditTaskForm = () => {
   )
 
   const currentBoardName = useAppSelector(
-    (state: RootState) => state.currentBoard.currentBoard.name
+    (state: RootState) => state.currentBoardName.currentBoardName
   )
 
-  const currentBoard = useAppSelector(
-    (state: RootState) => state.currentBoard.currentBoard
+  const currentBoard = data?.boards.find(
+    (board: any) => board.name === currentBoardName
   )
-
-  
 
   const handleToggleEditTaskForm = () => {
     dispatch(toggleEditTaskForm())

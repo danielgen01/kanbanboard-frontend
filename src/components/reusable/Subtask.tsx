@@ -18,11 +18,7 @@ export const Subtask: React.FC<props> = ({
   const data = useAppSelector((state: RootState) => state.data)
 
   const currentBoardName = useAppSelector(
-    (state: RootState) => state.currentBoard.currentBoard.name
-  )
-
-  const currentBoard = useAppSelector(
-    (state: RootState) => state.currentBoard.currentBoard
+    (state: RootState) => state.currentBoardName.currentBoardName
   )
 
   const currentTask = useAppSelector(
@@ -32,7 +28,9 @@ export const Subtask: React.FC<props> = ({
   const currentTaskTitle = currentTask.title
 
 
- 
+  const currentBoard = data?.boards.find(
+    (board: any) => board.name === currentBoardName
+  )
 
  
 

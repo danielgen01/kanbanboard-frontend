@@ -37,7 +37,7 @@ export const Kanbanbox: React.FC<TodoBox> = ({
   }
 
   const currentBoardName = useAppSelector(
-    (state: RootState) => state.currentBoard.currentBoard.name
+    (state: RootState) => state.currentBoardName.currentBoardName
   )
 
   const getKanbanboxData = (title: string) => {

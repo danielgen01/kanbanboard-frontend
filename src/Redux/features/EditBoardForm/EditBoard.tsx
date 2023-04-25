@@ -16,14 +16,12 @@ const EditBoardForm = () => {
   )
 
   const currentBoardName = useAppSelector(
-    (state: RootState) => state.currentBoard.currentBoard.name
+    (state: RootState) => state.currentBoardName.currentBoardName
   )
 
-  const currentBoard = useAppSelector(
-    (state: RootState) => state.currentBoard.currentBoard
+  const currentBoard = data?.boards.find(
+    (board: any) => board.name === currentBoardName
   )
-
-  
 
   const [columnNames, setColumnNames] = useState<string[]>(
     currentBoard?.columns.map((column) => column.name) || []
