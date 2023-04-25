@@ -24,12 +24,12 @@ const NewTaskForm = () => {
     (state: RootState) => state.newTaskForm.isTaskFormOpen
   )
 
-  const currentBoardName = useAppSelector(
-    (state: RootState) => state.currentBoardName.currentBoardName
+  const currentBoard = useAppSelector(
+    (state: RootState) => state.currentBoard.currentBoard
   )
 
-  const currentBoard = data.boards.find(
-    (board) => board.name === currentBoardName
+  const currentBoardName = useAppSelector(
+    (state: RootState) => state.currentBoard.currentBoard.name
   )
 
   const firstColumnName: any = currentBoard?.columns[0].name

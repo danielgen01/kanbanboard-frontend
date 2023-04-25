@@ -20,16 +20,18 @@ const DeleteTask: React.FC = () => {
   const data = useAppSelector((state: RootState) => state.data)
 
   const currentBoardName = useAppSelector(
-    (state: RootState) => state.currentBoardName.currentBoardName
+    (state: RootState) => state.currentBoard.currentBoard.name
+  )
+
+  const currentBoard = useAppSelector(
+    (state: RootState) => state.currentBoard.currentBoard
   )
 
   const currentTask = useAppSelector((state: RootState) => state.currentTask)
 
   const currentTaskTitle = currentTask.title
 
-  const currentBoard = data?.boards.find(
-    (board: any) => board.name === currentBoardName
-  )
+
 
   const getColumnIndexByStatus = (status: string): number | undefined => {
     const columnIndex = currentBoard?.columns.findIndex(

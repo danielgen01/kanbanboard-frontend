@@ -3,21 +3,33 @@ import boardicon from "../../../assets/icon-board.svg"
 import { setCurrentBoardName } from "../../Redux/features/currentBoard/currentBoardSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../Redux/rootReducer"
-
+import { setCurrentBoard } from "../../Redux/features/currentBoard/currentBoardSlice"
 type props = {
   name: any
+  
 }
 
-const CustomBoardName: React.FC<props> = ({ name }) => {
+const CustomBoardName: React.FC<props> = ({ name}) => {
   const dispatch = useDispatch()
 
-  const changeCurrentBoard = (name: string) => {
-    dispatch(setCurrentBoardName(name))
-  }
+  const currentBoard = useSelector(
+    (state: RootState) => state.currentBoard.currentBoard
+  )
 
   const currentBoardName = useSelector(
-    (state: RootState) => state.currentBoardName.currentBoardName
+    (state: RootState) => state.currentBoard.currentBoard.name
   )
+
+  const changeCurrentBoard = (newName: string) => {
+    
+    const updatedBoard = { ...currentBoard, name: newName }
+    dispatch(setCurrentBoard(updatedBoard))
+  }
+
+
+  
+
+  
 
   return (
     <button
@@ -30,7 +42,9 @@ const CustomBoardName: React.FC<props> = ({ name }) => {
       ${currentBoardName === name ? "text-white" : "text-medium-gray"}
       w-[90%]`}
       onClick={() => changeCurrentBoard(name)}
-    >
+
+      
+      >
       <img src={boardicon} alt="logo" />
       <span className="">{name}</span>
     </button>

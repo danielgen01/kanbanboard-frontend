@@ -1,5 +1,4 @@
 import React from "react"
-import { TodoItemsColumn } from "../../Redux/features/columns/Todo/TodoItemsColumn"
 import showSlideBarIcon from "../../../assets/icon-show-sidebar.svg"
 import { toggleSidebar } from "../../Redux/features/Sidebar/sidebarSlice"
 import { RootState } from "../../Redux/rootReducer"
@@ -20,12 +19,12 @@ const Board = () => {
     dispatch(toggleSidebar())
   }
 
-  const currentBoardName = useSelector(
-    (state: RootState) => state.currentBoardName.currentBoardName
+  const currentBoard = useSelector(
+    (state: RootState) => state.currentBoard.currentBoard
   )
-  const currentBoard = data.boards.find(
-    (board: any) => board.name === currentBoardName
-  )
+
+ 
+  
 
   return (
     <>

@@ -43,7 +43,7 @@ const Navbar = () => {
   }
 
   const currentBoard = useAppSelector(
-    (state: RootState) => state.currentBoardName.currentBoardName
+    (state: RootState) => state.currentBoard.currentBoard
   )
 
   return (
@@ -63,7 +63,7 @@ const Navbar = () => {
             className="font-bold text-lg
            dark:text-white"
           >
-            {currentBoard}
+            {currentBoard.name}
           </h1>
           <img src={chevrondown} className="h-2 md:hidden" alt="chevron down"/>
         </button>

@@ -14,7 +14,7 @@ const DeleteBoard: React.FC = () => {
   )
 
   const currentBoardName = useAppSelector(
-    (state: RootState) => state.currentBoardName.currentBoardName
+    (state: RootState) => state.currentBoard.currentBoard.name
   )
 
   const deleteCurrentBoard = () => {
