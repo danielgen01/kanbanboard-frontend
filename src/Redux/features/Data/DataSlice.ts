@@ -12,14 +12,14 @@ type Column = {
   tasks: Task[]
 }
 
-type Task = {
+export type Task = {
   title: string
   description: string
   status: string
   subtasks: Subtask[]
 }
 
-type Subtask = {
+export type Subtask = {
   title: string
   isCompleted: boolean
 }

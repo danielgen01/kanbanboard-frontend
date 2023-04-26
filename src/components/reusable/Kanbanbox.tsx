@@ -5,13 +5,12 @@ import { useAppDispatch, useAppSelector } from "../../Redux/store"
 import { toggleViewTaskForm } from "../../Redux/features/ViewTaskForm/ViewTaskFormSlice"
 import { setActiveTask, Board } from "../../Redux/features/Data/DataSlice"
 
-interface Subtask {
-  id: string
+type Subtask = {
   title: string
-  completed: boolean
+  isCompleted: boolean
 }
 
-type TodoBox = {
+type Task = {
   id: any
   title: string
   description: string
@@ -19,7 +18,7 @@ type TodoBox = {
   subtasksCount: number
 }
 
-export const Kanbanbox: React.FC<TodoBox> = ({
+export const Kanbanbox: React.FC<Task> = ({
   title,
   subtasksCount,
   id,
@@ -36,6 +35,10 @@ export const Kanbanbox: React.FC<TodoBox> = ({
 
   const currentBoardName = useAppSelector(
     (state: RootState) => state.currentBoardName.currentBoardName
+  )
+
+  const currentTask = useAppSelector(
+    (state: RootState) => state.data.activeTask
   )
 
   const getKanbanboxData = (title: string, boards: Board[]) => {
@@ -61,7 +64,7 @@ export const Kanbanbox: React.FC<TodoBox> = ({
     }
     return null
   }
-  
+
   const changeCurrentTask = () => {
     const kanbanboxData = getKanbanboxData(title, data.boards)
     if (kanbanboxData) {
@@ -69,8 +72,8 @@ export const Kanbanbox: React.FC<TodoBox> = ({
       handleToggleViewTaskForm()
     }
   }
-  
-  
+
+  console.log(currentTask)
 
   return (
     <div
