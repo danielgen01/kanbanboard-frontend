@@ -116,7 +116,7 @@ const ViewTaskForm = () => {
               id="select-staus"
               className="border-bright-gray border-2 h-10 rounded-md cursor-pointer
                px-2 dark:bg-transparent dark:outline-none dark:text-white"
-              defaultValue={currentTask?.status}
+              value={currentTask?.status}
               onChange={(e: any) => updateStatus(e.target.value, e)}
             >
               {currentBoard?.columns.map((column: any) => (
