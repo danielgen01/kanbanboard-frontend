@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../store"
 import { toggleViewTaskForm } from "./ViewTaskFormSlice"
 import { toggleEditTaskForm } from "../EditTaskForm/EditTaskFormSlice"
 import { toggleDeleteTaskForm } from "../DeletTaskForm/DeleteTaskFormSlice"
+import { updateTask, Task } from "../Data/DataSlice"
 
 const ViewTaskForm = () => {
   const handleToggleViewTaskForm = () => {
@@ -57,6 +58,45 @@ const ViewTaskForm = () => {
   const currentTaskTitle = currentTask ? currentTask.title || "" : ""
 
   const [completedSubtasks, setCompletedSubtasks] = useState(0)
+
+  let boardIndex = -1
+  let columnIndex = -1
+  let taskIndex = -1
+
+  const { boards } = useAppSelector((state: RootState) => state.data)
+
+  for (let i = 0; i < boards.length; i++) {
+    const columns = boards[i].columns
+    for (let j = 0; j < columns.length; j++) {
+      const tasks = columns[j].tasks
+      for (let k = 0; k < tasks.length; k++) {
+        if (tasks[k].title === currentTask.title) {
+          boardIndex = i
+          columnIndex = j
+          taskIndex = k
+          break
+        }
+      }
+    }
+  }
+
+  const updateStatus = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const updatedTask: Task = {
+      ...currentTask,
+      status: event.target.value,
+    }
+  
+    dispatch(
+      updateTask({
+        boardIndex: boardIndex,
+        columnIndex: columnIndex,
+        taskIndex: taskIndex,
+        updatedTask,
+      })
+    )
+    handleToggleViewTaskForm()
+  }
+  
 
   return (
     <>
@@ -115,8 +155,8 @@ const ViewTaskForm = () => {
               className="border-bright-gray border-2 h-10 rounded-md cursor-pointer
                px-2 dark:bg-transparent dark:outline-none dark:text-white"
               value={currentTask?.status}
-              // onChange={(e: any) => updateStatus(e.target.value, e)}
-            >
+              onChange={updateStatus}
+              >
               {currentBoard?.columns.map((column: any) => (
                 <option className="text-medium-gray" value={column.name}>
                   {column.name}
