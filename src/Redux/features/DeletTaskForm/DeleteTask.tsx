@@ -23,9 +23,9 @@ const DeleteTask: React.FC = () => {
     (state: RootState) => state.currentBoardName.currentBoardName
   )
 
-  const currentTask = useAppSelector((state: RootState) => state.currentTask)
+  const currentTask = useAppSelector((state: RootState) => state.data.activeTask)
 
-  const currentTaskTitle = currentTask.title
+  const currentTaskTitle = currentTask ? currentTask.title || "" : ""
 
   const currentBoard = data?.boards.find(
     (board: any) => board.name === currentBoardName

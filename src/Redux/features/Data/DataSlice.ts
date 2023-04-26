@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import data from "../../../../data.json"
+import { Subtask } from "../../../components/reusable/Subtask"
 
-type Board = {
+export type Board = {
   name: string
   columns: Column[]
 }
@@ -23,14 +24,31 @@ type Subtask = {
   isCompleted: boolean
 }
 
-// Definiere den Typen des Redux-Store
 type State = {
-  boards: Board[]
+  boards: Board[],
+  activeTask: {
+    boardIndex: number,
+    columnIndex: number,
+    taskIndex: number,
+    title:string,
+    description: string,
+    subtasks: Subtask[]
+    status: string
+  } 
 }
 
-// Initialisiere den State mit den Daten aus der JSON-Datei
+
 const initialState: State = {
   boards: data.boards,
+  activeTask: {
+    boardIndex: 0,
+    columnIndex: 0,
+    taskIndex: 0,
+    title:"",
+    description: "",
+    subtasks: [],
+    status: ""
+  }
 }
 
 const dataSlice = createSlice({
@@ -91,10 +109,43 @@ const dataSlice = createSlice({
       const { boardIndex, updatedBoard } = action.payload
       state.boards[boardIndex] = updatedBoard
     },
+    setActiveTask: (
+      state,
+      action: PayloadAction<{
+        boardIndex: number,
+        columnIndex: number,
+        taskIndex: number,
+        title: string,
+        description: string,
+        subtasks: Subtask[],
+        status: string
+      }>
+    ) => {
+      const {
+        boardIndex,
+        columnIndex,
+        taskIndex,
+        title,
+        description,
+        subtasks,
+        status,
+      } = action.payload
+      state.activeTask = {
+        boardIndex,
+        columnIndex,
+        taskIndex,
+        title,
+        description,
+        subtasks,
+        status,
+      }
+    },
+    
+
   },
 })
 
-export const { addBoard, addTask, removeBoard, removeTask, updateTask } =
+export const { addBoard, addTask, removeBoard, removeTask, updateTask,setActiveTask } =
   dataSlice.actions
 
 export default dataSlice.reducer

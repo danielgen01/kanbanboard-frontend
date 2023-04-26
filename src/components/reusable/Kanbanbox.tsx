@@ -3,7 +3,7 @@ import React from "react"
 import { RootState } from "../../Redux/rootReducer"
 import { useAppDispatch, useAppSelector } from "../../Redux/store"
 import { toggleViewTaskForm } from "../../Redux/features/ViewTaskForm/ViewTaskFormSlice"
-import { setCurrentTask } from "../../Redux/features/currentTask/currentTaskSlice"
+import { setActiveTask, Board } from "../../Redux/features/Data/DataSlice"
 
 interface Subtask {
   id: string
@@ -30,8 +30,6 @@ export const Kanbanbox: React.FC<TodoBox> = ({
 
   const data = useAppSelector((state: RootState) => state.data)
 
-  const currentTask = useAppSelector((state: RootState) => state.currentTask)
-
   const handleToggleViewTaskForm = () => {
     dispatch(toggleViewTaskForm())
   }
@@ -40,15 +38,18 @@ export const Kanbanbox: React.FC<TodoBox> = ({
     (state: RootState) => state.currentBoardName.currentBoardName
   )
 
-  const getKanbanboxData = (title: string) => {
-    for (let i = 0; i < data.boards.length; i++) {
-      const columns = data.boards[i].columns
+  const getKanbanboxData = (title: string, boards: Board[]) => {
+    for (let i = 0; i < boards.length; i++) {
+      const columns = boards[i].columns
       for (let j = 0; j < columns.length; j++) {
         const tasks = columns[j].tasks
         for (let k = 0; k < tasks.length; k++) {
           const task = tasks[k]
           if (task.title === title) {
             return {
+              boardIndex: i,
+              columnIndex: j,
+              taskIndex: k,
               title: task.title,
               description: task.description,
               status: task.status,
@@ -58,22 +59,18 @@ export const Kanbanbox: React.FC<TodoBox> = ({
         }
       }
     }
+    return null
   }
-
+  
   const changeCurrentTask = () => {
-    const kanbanboxData = getKanbanboxData(title)
+    const kanbanboxData = getKanbanboxData(title, data.boards)
     if (kanbanboxData) {
-      dispatch(
-        setCurrentTask({
-          title: kanbanboxData.title,
-          description: kanbanboxData.description,
-          status: kanbanboxData.status,
-          subtasks: kanbanboxData.subtasks,
-        })
-      )
+      dispatch(setActiveTask(kanbanboxData))
       handleToggleViewTaskForm()
     }
   }
+  
+  
 
   return (
     <div

@@ -7,23 +7,25 @@ import { toggleEditTaskForm } from "./EditTaskFormSlice"
 import { updateTask } from "../Data/DataSlice"
 
 const EditTaskForm = () => {
-  const data = useAppSelector((state: RootState) => state.data)
-  const currentTask = useAppSelector((state: RootState) => state.currentTask)
-
   const dispatch = useAppDispatch()
+
+  const data = useAppSelector((state: RootState) => state.data)
 
   const isEditTaskFormOpen = useAppSelector(
     (state: RootState) => state.editTaskForm.isEditTaskFormOpen
   )
 
+  const currentTask = useAppSelector(
+    (state: RootState) => state.data.activeTask
+  )
   const currentTaskDescription = useAppSelector(
-    (state: RootState) => state.currentTask.description
+    (state: RootState) => state.data.activeTask?.description
   )
   const currentTaskTitle = useAppSelector(
-    (state: RootState) => state.currentTask.title
+    (state: RootState) => state.data.activeTask?.title
   )
   const currentSubtasks = useAppSelector(
-    (state: RootState) => state.currentTask.subtasks
+    (state: RootState) => state.data.activeTask?.subtasks
   )
 
   const currentBoardName = useAppSelector(
@@ -88,7 +90,6 @@ const EditTaskForm = () => {
     )
   }
 
- 
   return (
     <>
       <section

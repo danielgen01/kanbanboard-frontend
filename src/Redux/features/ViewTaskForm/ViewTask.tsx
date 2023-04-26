@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from "../../store"
 import { toggleViewTaskForm } from "./ViewTaskFormSlice"
 import { toggleEditTaskForm } from "../EditTaskForm/EditTaskFormSlice"
 import { toggleDeleteTaskForm } from "../DeletTaskForm/DeleteTaskFormSlice"
-import { setCurrentTask } from "../currentTask/currentTaskSlice"
 
 const ViewTaskForm = () => {
   const handleToggleViewTaskForm = () => {
@@ -48,15 +47,14 @@ const ViewTaskForm = () => {
     (board: any) => board.name === currentBoardName
   )
 
-  const currentTask = useAppSelector((state: RootState) => state.currentTask)
+  const currentTask = useAppSelector(
+    (state: RootState) => state.data.activeTask
+  )
 
-  const currentTaskDescription = currentTask.description
-  const currentTaskTitle = currentTask.title
-
-  const updateStatus = (status: string, e: any) => {
-    dispatch(setCurrentTask({ ...currentTask, status: e.target.value }))
-    handleToggleViewTaskForm()
-  }
+  const currentTaskDescription = currentTask
+    ? currentTask.description || ""
+    : ""
+  const currentTaskTitle = currentTask ? currentTask.title || "" : ""
 
   const [completedSubtasks, setCompletedSubtasks] = useState(0)
 
@@ -117,7 +115,7 @@ const ViewTaskForm = () => {
               className="border-bright-gray border-2 h-10 rounded-md cursor-pointer
                px-2 dark:bg-transparent dark:outline-none dark:text-white"
               value={currentTask?.status}
-              onChange={(e: any) => updateStatus(e.target.value, e)}
+              // onChange={(e: any) => updateStatus(e.target.value, e)}
             >
               {currentBoard?.columns.map((column: any) => (
                 <option className="text-medium-gray" value={column.name}>

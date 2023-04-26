@@ -22,7 +22,7 @@ export const Subtask: React.FC<props> = ({
   )
 
   const currentTask = useAppSelector(
-    (state: RootState) => state.currentTask
+    (state: RootState) => state.data.activeTask
   )
 
   const currentTaskTitle = currentTask.title
