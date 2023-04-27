@@ -145,7 +145,8 @@ const dataSlice = createSlice({
   },
 })
 
-export const { addBoard, addTask, removeBoard, removeTask, updateTask,setActiveTask } =
+export const { addBoard, addTask, removeBoard, 
+  removeTask, updateTask,setActiveTask,updateBoard } =
   dataSlice.actions
 
 export default dataSlice.reducer
