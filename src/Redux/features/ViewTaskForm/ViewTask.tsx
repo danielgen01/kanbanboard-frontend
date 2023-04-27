@@ -88,7 +88,7 @@ const ViewTaskForm = () => {
     };
   
     // Find the new columnIndex based on the updated status
-    const newColumnIndex = currentBoard?.columns.findIndex(
+    const newColumnIndex:any = currentBoard?.columns.findIndex(
       (column: any) => column.name === event.target.value
     );
   
