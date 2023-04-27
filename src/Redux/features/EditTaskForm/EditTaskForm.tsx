@@ -4,7 +4,7 @@ import { AddColInput } from "../../../components/reusable/AddColInput"
 import { RootState } from "../../rootReducer"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { toggleEditTaskForm } from "./EditTaskFormSlice"
-import { updateTask } from "../Data/DataSlice"
+import { updateTask, Task } from "../Data/DataSlice"
 
 const EditTaskForm = () => {
   const dispatch = useAppDispatch()
@@ -90,6 +90,54 @@ const EditTaskForm = () => {
     )
   }
 
+  const activeTaskData = useAppSelector((state: RootState) => {
+    const { boards, activeTask } = state.data;
+    const { boardIndex, columnIndex, taskIndex } = activeTask;
+  
+    let currentTaskData;
+  
+    for (const board of boards) {
+      for (const column of board.columns) {
+        for (const task of column.tasks) {
+          if (
+            task.title === activeTask.title &&
+            task.description === activeTask.description
+          ) {
+            currentTaskData = task;
+            break;
+          }
+        }
+      }
+    }
+    return currentTaskData;  
+
+  });
+
+
+  
+  const handleUpdateTask = () => {
+    const updatedTask: Task = {
+      ...currentTask,
+      title:title,
+      description:description,
+      status:currentTask.status,
+      subtasks:currentTask.subtasks
+      // description: 'Neue Beschreibung',
+    };
+  
+    // Die boardIndex, columnIndex und taskIndex bleiben unverändert
+    dispatch(
+      updateTask({
+        boardIndex: currentTask.boardIndex,
+        columnIndex: currentTask.columnIndex,
+        taskIndex: currentTask.taskIndex,
+        updatedTask,
+      })
+    );
+    handleToggleEditTaskForm()
+  };
+
+
   return (
     <>
       <section
@@ -172,7 +220,7 @@ const EditTaskForm = () => {
             </button>
             <button
               className="w-full text-white font-bold bg-dark-purple h-10 gap-2 rounded-3xl"
-              // onClick={updateCurrentTask}
+              onClick={handleUpdateTask}
             >
               Save Changes
             </button>
