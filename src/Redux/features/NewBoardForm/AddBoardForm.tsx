@@ -7,6 +7,7 @@ import { toggleAddBoardForm } from "./NewBoardFormSlice"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { RootState } from "../../rootReducer"
 import { addBoard } from "../Data/DataSlice"
+import { setCurrentBoardName } from "../currentBoard/currentBoardSlice"
 
 const AddBoardForm: React.FC = () => {
   const data = useAppSelector((state: RootState) => state.data)
@@ -58,6 +59,8 @@ const AddBoardForm: React.FC = () => {
     )
 
     handleToggleAddBoardForm()
+
+    dispatch(setCurrentBoardName(boardTitle))
   }
 
   function handleColumnNameChange(index: number, value: string) {
