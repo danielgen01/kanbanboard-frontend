@@ -32,8 +32,10 @@ export const BoardColumn: React.FC<props> = ({
     <div className="grid-item-2(doingItems) flex flex-col gap-4">
       <div className="headline flex items-center gap-2">
         <div className={`h-5 w-5 rounded-full ${batchColor} `}></div>
-        <h1 className="text-medium-gray -tracking-tighter
-         text-md uppercase font-bold whitespace-nowrap">
+        <h1
+          className="text-medium-gray -tracking-tighter
+         text-md uppercase font-bold whitespace-nowrap"
+        >
           {columnName} (0){" "}
         </h1>
       </div>

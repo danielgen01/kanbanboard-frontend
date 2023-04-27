@@ -44,6 +44,14 @@ const EditBoardForm = () => {
   }
 
   const [boardName, setBoardName] = useState(currentBoardName)
+  const [taskBackup, setTaskBackup] = useState<any[][]>([])
+
+  useEffect(() => {
+    if (currentBoard) {
+      setTaskBackup(currentBoard.columns.map((column) => column.tasks))
+      console.log(taskBackup)
+    }
+  }, [currentBoard])
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBoardName(event.target.value)
@@ -56,20 +64,32 @@ const EditBoardForm = () => {
     dispatch(toggleEditBoardForm())
   }
 
-  function handleColumnNameChange(index: number, newName: string) {
+  function handleColumnNameChange(
+    index: number,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) {
+    const newName = event.target.value
     const updatedColumnNames = [...columnNames]
     updatedColumnNames[index] = newName
     setColumnNames(updatedColumnNames)
   }
-
   const handleUpdateBoard = async () => {
     const updatedBoard: Board = {
       ...currentBoard,
       name: boardName,
-      columns: columnNames.map((name, index) => ({
-        name,
-        tasks: currentBoard?.columns[index]?.tasks || [],
-      })),
+      columns: columnNames.map((name, index) => {
+        const oldColumn = currentBoard?.columns[index]
+        const updatedTasks = oldColumn
+          ? oldColumn.tasks.map((task) => ({
+              ...task,
+              status: name,
+            }))
+          : []
+        return {
+          name,
+          tasks: updatedTasks,
+        }
+      }),
     }
 
     const currentBoardIndex = data.boards.findIndex(
@@ -126,11 +146,11 @@ const EditBoardForm = () => {
             </label>
             {columnNames.map((columnName, index) => (
               <AddColInput
-                key={columnName}
+                key={index}
                 defaultValue={columnName}
                 onRemove={() => removeColumn(columnName)}
-                onInputChange={(newName: any) =>
-                  handleColumnNameChange(index, newName)
+                onInputChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  handleColumnNameChange(index, event)
                 }
               />
             ))}
