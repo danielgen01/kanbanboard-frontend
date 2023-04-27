@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { AiOutlinePlus } from "react-icons/ai"
 import { AddColInput } from "../../../components/reusable/AddColInput"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { toggleEditBoardForm } from "./EditBoardFormSlice"
 import { RootState } from "../../rootReducer"
 import { setCurrentBoardName } from "../currentBoard/currentBoardSlice"
+import { updateBoard, Board } from "../Data/DataSlice"
+import { current } from "@reduxjs/toolkit"
 
 const EditBoardForm = () => {
   const dispatch = useAppDispatch()
@@ -25,7 +27,8 @@ const EditBoardForm = () => {
 
   const [columnNames, setColumnNames] = useState<string[]>(
     currentBoard?.columns.map((column) => column.name) || []
-  )
+  );
+  
 
   function addNewColumn() {
     setColumnNames([...columnNames, ""])
@@ -40,17 +43,35 @@ const EditBoardForm = () => {
 
   const [boardName, setBoardName] = useState(currentBoardName)
 
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBoardName(event.target.value)
+  }
   useEffect(() => {
     setBoardName(currentBoardName)
   }, [currentBoardName])
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setBoardName(event.target.value)
-  }
-
   const handleToggleEditBoardForm = () => {
     dispatch(toggleEditBoardForm())
   }
+
+  // const updateBoard = async () => {
+  //   const updatedBoard: Board = {
+  //     ...currentBoard,
+  //     name: boardName,
+  //     columns: columnNames,
+  //   }
+
+  //   await dispatch(
+  //     updateBoard({
+  //       boardIndex: currentBoard.boardIndex,
+  //       updatedBoard: updatedBoard,
+  //     })
+  //   )
+
+  //   handleToggleEditBoardForm()
+  // }
+
+
 
   return (
     <>
@@ -75,12 +96,12 @@ const EditBoardForm = () => {
           </label>
           <input
             type="text"
-            className="px-5 border-2 border-bright-gray rounded-md
-             h-12 dark:bg-dark-gray dark:border-medium-gray 
-             dark:border dark:text-white outline-white"
+            className="px-5 border-2 border-bright-gray rounded-md h-12 dark:bg-dark-gray dark:border-medium-gray dark:border dark:text-white outline-white"
             placeholder={currentBoardName}
+            value={boardName}
             onChange={handleInputChange}
           />
+
           <section className="board-columns flex flex-col gap-2">
             <label
               htmlFor=""
@@ -99,13 +120,17 @@ const EditBoardForm = () => {
           <section className="buttons flex flex-col gap-5">
             <button
               className="flex items-center justify-center w-full text-dark-purple font-bold bg-bright-gray h-10 gap-2 rounded-3xl 
-            dark:bg-white"
+            dark:bg-white hover:opacity-70 duration-200"
               onClick={addNewColumn}
             >
               <AiOutlinePlus className="text-dark-purple font-bold" /> Add new
               Column
             </button>
-            <button className="w-full text-white font-bold bg-dark-purple h-10 gap-2 rounded-3xl">
+            <button
+              className="w-full text-white font-bold bg-dark-purple h-10
+               gap-2 rounded-3xl hover:bg-bright-purple duration-200"
+              onClick={updateBoard}
+            >
               Save Changes
             </button>
           </section>

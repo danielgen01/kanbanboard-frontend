@@ -4,7 +4,7 @@ import { AddColInput } from "../../../components/reusable/AddColInput"
 import { RootState } from "../../rootReducer"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { toggleEditTaskForm } from "./EditTaskFormSlice"
-import { updateTask, Task } from "../Data/DataSlice"
+import { updateTask, Task, Subtask } from "../Data/DataSlice"
 
 const EditTaskForm = () => {
   const dispatch = useAppDispatch()
@@ -44,13 +44,8 @@ const EditTaskForm = () => {
   const [description, setDescription] = useState<string>(
     currentTask.description
   )
-  const [subtasks, setSubtasks] = useState<
-    { title: string; isCompleted: boolean }[]
-  >(
-    currentSubtasks.map((subtask) => ({
-      title: subtask.title,
-      isCompleted: subtask.isCompleted,
-    }))
+  const [subtasks, setSubtasks] = useState<Subtask[]>(
+    currentSubtasks ? currentSubtasks : []
   )
 
   useEffect(() => {
@@ -91,11 +86,11 @@ const EditTaskForm = () => {
   }
 
   const activeTaskData = useAppSelector((state: RootState) => {
-    const { boards, activeTask } = state.data;
-    const { boardIndex, columnIndex, taskIndex } = activeTask;
-  
-    let currentTaskData;
-  
+    const { boards, activeTask } = state.data
+    const { boardIndex, columnIndex, taskIndex } = activeTask
+
+    let currentTaskData
+
     for (const board of boards) {
       for (const column of board.columns) {
         for (const task of column.tasks) {
@@ -103,40 +98,43 @@ const EditTaskForm = () => {
             task.title === activeTask.title &&
             task.description === activeTask.description
           ) {
-            currentTaskData = task;
-            break;
+            currentTaskData = task
+            break
           }
         }
       }
     }
-    return currentTaskData;  
+    return currentTaskData
+  })
 
-  });
-
-
-  
-  const handleUpdateTask = () => {
+  const handleUpdateTask = async () => {
     const updatedTask: Task = {
       ...currentTask,
-      title:title,
-      description:description,
-      status:currentTask.status,
-      subtasks:currentTask.subtasks
-      // description: 'Neue Beschreibung',
-    };
-  
+      title: title,
+      description: description,
+      status: currentTask.status,
+      subtasks: currentTask.subtasks,
+    }
+
     // Die boardIndex, columnIndex und taskIndex bleiben unverändert
-    dispatch(
+    await dispatch(
       updateTask({
         boardIndex: currentTask.boardIndex,
         columnIndex: currentTask.columnIndex,
         taskIndex: currentTask.taskIndex,
         updatedTask,
       })
-    );
+    )
     handleToggleEditTaskForm()
-  };
-
+    if (titleRef.current) {
+      titleRef.current.value = ""
+      setTitle(currentTask.title)
+    }
+    if (descriptionRef.current) {
+      descriptionRef.current.value = ""
+      setDescription(currentTask.description)
+    }
+  }
 
   return (
     <>
@@ -212,14 +210,18 @@ const EditTaskForm = () => {
           </section>
           <section className="buttons flex flex-col gap-5">
             <button
-              className="flex items-center gap-2 text-dark-purple w-full justify-center mt-2 bg-bright-gray rounded-3xl h-12 font-bold"
+              className="flex items-center gap-2 text-dark-purple w-full 
+              justify-center mt-2
+               bg-bright-gray rounded-3xl h-12 font-bold 
+                hover:opacity-70 duration-200"
               onClick={addNewSubTask}
             >
               <AiOutlinePlus className="font-bold" />
               Add New Subtask
             </button>
             <button
-              className="w-full text-white font-bold bg-dark-purple h-10 gap-2 rounded-3xl"
+              className="w-full text-white font-bold bg-dark-purple h-10
+               gap-2 rounded-3xl  hover:bg-bright-purple duration-200"
               onClick={handleUpdateTask}
             >
               Save Changes
