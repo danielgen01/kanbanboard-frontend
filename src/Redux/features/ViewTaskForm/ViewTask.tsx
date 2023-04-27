@@ -7,7 +7,8 @@ import { useAppDispatch, useAppSelector } from "../../store"
 import { toggleViewTaskForm } from "./ViewTaskFormSlice"
 import { toggleEditTaskForm } from "../EditTaskForm/EditTaskFormSlice"
 import { toggleDeleteTaskForm } from "../DeletTaskForm/DeleteTaskFormSlice"
-import { updateTask, Task } from "../Data/DataSlice"
+import { updateTask, Task, removeTask, addTask } from "../Data/DataSlice"
+
 
 const ViewTaskForm = () => {
   const handleToggleViewTaskForm = () => {
@@ -64,7 +65,7 @@ const ViewTaskForm = () => {
   let taskIndex = -1
 
   const { boards } = useAppSelector((state: RootState) => state.data)
-
+    
   for (let i = 0; i < boards.length; i++) {
     const columns = boards[i].columns
     for (let j = 0; j < columns.length; j++) {
@@ -84,18 +85,34 @@ const ViewTaskForm = () => {
     const updatedTask: Task = {
       ...currentTask,
       status: event.target.value,
-    }
+    };
   
+    // Find the new columnIndex based on the updated status
+    const newColumnIndex = currentBoard?.columns.findIndex(
+      (column: any) => column.name === event.target.value
+    );
+  
+    // Remove the task from the original column
     dispatch(
-      updateTask({
+      removeTask({
         boardIndex: boardIndex,
         columnIndex: columnIndex,
         taskIndex: taskIndex,
-        updatedTask,
       })
-    )
-    handleToggleViewTaskForm()
-  }
+    );
+  
+    // Add the task to the new column
+    dispatch(
+      addTask({
+        boardIndex: boardIndex,
+        columnIndex: newColumnIndex,
+        task: updatedTask,
+      })
+    );
+  
+    handleToggleViewTaskForm();
+  };
+  
   
 
   return (
