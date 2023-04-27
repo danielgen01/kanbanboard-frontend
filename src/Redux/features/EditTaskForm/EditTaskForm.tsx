@@ -201,7 +201,7 @@ const EditTaskForm = () => {
                 <AddColInput
                   defaultValue={subtask.title}
                   onRemove={() => removeSubTask(subtask)}
-                  onInputChange={(newTitle) =>
+                  onInputChange={(newTitle:any) =>
                     updateSubTaskTitle(index, newTitle)
                   }
                 />

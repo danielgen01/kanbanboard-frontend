@@ -6,7 +6,6 @@ import { toggleEditBoardForm } from "./EditBoardFormSlice"
 import { RootState } from "../../rootReducer"
 import { setCurrentBoardName } from "../currentBoard/currentBoardSlice"
 import { updateBoard, Board } from "../Data/DataSlice"
-import { current } from "@reduxjs/toolkit"
 
 const EditBoardForm = () => {
   const dispatch = useAppDispatch()
@@ -27,8 +26,11 @@ const EditBoardForm = () => {
 
   const [columnNames, setColumnNames] = useState<string[]>(
     currentBoard?.columns.map((column) => column.name) || []
-  );
-  
+  )
+
+  useEffect(() => {
+    setColumnNames(currentBoard?.columns.map((column) => column.name) || [])
+  }, [currentBoard?.name])
 
   function addNewColumn() {
     setColumnNames([...columnNames, ""])
@@ -54,24 +56,37 @@ const EditBoardForm = () => {
     dispatch(toggleEditBoardForm())
   }
 
-  // const updateBoard = async () => {
-  //   const updatedBoard: Board = {
-  //     ...currentBoard,
-  //     name: boardName,
-  //     columns: columnNames,
-  //   }
+  function handleColumnNameChange(index: number, newName: string) {
+    const updatedColumnNames = [...columnNames]
+    updatedColumnNames[index] = newName
+    setColumnNames(updatedColumnNames)
+  }
 
-  //   await dispatch(
-  //     updateBoard({
-  //       boardIndex: currentBoard.boardIndex,
-  //       updatedBoard: updatedBoard,
-  //     })
-  //   )
+  const handleUpdateBoard = async () => {
+    const updatedBoard: Board = {
+      ...currentBoard,
+      name: boardName,
+      columns: columnNames.map((name, index) => ({
+        name,
+        tasks: currentBoard?.columns[index]?.tasks || [],
+      })),
+    }
 
-  //   handleToggleEditBoardForm()
-  // }
+    const currentBoardIndex = data.boards.findIndex(
+      (board: Board) => board.name === currentBoardName
+    )
 
+    await dispatch(
+      updateBoard({
+        boardIndex: currentBoardIndex,
+        updatedBoard: updatedBoard,
+      })
+    )
 
+    dispatch(setCurrentBoardName(boardName))
+
+    handleToggleEditBoardForm()
+  }
 
   return (
     <>
@@ -109,11 +124,14 @@ const EditBoardForm = () => {
             >
               Board Columns
             </label>
-            {columnNames.map((columnName) => (
+            {columnNames.map((columnName, index) => (
               <AddColInput
                 key={columnName}
                 defaultValue={columnName}
                 onRemove={() => removeColumn(columnName)}
+                onInputChange={(newName: any) =>
+                  handleColumnNameChange(index, newName)
+                }
               />
             ))}
           </section>
@@ -129,7 +147,7 @@ const EditBoardForm = () => {
             <button
               className="w-full text-white font-bold bg-dark-purple h-10
                gap-2 rounded-3xl hover:bg-bright-purple duration-200"
-              onClick={updateBoard}
+              onClick={handleUpdateBoard}
             >
               Save Changes
             </button>
