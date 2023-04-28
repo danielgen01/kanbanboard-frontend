@@ -10,6 +10,8 @@ import DeleteBoard from "./Redux/features/DeleteBoardForm/DeleteBoard"
 import DeleteTask from "./Redux/features/DeletTaskForm/DeleteTask"
 import Sidebar from "./components/MainLayout/Sidebar"
 import EditTaskForm from "./Redux/features/EditTaskForm/EditTaskForm"
+import { useAppSelector } from "./Redux/store"
+import { RootState } from "./Redux/rootReducer"
 
 function App() {
   const [boardFormKey, setBoardFormKey] = useState(0)
@@ -18,6 +20,11 @@ function App() {
     setBoardFormKey((prevKey) => prevKey + 1)
   }
 
+ 
+  const currentBoardName = useAppSelector(
+    (state: RootState) => state.currentBoardName.currentBoardName
+  )
+
   return (
     <div className="app min-h-screen md:w-screen grid grid-cols-1 md:grid-cols-6 ">
       <Sidebar />
@@ -25,7 +32,7 @@ function App() {
       <NewTaskForm />
       <ViewTaskForm />
       <AddBoardForm key={boardFormKey} onBoardAdded={handleBoardAdded} />
-      <EditBoardForm />
+      <EditBoardForm key={currentBoardName} />
       <DeleteBoard />
       <DeleteTask />
       <EditTaskForm />

@@ -7,7 +7,7 @@ import { RootState } from "../../rootReducer"
 import { setCurrentBoardName } from "../currentBoard/currentBoardSlice"
 import { updateBoard, Board } from "../Data/DataSlice"
 
-const EditBoardForm = () => {
+const EditBoardForm = ({ key }: { key: string }) => {
   const dispatch = useAppDispatch()
 
   const data = useAppSelector((state: RootState) => state.data)
@@ -44,10 +44,6 @@ const EditBoardForm = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBoardName(event.target.value)
   }
-  useEffect(() => {
-    setBoardName(currentBoardName)
-    setColumnNames(currentBoard?.columns.map((column) => column.name) || [])
-  }, [currentBoardName])
 
   const handleToggleEditBoardForm = () => {
     dispatch(toggleEditBoardForm())
@@ -96,6 +92,13 @@ const EditBoardForm = () => {
 
     handleToggleEditBoardForm()
   }
+
+  useEffect(() => {
+    if (isEditBoardFormOpen) {
+      setBoardName(currentBoardName)
+      setColumnNames(currentBoard?.columns.map((column) => column.name) || [])
+    }
+  }, [isEditBoardFormOpen, currentBoardName, currentBoard])
 
   return (
     <>
