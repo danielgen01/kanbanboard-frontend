@@ -44,9 +44,7 @@ const EditTaskForm = ({ key }: { key: string }) => {
   const [description, setDescription] = useState<string>(
     currentTask.description
   )
-  const [subtasks, setSubtasks] = useState<Subtask[]>(
- currentSubtasks
-  )
+  const [subtasks, setSubtasks] = useState<Subtask[]>(currentSubtasks)
 
   const descriptionRef: any = useRef(null)
   const titleRef: any = useRef(null)
@@ -103,8 +101,6 @@ const EditTaskForm = ({ key }: { key: string }) => {
     return currentTaskData
   })
 
-  console.log(currentSubtasks)
-  console.log(subtasks)
 
   const handleUpdateTask = async () => {
     const updatedTask: Task = {
@@ -114,8 +110,6 @@ const EditTaskForm = ({ key }: { key: string }) => {
       status: currentTask.status,
       subtasks: subtasks, // should save the new subtasks data!!!!
     }
-
-   
 
     await dispatch(
       updateTask({
@@ -191,12 +185,11 @@ const EditTaskForm = ({ key }: { key: string }) => {
             {subtasks.map((subtask, index) => (
               <>
                 <AddColInput
-                key={index}
+                  key={index}
                   defaultValue={subtask.title}
                   onRemove={() => removeSubTask(subtask)}
                   onInputChange={(newTitle: any) =>
                     updateSubTaskTitle(index, newTitle)
-                    
                   }
                 />
               </>

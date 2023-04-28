@@ -16,7 +16,9 @@ type Task = {
   description: string
   subtasks: Subtask[]
   subtasksCount: number
+  completedSubtasksCount:number
 }
+
 
 export const Kanbanbox: React.FC<Task> = ({
   title,
@@ -24,6 +26,8 @@ export const Kanbanbox: React.FC<Task> = ({
   id,
   description,
   subtasks: Subtask,
+  completedSubtasksCount
+  
 }) => {
   const dispatch = useAppDispatch()
 
@@ -39,6 +43,10 @@ export const Kanbanbox: React.FC<Task> = ({
 
   const currentTask = useAppSelector(
     (state: RootState) => state.data.activeTask
+  )
+
+  const completedSubtasks = currentTask.subtasks.filter(
+    (subtask: any) => subtask.isCompleted
   )
 
   const getKanbanboxData = (title: string, boards: Board[]) => {
@@ -89,7 +97,7 @@ export const Kanbanbox: React.FC<Task> = ({
         {title}
       </h1>
       <p className="text-medium-gray font-bold text-sm">
-        0 of {subtasksCount} subtasks
+        {completedSubtasksCount} of {subtasksCount} subtasks
       </p>
     </div>
   )

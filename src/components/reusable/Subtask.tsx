@@ -1,19 +1,18 @@
-import React, { useState } from "react"
-import { useAppSelector } from "../../Redux/store"
+import React, {useState} from "react"
+import { useAppSelector, useAppDispatch } from "../../Redux/store"
 import { RootState } from "../../Redux/rootReducer"
-
+import { updateTask, Task } from "../../Redux/features/Data/DataSlice"
+import { toggleViewTaskForm } from "../../Redux/features/ViewTaskForm/ViewTaskFormSlice"
 type props = {
   title: string
-  completedSubtasks: number
-  setCompletedSubtasks: any
+
 }
 
 export const Subtask: React.FC<props> = ({
   title,
-  completedSubtasks,
-  setCompletedSubtasks,
+  
 }) => {
-  const [isChecked, setIsChecked] = useState(false)
+  const dispatch = useAppDispatch()
 
   const data = useAppSelector((state: RootState) => state.data)
 
@@ -27,54 +26,64 @@ export const Subtask: React.FC<props> = ({
 
   const currentTaskTitle = currentTask.title
 
-
   const currentBoard = data?.boards.find(
     (board: any) => board.name === currentBoardName
   )
 
- 
+  const currentSubtask = currentTask?.subtasks.find(
+    (subtask: any) => subtask.title === title
+  )
 
   const handleCheckboxChange = () => {
-    if (!isChecked) {
-      setCompletedSubtasks(completedSubtasks + 1)
-    } else {
-      setCompletedSubtasks(completedSubtasks - 1)
-    }
-
     const newSubtasks = currentTask?.subtasks.map((subtask: any) => {
       if (subtask.title === title) {
         return {
           ...subtask,
-          isCompleted: !isChecked,
+          isCompleted: !subtask.isCompleted,
         }
       }
       return subtask
     })
 
-    setIsChecked(!isChecked)
-    // currentTask.subtasks = newSubtasks
+    // Aktualisieren Sie den Task mit den neuen Subtasks
+    const updatedTask: Task = {
+      ...currentTask,
+      subtasks: newSubtasks,
+    }
+
+    // Führen Sie den updateTask-Dispatch aus
+    dispatch(
+      updateTask({
+        boardIndex: currentTask.boardIndex,
+        columnIndex: currentTask.columnIndex,
+        taskIndex: currentTask.taskIndex,
+        updatedTask,
+      })
+    )
+    dispatch(toggleViewTaskForm())
+      
   }
 
   return (
     <div
-      className="subtask flex items-center gap-2 w-full bg-bright-gray min-h-[50px] rounded-md px-3 hover:bg-bright-purple>
-    dark:bg-dark-black cursor-pointer"
+      className="subtask flex items-center gap-2 w-full bg-bright-gray min-h-[50px] rounded-md px-3 hover:bg-bright-purple dark:bg-dark-black cursor-pointer"
       onClick={handleCheckboxChange}
     >
       <input
         type="checkbox"
         name="check-task"
         id="check-task"
-        className={`w-6 h-6 border border-gray-300 rounded-sm bg-white 
-        ${`
-          isChecked ? "bg-dark-purple : ""
-        `}  focus:outline-none`}
-        checked={isChecked}
+        className={`w-6 h-6 border border-gray-300 rounded-sm bg-white ${
+          currentSubtask?.isCompleted ? "bg-dark-purple" : ""
+        } focus:outline-none`}
+        checked={currentSubtask?.isCompleted}
       />
       <span
-        className={`text-sm font-bold ${isChecked ? "line-through" : ""}
-          ${isChecked ? "dark:text-medium-gray" : ""}
-         dark:text-white`}
+        className={`text-sm font-bold ${
+          currentSubtask?.isCompleted ? "line-through" : ""
+        } ${
+          currentSubtask?.isCompleted ? "dark:text-medium-gray" : ""
+        } dark:text-white`}
       >
         {title}
       </span>

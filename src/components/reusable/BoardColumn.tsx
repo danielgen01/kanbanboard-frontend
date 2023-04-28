@@ -32,6 +32,9 @@ export const BoardColumn: React.FC<props> = ({
     (board: any) => board.name === currentBoardName
   )
 
+
+
+
   return (
     <div className="grid-item-2(doingItems) flex flex-col gap-4">
       <div className="headline flex items-center gap-2">
@@ -45,22 +48,31 @@ export const BoardColumn: React.FC<props> = ({
       </div>
 
       {boardIndex >= 0 &&
-        data.boards[boardIndex].columns.map((column: any) => (
-          <div key={column.id} className="flex flex-col gap-3">
-            {column.tasks
-              .filter((task: any) => task.status === statusName)
-              .map((task: any) => (
-                <Kanbanbox
-                  key={task.name}
-                  title={task.title}
-                  subtasksCount={task.subtasks.length}
-                  subtasks={task.subtasks}
-                  description={task.description}
-                  id={task.id}
-                />
-              ))}
-          </div>
-        ))}
+  data.boards[boardIndex].columns.map((column: any) => (
+    <div key={column.id} className="flex flex-col gap-3">
+      {column.tasks
+        .filter((task: any) => task.status === statusName)
+        .map((task: any) => {
+          // Berechne die Anzahl der abgeschlossenen Subtasks
+          const completedSubtasksCount = task.subtasks.filter(
+            (subtask: any) => subtask.isCompleted
+          ).length;
+
+          return (
+            <Kanbanbox
+              key={task.name}
+              title={task.title}
+              subtasksCount={task.subtasks.length}
+              completedSubtasksCount={completedSubtasksCount} // Übergebe die Anzahl der abgeschlossenen Subtasks
+              subtasks={task.subtasks}
+              description={task.description}
+              id={task.id}
+            />
+          );
+        })}
+    </div>
+  ))}
+
     </div>
   )
 }

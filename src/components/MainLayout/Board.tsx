@@ -27,6 +27,7 @@ const Board = () => {
     (board: any) => board.name === currentBoardName
   )
 
+
   return (
     <>
       <main
@@ -49,7 +50,7 @@ const Board = () => {
                 key={column.name}
                 statusName={column.name}
                 columnName={`${column.name}`}
-                batchColor="bg-teal-500"
+                batchColor={"bg-teal-500"}
               />
             ))
           ) : (

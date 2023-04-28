@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Subtask } from "../../../components/reusable/Subtask"
 import ellipsIcon from "../../../../assets/icon-vertical-ellipsis.svg"
 
@@ -8,7 +8,6 @@ import { toggleViewTaskForm } from "./ViewTaskFormSlice"
 import { toggleEditTaskForm } from "../EditTaskForm/EditTaskFormSlice"
 import { toggleDeleteTaskForm } from "../DeletTaskForm/DeleteTaskFormSlice"
 import { updateTask, Task, removeTask, addTask } from "../Data/DataSlice"
-
 
 const ViewTaskForm = () => {
   const handleToggleViewTaskForm = () => {
@@ -58,14 +57,26 @@ const ViewTaskForm = () => {
     : ""
   const currentTaskTitle = currentTask ? currentTask.title || "" : ""
 
-  const [completedSubtasks, setCompletedSubtasks] = useState(0)
+  const completedSubtasks = currentTask.subtasks.filter(
+    (subtask: any) => subtask.isCompleted
+  )
+
+  console.log(completedSubtasks)
+
+  const [completedSubtasksLength, setCompletedSubtasksLength] = useState(
+    completedSubtasks.length
+  )
+
+  useEffect(() => {
+    setCompletedSubtasksLength(completedSubtasks.length)
+  }, [completedSubtasks])
 
   let boardIndex = -1
   let columnIndex = -1
   let taskIndex = -1
 
   const { boards } = useAppSelector((state: RootState) => state.data)
-    
+
   for (let i = 0; i < boards.length; i++) {
     const columns = boards[i].columns
     for (let j = 0; j < columns.length; j++) {
@@ -85,13 +96,13 @@ const ViewTaskForm = () => {
     const updatedTask: Task = {
       ...currentTask,
       status: event.target.value,
-    };
-  
+    }
+
     // Find the new columnIndex based on the updated status
-    const newColumnIndex:any = currentBoard?.columns.findIndex(
+    const newColumnIndex: any = currentBoard?.columns.findIndex(
       (column: any) => column.name === event.target.value
-    );
-  
+    )
+
     // Remove the task from the original column
     dispatch(
       removeTask({
@@ -99,8 +110,8 @@ const ViewTaskForm = () => {
         columnIndex: columnIndex,
         taskIndex: taskIndex,
       })
-    );
-  
+    )
+
     // Add the task to the new column
     dispatch(
       addTask({
@@ -108,12 +119,10 @@ const ViewTaskForm = () => {
         columnIndex: newColumnIndex,
         task: updatedTask,
       })
-    );
-  
-    handleToggleViewTaskForm();
-  };
-  
-  
+    )
+
+    handleToggleViewTaskForm()
+  }
 
   return (
     <>
@@ -147,15 +156,11 @@ const ViewTaskForm = () => {
               htmlFor="check-task"
               className="text-medium-gray dark:text-white font-bold text-sm"
             >
-              Subtasks ({completedSubtasks} of {currentTask?.subtasks.length})
+              Subtasks ({completedSubtasksLength} of{" "}
+              {currentTask?.subtasks.length})
             </label>
             {currentTask?.subtasks.map((subtask: any, index: number) => (
-              <Subtask
-                key={index}
-                title={subtask.title}
-                completedSubtasks={completedSubtasks}
-                setCompletedSubtasks={setCompletedSubtasks}
-              />
+              <Subtask key={index} title={subtask.title} />
             ))}
           </section>
 
@@ -173,7 +178,7 @@ const ViewTaskForm = () => {
                px-2 dark:bg-transparent dark:outline-none dark:text-white"
               value={currentTask?.status}
               onChange={updateStatus}
-              >
+            >
               {currentBoard?.columns.map((column: any) => (
                 <option className="text-medium-gray" value={column.name}>
                   {column.name}
