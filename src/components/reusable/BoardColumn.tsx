@@ -24,6 +24,10 @@ export const BoardColumn: React.FC<props> = ({
     (board: any) => board.name === currentBoardName
   )
 
+  const matchingColumn = currentBoard?.columns.find(
+    (column) => column.name === columnName
+  )
+
   const boardIndex = data.boards.findIndex(
     (board: any) => board.name === currentBoardName
   )
@@ -36,7 +40,7 @@ export const BoardColumn: React.FC<props> = ({
           className="text-medium-gray -tracking-tighter
          text-md uppercase font-bold whitespace-nowrap"
         >
-          {columnName} (0){" "}
+          {columnName} ({matchingColumn?.tasks.length}){" "}
         </h1>
       </div>
 
