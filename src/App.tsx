@@ -15,6 +15,7 @@ import { RootState } from "./Redux/rootReducer"
 
 function App() {
   const [boardFormKey, setBoardFormKey] = useState(0)
+  
 
   const handleBoardAdded = () => {
     setBoardFormKey((prevKey) => prevKey + 1)
@@ -23,6 +24,10 @@ function App() {
  
   const currentBoardName = useAppSelector(
     (state: RootState) => state.currentBoardName.currentBoardName
+  )
+
+  const currentTask = useAppSelector(
+    (state: RootState) => state.data.activeTask
   )
 
   return (
@@ -35,7 +40,7 @@ function App() {
       <EditBoardForm key={currentBoardName} />
       <DeleteBoard />
       <DeleteTask />
-      <EditTaskForm />
+      <EditTaskForm key={currentTask.title}/>
     </div>
   )
 }

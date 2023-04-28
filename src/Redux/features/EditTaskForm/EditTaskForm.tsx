@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../store"
 import { toggleEditTaskForm } from "./EditTaskFormSlice"
 import { updateTask, Task, Subtask } from "../Data/DataSlice"
 
-const EditTaskForm = () => {
+const EditTaskForm = ({ key }: { key: string }) => {
   const dispatch = useAppDispatch()
 
   const data = useAppSelector((state: RootState) => state.data)
@@ -126,14 +126,6 @@ const EditTaskForm = () => {
       })
     )
     handleToggleEditTaskForm()
-    if (titleRef.current) {
-      titleRef.current.value = ""
-      setTitle(currentTask.title)
-    }
-    if (descriptionRef.current) {
-      descriptionRef.current.value = ""
-      setDescription(currentTask.description)
-    }
   }
 
   return (
@@ -201,7 +193,7 @@ const EditTaskForm = () => {
                 <AddColInput
                   defaultValue={subtask.title}
                   onRemove={() => removeSubTask(subtask)}
-                  onInputChange={(newTitle:any) =>
+                  onInputChange={(newTitle: any) =>
                     updateSubTaskTitle(index, newTitle)
                   }
                 />

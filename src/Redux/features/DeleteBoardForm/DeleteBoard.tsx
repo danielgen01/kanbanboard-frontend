@@ -20,9 +20,6 @@ const DeleteBoard: React.FC = () => {
   const deleteCurrentBoard = () => {
     dispatch(removeBoard(currentBoardName))
     handleToggleDeleteBoardForm()
-    // window.location.reload()
-    const lastIndex = data.boards.length - 1
-    dispatch(setCurrentBoardName(data.boards[lastIndex].name))
   }
 
   const handleToggleDeleteBoardForm = () => {
