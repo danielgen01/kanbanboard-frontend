@@ -12,13 +12,19 @@ import Sidebar from "./components/MainLayout/Sidebar"
 import EditTaskForm from "./Redux/features/EditTaskForm/EditTaskForm"
 
 function App() {
+  const [boardFormKey, setBoardFormKey] = useState(0)
+
+  const handleBoardAdded = () => {
+    setBoardFormKey((prevKey) => prevKey + 1)
+  }
+
   return (
     <div className="app min-h-screen md:w-screen grid grid-cols-1 md:grid-cols-6 ">
       <Sidebar />
       <Board />
       <NewTaskForm />
       <ViewTaskForm />
-      <AddBoardForm />
+      <AddBoardForm key={boardFormKey} onBoardAdded={handleBoardAdded} />
       <EditBoardForm />
       <DeleteBoard />
       <DeleteTask />

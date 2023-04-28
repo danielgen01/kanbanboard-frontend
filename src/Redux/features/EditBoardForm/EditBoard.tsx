@@ -28,10 +28,6 @@ const EditBoardForm = () => {
     currentBoard?.columns.map((column) => column.name) || []
   )
 
-  useEffect(() => {
-    setColumnNames(currentBoard?.columns.map((column) => column.name) || [])
-  }, [currentBoard?.name])
-
   function addNewColumn() {
     setColumnNames([...columnNames, ""])
   }
@@ -44,20 +40,13 @@ const EditBoardForm = () => {
   }
 
   const [boardName, setBoardName] = useState(currentBoardName)
-  const [taskBackup, setTaskBackup] = useState<any[][]>([])
-
-  useEffect(() => {
-    if (currentBoard) {
-      setTaskBackup(currentBoard.columns.map((column) => column.tasks))
-      console.log(taskBackup)
-    }
-  }, [currentBoard])
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBoardName(event.target.value)
   }
   useEffect(() => {
     setBoardName(currentBoardName)
+    setColumnNames(currentBoard?.columns.map((column) => column.name) || [])
   }, [currentBoardName])
 
   const handleToggleEditBoardForm = () => {

@@ -9,7 +9,11 @@ import { RootState } from "../../rootReducer"
 import { addBoard } from "../Data/DataSlice"
 import { setCurrentBoardName } from "../currentBoard/currentBoardSlice"
 
-const AddBoardForm: React.FC = () => {
+type AddBoardFormProps = {
+  onBoardAdded: () => void
+}
+
+const AddBoardForm: React.FC<AddBoardFormProps> = ({ onBoardAdded }) => {
   const data = useAppSelector((state: RootState) => state.data)
   const [boardTitle, setBoardTitle] = useState<string>("New Board")
   const [columnNames, setColumnNames] = useState<string[]>([
@@ -17,6 +21,14 @@ const AddBoardForm: React.FC = () => {
     "Doing",
     "Done",
   ])
+
+  const currentBoardName = useAppSelector(
+    (state: RootState) => state.currentBoardName.currentBoardName
+  )
+
+  const currentBoard = data?.boards.find(
+    (board: any) => board.name === currentBoardName
+  )
 
   function addNewColumn() {
     setColumnNames([...columnNames, ""])
@@ -40,11 +52,10 @@ const AddBoardForm: React.FC = () => {
   }
 
   const addNewBoard = () => {
-    const columns = columnNames.map((name) => ({
+    let columns = columnNames.map((name) => ({
       name,
       tasks: [],
     }))
-
     const boardExists = data.boards.find((board) => board.name === boardTitle)
     if (boardExists) {
       alert("Board with the same name already exists")
@@ -54,13 +65,18 @@ const AddBoardForm: React.FC = () => {
     dispatch(
       addBoard({
         name: boardTitle,
-        columns,
+        columns: columns,
       })
     )
 
     handleToggleAddBoardForm()
 
     dispatch(setCurrentBoardName(boardTitle))
+
+    setBoardTitle("New Board")
+    setColumnNames(["Todo", "Doing", "Done"])
+
+    onBoardAdded()
   }
 
   function handleColumnNameChange(index: number, value: string) {

@@ -21,7 +21,6 @@ export const AddColInput: React.FC<props> = ({
         placeholder="e.g 2"
         defaultValue={defaultValue}
         onChange={onInputChange}
-        
       />
       <img src={crossicon} alt="cross icon" onClick={onRemove} />
     </div>
