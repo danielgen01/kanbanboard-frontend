@@ -45,12 +45,8 @@ const EditTaskForm = ({ key }: { key: string }) => {
     currentTask.description
   )
   const [subtasks, setSubtasks] = useState<Subtask[]>(
-    currentSubtasks ? currentSubtasks : []
+ currentSubtasks
   )
-
-  useEffect(() => {
-    setSubtasks(currentSubtasks)
-  }, [currentSubtasks])
 
   const descriptionRef: any = useRef(null)
   const titleRef: any = useRef(null)
@@ -107,16 +103,20 @@ const EditTaskForm = ({ key }: { key: string }) => {
     return currentTaskData
   })
 
+  console.log(currentSubtasks)
+  console.log(subtasks)
+
   const handleUpdateTask = async () => {
     const updatedTask: Task = {
       ...currentTask,
       title: title,
       description: description,
       status: currentTask.status,
-      subtasks: currentTask.subtasks,
+      subtasks: subtasks, // should save the new subtasks data!!!!
     }
 
-    // Die boardIndex, columnIndex und taskIndex bleiben unverändert
+   
+
     await dispatch(
       updateTask({
         boardIndex: currentTask.boardIndex,
@@ -189,15 +189,17 @@ const EditTaskForm = ({ key }: { key: string }) => {
               Subtasks
             </label>
             {subtasks.map((subtask, index) => (
-              <div key={index}>
+              <>
                 <AddColInput
+                key={index}
                   defaultValue={subtask.title}
                   onRemove={() => removeSubTask(subtask)}
                   onInputChange={(newTitle: any) =>
                     updateSubTaskTitle(index, newTitle)
+                    
                   }
                 />
-              </div>
+              </>
             ))}
           </section>
           <section className="buttons flex flex-col gap-5">
