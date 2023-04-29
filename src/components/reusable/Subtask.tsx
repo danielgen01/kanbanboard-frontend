@@ -45,13 +45,11 @@ export const Subtask: React.FC<props> = ({
       return subtask
     })
 
-    // Aktualisieren Sie den Task mit den neuen Subtasks
     const updatedTask: Task = {
       ...currentTask,
       subtasks: newSubtasks,
     }
 
-    // Führen Sie den updateTask-Dispatch aus
     dispatch(
       updateTask({
         boardIndex: currentTask.boardIndex,

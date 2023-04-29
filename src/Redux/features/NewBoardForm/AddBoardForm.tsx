@@ -39,6 +39,7 @@ const AddBoardForm: React.FC<AddBoardFormProps> = ({ onBoardAdded }) => {
     if (index !== -1) {
       setColumnNames(columnNames.filter((_, i) => i !== index))
     }
+    console.log(index)
   }
 
   const isBoardFormOpen = useAppSelector(

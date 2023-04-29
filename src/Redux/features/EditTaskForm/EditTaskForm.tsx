@@ -101,7 +101,6 @@ const EditTaskForm = ({ key }: { key: string }) => {
     return currentTaskData
   })
 
-
   const handleUpdateTask = async () => {
     const updatedTask: Task = {
       ...currentTask,
@@ -188,8 +187,8 @@ const EditTaskForm = ({ key }: { key: string }) => {
                   key={index}
                   defaultValue={subtask.title}
                   onRemove={() => removeSubTask(subtask)}
-                  onInputChange={(newTitle: any) =>
-                    updateSubTaskTitle(index, newTitle)
+                  onInputChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                    updateSubTaskTitle(index, event?.target.value)
                   }
                 />
               </>
