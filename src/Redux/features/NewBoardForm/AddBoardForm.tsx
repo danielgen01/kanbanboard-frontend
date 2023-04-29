@@ -78,7 +78,6 @@ const AddBoardForm: React.FC<AddBoardFormProps> = ({ onBoardAdded }) => {
 
     setBoardTitle("New Board")
     setColumnNames(["Todo", "Doing", "Done"])
-
     onBoardAdded()
   }
 
