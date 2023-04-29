@@ -50,6 +50,8 @@ const AddBoardForm: React.FC<AddBoardFormProps> = ({ onBoardAdded }) => {
 
   const handleToggleAddBoardForm = () => {
     dispatch(toggleAddBoardForm())
+    setBoardTitle("New Board")
+    setColumnNames(["Todo", "Doing", "Done"])
   }
 
   const addNewBoard = () => {
