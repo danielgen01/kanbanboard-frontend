@@ -60,7 +60,11 @@ const EditTaskForm = ({ key }: { key: string }) => {
   function addNewSubTask() {
     setSubtasks([
       ...subtasks,
-      { id: Date.now().toString(), title: "", isCompleted: false },
+      {
+        id: Math.floor(Math.random() * 6_000_000).toString(),
+        title: "",
+        isCompleted: false,
+      },
     ])
   }
 
