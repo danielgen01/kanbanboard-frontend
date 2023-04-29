@@ -13,15 +13,18 @@
               "subtasks": [
                 {
                   "title": "Sign up page",
-                  "isCompleted": true
+                  "isCompleted": true,
+                  "id":"defaultSubtask1"
                 },
                 {
                   "title": "Sign in page",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask2"
                 },
                 {
                   "title": "Welcome page",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask3"
                 }
               ]
             },
@@ -32,7 +35,8 @@
               "subtasks": [
                 {
                   "title": "Search page",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask3"
                 }
               ]
             },
@@ -43,11 +47,13 @@
               "subtasks": [
                 {
                   "title": "Account page",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask4"
                 },
                 {
                   "title": "Billing page",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask5"
                 }
               ]
             },
@@ -58,11 +64,13 @@
               "subtasks": [
                 {
                   "title": "Internal testing",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask6"
                 },
                 {
                   "title": "External testing",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask7"
                 }
               ]
             }
@@ -78,15 +86,18 @@
               "subtasks": [
                 {
                   "title": "Settings - Account page",
-                  "isCompleted": true
+                  "isCompleted": true,
+                  "id":"defaultSubtask8"
                 },
                 {
                   "title": "Settings - Billing page",
-                  "isCompleted": true
+                  "isCompleted": true,
+                  "id":"defaultSubtask9"
                 },
                 {
                   "title": "Search page",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask10"
                 }
               ]
             },
@@ -97,15 +108,18 @@
               "subtasks": [
                 {
                   "title": "Upgrade plan",
-                  "isCompleted": true
+                  "isCompleted": true,
+                  "id":"defaultSubtask11"
                 },
                 {
                   "title": "Cancel plan",
-                  "isCompleted": true
+                  "isCompleted": true,
+                  "id":"defaultSubtask12"
                 },
                 {
                   "title": "Update payment method",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask13"
                 }
               ]
             },
@@ -116,15 +130,18 @@
               "subtasks": [
                 {
                   "title": "Sign up page",
-                  "isCompleted": true
+                  "isCompleted": true,
+                  "id":"defaultSubtask14"
                 },
                 {
                   "title": "Sign in page",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask15"
                 },
                 {
                   "title": "Welcome page",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask16"
                 }
               ]
             },
@@ -135,11 +152,13 @@
               "subtasks": [
                 {
                   "title": "Add search endpoint",
-                  "isCompleted": true
+                  "isCompleted": true,
+                  "id":"defaultSubtask17"
                 },
                 {
                   "title": "Define search filters",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask18"
                 }
               ]
             },
@@ -150,11 +169,13 @@
               "subtasks": [
                 {
                   "title": "Define user model",
-                  "isCompleted": true
+                  "isCompleted": true,
+                  "id":"defaultSubtask19"
                 },
                 {
                   "title": "Add auth endpoints",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask20"
                 }
               ]
             },
@@ -165,15 +186,18 @@
               "subtasks": [
                 {
                   "title": "Research competitor pricing and business models",
-                  "isCompleted": true
+                  "isCompleted": true,
+                  "id":"defaultSubtask21"
                 },
                 {
                   "title": "Outline a business model that works for our solution",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask22"
                 },
                 {
                   "title": "Talk to potential customers about our proposed solution and ask for fair price expectancy",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask23"
                 }
               ]
             }
@@ -189,7 +213,8 @@
               "subtasks": [
                 {
                   "title": "Complete 5 wireframe prototype tests",
-                  "isCompleted": true
+                  "isCompleted": true,
+                  "id":"defaultSubtask24"
                 }
               ]
             },
@@ -200,7 +225,8 @@
               "subtasks": [
                 {
                   "title": "Create clickable wireframe prototype in Balsamiq",
-                  "isCompleted": true
+                  "isCompleted": true,
+                  "id":"defaultSubtask25"
                 }
               ]
             },
@@ -211,15 +237,18 @@
               "subtasks": [
                 {
                   "title": "Meet to review notes from previous tests and plan changes",
-                  "isCompleted": true
+                  "isCompleted": true,
+                  "id":"defaultSubtask26"
                 },
                 {
                   "title": "Make changes to paper prototypes",
-                  "isCompleted": true
+                  "isCompleted": true,
+                  "id":"defaultSubtask27"
                 },
                 {
                   "title": "Conduct 5 usability tests",
-                  "isCompleted": true
+                  "isCompleted": true,
+                  "id":"defaultSubtask28"
                 }
               ]
             },
@@ -230,11 +259,13 @@
               "subtasks": [
                 {
                   "title": "Create paper prototypes for version one",
-                  "isCompleted": true
+                  "isCompleted": true,
+                  "id":"defaultSubtask29"
                 },
                 {
                   "title": "Complete 10 usability tests",
-                  "isCompleted": true
+                  "isCompleted": true,
+                  "id":"defaultSubtask30"
                 }
               ]
             },
@@ -245,7 +276,8 @@
               "subtasks": [
                 {
                   "title": "Interview 10 prospective customers",
-                  "isCompleted": true
+                  "isCompleted": true,
+                  "id":"defaultSubtask31"
                 }
               ]
             },
@@ -256,11 +288,13 @@
               "subtasks": [
                 {
                   "title": "Find direct and indirect competitors",
-                  "isCompleted": true
+                  "isCompleted": true,
+                  "id":"defaultSubtask32"
                 },
                 {
                   "title": "SWOT analysis for each competitor",
-                  "isCompleted": true
+                  "isCompleted": true,
+                  "id":"defaultSubtask33"
                 }
               ]
             }
@@ -281,27 +315,33 @@
               "subtasks": [
                 {
                   "title": "Find hunter",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask34"
                 },
                 {
                   "title": "Gather assets",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask35"
                 },
                 {
                   "title": "Draft product page",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask36"
                 },
                 {
                   "title": "Notify customers",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask37"
                 },
                 {
                   "title": "Notify network",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask38"
                 },
                 {
                   "title": "Launch!",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask39"
                 }
               ]
             },
@@ -312,15 +352,18 @@
               "subtasks": [
                 {
                   "title": "Draft out HN post",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask40"
                 },
                 {
                   "title": "Get feedback and refine",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask41"
                 },
                 {
                   "title": "Publish post",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask42"
                 }
               ]
             },
@@ -331,19 +374,23 @@
               "subtasks": [
                 {
                   "title": "Write article",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask43"
                 },
                 {
                   "title": "Publish on LinkedIn",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask44"
                 },
                 {
                   "title": "Publish on Inndie Hackers",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask45"
                 },
                 {
                   "title": "Publish on Medium",
-                  "isCompleted": false
+                  "isCompleted": false,
+                  "id":"defaultSubtask46"
                 }
               ]
             }
