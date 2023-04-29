@@ -74,7 +74,7 @@ const NewTaskForm = () => {
  
 
   const handleAddTask = () => {
-    if (title && description && subtasks && subtasks.length > 0) {
+    if (title) {
       dispatch(
         addTask({
           boardIndex: currentBoardIndex,
@@ -96,7 +96,7 @@ const NewTaskForm = () => {
       titleRef.current.value = ""
       descriptionRef.current.value = ""
     } else {
-      return alert("All fields are required")
+      return alert("Title is required")
     }
     setTitle("")
     setDescription("")
