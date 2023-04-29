@@ -58,23 +58,24 @@ const EditTaskForm = ({ key }: { key: string }) => {
   }
 
   function addNewSubTask() {
-    setSubtasks([...subtasks, { title: "", isCompleted: false }])
+    setSubtasks([
+      ...subtasks,
+      { id: Date.now().toString(), title: "", isCompleted: false },
+    ])
   }
 
   function removeSubTask(subtaskToRemove: {
+    id: string
     title: string
     isCompleted: boolean
   }) {
-    const index = subtasks.findIndex((subtask) => subtask === subtaskToRemove)
-    if (index !== -1) {
-      setSubtasks(subtasks.filter((_, i) => i !== index))
-    }
+    setSubtasks(subtasks.filter((subtask) => subtask.id !== subtaskToRemove.id))
   }
 
-  function updateSubTaskTitle(index: number, newTitle: string) {
+  function updateSubTaskTitle(id: string, newTitle: string) {
     setSubtasks((prevSubtasks) =>
-      prevSubtasks.map((subtask, i) =>
-        i === index ? { ...subtask, title: newTitle } : subtask
+      prevSubtasks.map((subtask) =>
+        subtask.id === id ? { ...subtask, title: newTitle } : subtask
       )
     )
   }
@@ -181,17 +182,15 @@ const EditTaskForm = ({ key }: { key: string }) => {
             >
               Subtasks
             </label>
-            {subtasks.map((subtask, index) => (
-              <>
-                <AddColInput
-                  key={index}
-                  defaultValue={subtask.title}
-                  onRemove={() => removeSubTask(subtask)}
-                  onInputChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    updateSubTaskTitle(index, event?.target.value)
-                  }
-                />
-              </>
+            {subtasks.map((subtask) => (
+              <AddColInput
+                key={subtask.id}
+                defaultValue={subtask.title}
+                onRemove={() => removeSubTask(subtask)}
+                onInputChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  updateSubTaskTitle(subtask.id, event?.target.value)
+                }
+              />
             ))}
           </section>
           <section className="buttons flex flex-col gap-5">

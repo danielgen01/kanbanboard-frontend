@@ -22,6 +22,7 @@ export type Task = {
 export type Subtask = {
   title: string
   isCompleted: boolean
+  id:string
 }
 
 type State = {
