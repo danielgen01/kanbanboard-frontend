@@ -32,7 +32,7 @@ const Board = () => {
     <>
       <main
         className={`dark:bg-dark-black bg-dark-white 
-        min-h-screen ${
+        min-h-screen overflow-hidden ${
           isSideBarOpen
             ? "md:col-span-4 xl:col-span-5"
             : "md:col-span-6 lg:col-span-6"
@@ -43,7 +43,7 @@ const Board = () => {
         <section
           className="columns 
            flex flex-row gap-20 md:gap-40 lg:gap-60 xl:gap-80  overflow-x-scroll
-             px-5 mt-5 "
+             px-5 mt-5 overflow-auto"
         >
           {currentBoard && currentBoard.columns.length > 0 ? (
             currentBoard.columns.map((column: any) => (
