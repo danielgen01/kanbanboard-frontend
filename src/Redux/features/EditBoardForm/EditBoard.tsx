@@ -24,19 +24,25 @@ const EditBoardForm = ({ key }: { key: string }) => {
     (board: any) => board.name === currentBoardName
   )
 
-  const [columnNames, setColumnNames] = useState<string[]>(
-    currentBoard?.columns.map((column) => column.name) || []
+  const [columnNames, setColumnNames] = useState<
+    { id: number; name: string }[]
+  >(
+    currentBoard?.columns.map((column) => ({
+      id: column.id,
+      name: column.name,
+    })) || []
   )
 
   function addNewColumn() {
-    setColumnNames([...columnNames, ""])
+    const newId =
+      columnNames.length > 0
+        ? Math.max(...columnNames.map((col) => col.id)) + 1
+        : 0
+    setColumnNames([...columnNames, { id: newId, name: "" }])
   }
 
-  function removeColumn(name: string) {
-    const index = columnNames.findIndex((columnName) => columnName === name)
-    if (index !== -1) {
-      setColumnNames(columnNames.filter((_, i) => i !== index))
-    }
+  function removeColumn(id: number) {
+    setColumnNames(columnNames.filter((column) => column.id !== id))
   }
 
   const [boardName, setBoardName] = useState(currentBoardName)
@@ -49,29 +55,31 @@ const EditBoardForm = ({ key }: { key: string }) => {
     dispatch(toggleEditBoardForm())
   }
 
-  function handleColumnNameChange(
-    index: number,
-    event: React.ChangeEvent<HTMLInputElement>
-  ) {
-    const newName = event.target.value
-    const updatedColumnNames = [...columnNames]
-    updatedColumnNames[index] = newName
-    setColumnNames(updatedColumnNames)
+  function handleColumnNameChange(id: number, value: string) {
+    setColumnNames((prevColumnNames) => {
+      const newColumnNames = prevColumnNames.map((column) =>
+        column.id === id ? { ...column, name: value } : column
+      )
+      return newColumnNames
+    })
   }
+
   const handleUpdateBoard = async () => {
     const updatedBoard: Board = {
       ...currentBoard,
       name: boardName,
-      columns: columnNames.map((name, index) => {
-        const oldColumn = currentBoard?.columns[index]
+      columns: columnNames.map((column) => {
+        const oldColumn = currentBoard?.columns.find(
+          (oldCol) => oldCol.name === column.name
+        )
         const updatedTasks = oldColumn
           ? oldColumn.tasks.map((task) => ({
               ...task,
-              status: name,
+              status: column.name,
             }))
           : []
         return {
-          name,
+          name: column.name,
           tasks: updatedTasks,
         }
       }),
@@ -92,13 +100,6 @@ const EditBoardForm = ({ key }: { key: string }) => {
 
     handleToggleEditBoardForm()
   }
-
-  useEffect(() => {
-    if (isEditBoardFormOpen) {
-      setBoardName(currentBoardName)
-      setColumnNames(currentBoard?.columns.map((column) => column.name) || [])
-    }
-  }, [isEditBoardFormOpen, currentBoardName, currentBoard])
 
   return (
     <>
@@ -136,13 +137,13 @@ const EditBoardForm = ({ key }: { key: string }) => {
             >
               Board Columns
             </label>
-            {columnNames.map((columnName, index) => (
+            {columnNames.map((column) => (
               <AddColInput
-                key={index}
-                defaultValue={columnName}
-                onRemove={() => removeColumn(columnName)}
-                onInputChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  handleColumnNameChange(index, event)
+                key={column.id}
+                defaultValue={column.name}
+                onRemove={() => removeColumn(column.id)}
+                onInputChange={(event) =>
+                  handleColumnNameChange(column.id, event.target.value)
                 }
               />
             ))}

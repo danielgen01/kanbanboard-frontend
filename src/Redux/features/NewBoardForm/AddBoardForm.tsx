@@ -19,9 +19,9 @@ const AddBoardForm: React.FC<AddBoardFormProps> = ({ onBoardAdded }) => {
   const [columnNames, setColumnNames] = useState<
     Array<{ id: number; name: string }>
   >([
-    { id: 1, name: "Todo" },
-    { id: 2, name: "Doing" },
-    { id: 3, name: "Done" },
+    { id: Math.max(Math.random() * 6_000_000), name: "Todo" },
+    { id: Math.max(Math.random() * 6_000_000), name: "Doing" },
+    { id: Math.max(Math.random() * 6_000_000), name: "Done" },
   ])
 
   const currentBoardName = useAppSelector(
@@ -62,6 +62,7 @@ const AddBoardForm: React.FC<AddBoardFormProps> = ({ onBoardAdded }) => {
     let columns = columnNames.map((column) => ({
       name: column.name,
       tasks: [],
+      id:column.id
     }))
     const boardExists = data.boards.find((board) => board.name === boardTitle)
     if (boardExists) {
