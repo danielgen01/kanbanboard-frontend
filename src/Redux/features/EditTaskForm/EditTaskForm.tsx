@@ -156,7 +156,7 @@ const EditTaskForm = ({ key }: { key: string }) => {
             className="px-5 border-2 border-bright-gray rounded-md
              h-12 dark:bg-dark-gray
               dark:border-medium-gray dark:border
-               dark:text-white font-bold outline-white"
+               dark:text-white font-bold outline-white dark:outline-none dark:focus:border-dark-purple"
             placeholder="e.g ..."
             defaultValue={currentTaskTitle}
             ref={titleRef}
@@ -175,7 +175,7 @@ const EditTaskForm = ({ key }: { key: string }) => {
             <textarea
               name="input-title"
               className="border-bright-gray border-2 outline-bright-gray rounded-md h-28 px-2 py-2 text-sm resize-none
-               dark:bg-dark-gray dark:border-medium-gray dark:text-white"
+               dark:bg-dark-gray dark:border-medium-gray dark:text-white dark:outline-none dark:focus:border-dark-purple"
               placeholder="e.g its always good to take a small break from working to prevent burnouts"
               defaultValue={currentTaskDescription}
               ref={descriptionRef}
