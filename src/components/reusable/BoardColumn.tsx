@@ -52,7 +52,6 @@ export const BoardColumn: React.FC<props> = ({
             {column.tasks
               .filter((task: any) => task.status === statusName)
               .map((task: any) => {
-                // Berechne die Anzahl der abgeschlossenen Subtasks
                 const completedSubtasksCount = task.subtasks.filter(
                   (subtask: any) => subtask.isCompleted
                 ).length
@@ -62,7 +61,7 @@ export const BoardColumn: React.FC<props> = ({
                     key={task.name}
                     title={task.title}
                     subtasksCount={task.subtasks.length}
-                    completedSubtasksCount={completedSubtasksCount} // Übergebe die Anzahl der abgeschlossenen Subtasks
+                    completedSubtasksCount={completedSubtasksCount} 
                     subtasks={task.subtasks}
                     description={task.description}
                     id={task.id}
