@@ -67,7 +67,7 @@ const Navbar = () => {
   return (
     <nav
       className="h-20 shadow-sm nav-bar-ctn w-screen md:w-auto md:border-b-[1px] border-medium-gray border-none
-     dark:bg-dark-gray px-5"
+     dark:bg-dark-gray "
     >
       <section className="navbar-content px-5 flex  items-center w-full h-full">
         <figure className="logo-ctn">
@@ -79,7 +79,7 @@ const Navbar = () => {
         >
           <h1
             className="font-bold text-lg
-           dark:text-white"
+           dark:text-white whitespace-nowrap"
           >
             {currentBoardName}
           </h1>
