@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import boardicon from "../../assets/logo-light.svg"
 import darkboardicon from "../../assets/logo-dark.svg"
 import logomobile from "../../../assets/logo-mobile.svg"
@@ -14,8 +14,10 @@ import { RootState } from "../../Redux/rootReducer"
 import SelectBoardFormMobile from "./SelectBoardFormMobile"
 
 const Navbar = () => {
+  const data = useAppSelector((state: RootState) => state.data)
   const [isEllipsDropDownOpen, setIsEllipsDropDownOpen] = useState(false)
   const [isSelectBoardOpen, setIsSelectBoardOpen] = useState(false)
+  const [isBoardEmpty, setIsBoardEmpty] = useState(false)
 
   const handleToggleEditBoardForm = () => {
     dispatch(toggleEditBoardForm())
@@ -42,9 +44,19 @@ const Navbar = () => {
     setIsEllipsDropDownOpen(false)
   }
 
-  const currentBoard = useAppSelector(
+  const currentBoardName = useAppSelector(
     (state: RootState) => state.currentBoardName.currentBoardName
   )
+
+  const currentBoard = data?.boards.find(
+    (board: any) => board.name === currentBoardName
+  )
+
+  useEffect(() => {
+    if (currentBoard?.columns.length <= 0) {
+      setIsBoardEmpty(true)
+    }
+  }, [currentBoard?.columns])
 
   return (
     <nav
@@ -63,14 +75,17 @@ const Navbar = () => {
             className="font-bold text-lg
            dark:text-white"
           >
-            {currentBoard}
+            {currentBoardName}
           </h1>
-          <img src={chevrondown} className="h-2 md:hidden" alt="chevron down"/>
+          <img src={chevrondown} className="h-2 md:hidden" alt="chevron down" />
         </button>
         <div className="top-right-icons ml-auto flex  items-center gap-5">
           <button
-            className="add-btn flex bg-dark-purple py-3 px-5 rounded-2xl items-center gap-2 text-white font-bold hover:bg-bright-purple duration-150"
+            className={`add-btn flex bg-dark-purple py-3 px-5 rounded-2xl items-center gap-2 text-white font-bold hover:bg-bright-purple duration-150 ${
+              isBoardEmpty ? "cursor-not-allowed" : "cursor-pointer"
+            }`}
             onClick={handleToggleNewTaskForm}
+            disabled={isBoardEmpty}
           >
             <img src={addicon} alt="addicon" className="" />
             <span className="font-boldtext-white text-sm hidden md:block">

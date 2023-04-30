@@ -32,8 +32,8 @@ const NewTaskForm = () => {
     (board) => board.name === currentBoardName
   )
 
-  const firstColumnName: any = currentBoard?.columns[0].name
-  const [status, setStatus] = useState(firstColumnName)
+  const firstColumnName: any = currentBoard?.columns && currentBoard.columns.length > 0 ? currentBoard.columns[0].name : null;
+  const [status, setStatus] = useState(firstColumnName) 
 
   useEffect(() => {
     setStatus(firstColumnName)

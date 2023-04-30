@@ -28,9 +28,7 @@ const AddBoardForm: React.FC<AddBoardFormProps> = ({ onBoardAdded }) => {
     (state: RootState) => state.currentBoardName.currentBoardName
   )
 
-  const currentBoard = data?.boards.find(
-    (board: any) => board.name === currentBoardName
-  )
+ 
 
   function addNewColumn() {
     const newId =
