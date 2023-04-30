@@ -92,7 +92,7 @@ const NewTaskForm = () => {
       )
 
       handleToggleNewTaskForm()
-      setSubtasks([""])
+      setSubtasks([])
       titleRef.current.value = ""
       descriptionRef.current.value = ""
     } else {
