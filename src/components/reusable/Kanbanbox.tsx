@@ -87,7 +87,7 @@ export const Kanbanbox: React.FC<Task> = ({
     <div
       className="kanbanbox min-h-[5rem] xl:h-28 w-72  md:w-52
        xl:w-72 bg-white rounded-md flex flex-col items-start justify-center shadow-md gap-2 px-5
-          dark:bg-dark-gray cursor-pointer hover:scale-110 hover:text-dark-purple duration-200"
+          dark:bg-dark-gray cursor-pointer xl:hover:scale-110 hover:text-dark-purple duration-200"
       onClick={changeCurrentTask}
     >
       <h1
