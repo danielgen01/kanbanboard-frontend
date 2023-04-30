@@ -35,14 +35,14 @@ const Board = () => {
           isSideBarOpen
             ? "md:col-span-4 xl:col-span-5"
             : "md:col-span-6 lg:col-span-6"
-        }`}
+        } `}
       >
         <Navbar />
 
         <section
           className="columns 
            flex flex-row gap-20 md:gap-40 lg:gap-60 xl:gap-80  overflow-x-scroll
-             px-5 mt-5 overflow-auto"
+             px-5 mt-5 overflow-auto pb-20"
         >
           {currentBoard && currentBoard.columns.length > 0 ? (
             currentBoard.columns.map((column: any) => (

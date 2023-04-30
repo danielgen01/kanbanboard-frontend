@@ -200,7 +200,7 @@ const NewTaskForm = () => {
             ))}
             <button
               className="flex items-center gap-2 text-dark-purple
-               w-full justify-center mt-2 bg-white rounded-3xl
+               w-full justify-center mt-2 bg-bright-gray dark:bg-white rounded-3xl
                 h-12 font-bold hover:opacity-70 duration-150"
               type="button"
               onClick={addNewSubTask}

@@ -92,7 +92,7 @@ export const Kanbanbox: React.FC<Task> = ({
     >
       <h1
         className="text-black font-bold text-md 
-            dark:text-white"
+            dark:text-white whitespace-pre-wrap"
       >
         {title}
       </h1>
