@@ -32,7 +32,7 @@ const Board = () => {
     <>
       <main
         className={`dark:bg-dark-black bg-dark-white 
-        min-h-screen overflow-hidden ${
+        min-h-screen ${
           isSideBarOpen
             ? "md:col-span-4 xl:col-span-5"
             : "md:col-span-6 lg:col-span-6"
