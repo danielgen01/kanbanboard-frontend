@@ -19,6 +19,7 @@ const DeleteBoard: React.FC = () => {
 
   const deleteCurrentBoard = () => {
     dispatch(removeBoard(currentBoardName))
+
     handleToggleDeleteBoardForm()
   }
 
@@ -45,8 +46,10 @@ const DeleteBoard: React.FC = () => {
             Delete this Board?
           </h1>
           <p className="text-medium-gray leading-6 font-bold text-sm">
-            Are you sure you want to delete the boardtitle board? This action
-            will remove all columns and tasks and cannot be reversed.
+            Are you sure you want to delete the{" "}
+            <span className="font-bold uppercase ">{currentBoardName}</span>{" "}
+            board? This action will remove all columns and tasks and cannot be
+            reversed.
           </p>
           <div className="button flex flex-col gap-3 lg:grid lg:grid-cols-2">
             <button

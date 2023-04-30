@@ -81,7 +81,7 @@ const DeleteTask: React.FC = () => {
             Delete this task?
           </h1>
           <p className="text-medium-gray leading-6 font-bold text-sm">
-            Are you sure you want to delete the tasktitle task and its subtasks?
+            Are you sure you want to delete the <span className="font-bold uppercase ">{currentTask.title}</span> task and its subtasks?
             This action cannot be reversed.
           </p>
           <div className="button flex flex-col gap-3 lg:grid lg:grid-cols-2">
