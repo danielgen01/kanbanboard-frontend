@@ -26,6 +26,20 @@ const Board = () => {
     (board: any) => board.name === currentBoardName
   )
 
+  const colorOptions = [
+    "bg-teal-500",
+    "bg-blue-500",
+    "bg-red-500",
+    "bg-yellow-500",
+    "bg-green-500",
+    "bg-indigo-500",
+    "bg-purple-500",
+    "bg-pink-500",
+  ]
+
+  const getRandomColor = () => {
+    return colorOptions[Math.floor(Math.random() * colorOptions.length)]
+  }
 
   return (
     <>
@@ -50,7 +64,7 @@ const Board = () => {
                 key={column.name}
                 statusName={column.name}
                 columnName={`${column.name}`}
-                batchColor={"bg-teal-500"}
+                batchColor={getRandomColor()}
               />
             ))
           ) : (
