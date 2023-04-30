@@ -32,8 +32,11 @@ const NewTaskForm = () => {
     (board) => board.name === currentBoardName
   )
 
-  const firstColumnName: any = currentBoard?.columns && currentBoard.columns.length > 0 ? currentBoard.columns[0].name : null;
-  const [status, setStatus] = useState(firstColumnName) 
+  const firstColumnName: any =
+    currentBoard?.columns && currentBoard.columns.length > 0
+      ? currentBoard.columns[0].name
+      : null
+  const [status, setStatus] = useState(firstColumnName)
 
   useEffect(() => {
     setStatus(firstColumnName)
@@ -71,8 +74,6 @@ const NewTaskForm = () => {
     })
   }
 
- 
-
   const handleAddTask = () => {
     if (title) {
       dispatch(
@@ -83,9 +84,10 @@ const NewTaskForm = () => {
             title: title,
             description: description,
             status: status,
-            subtasks: subtasks.map((subtaskTitle) => ({
+            subtasks: subtasks.map((subtaskTitle, index) => ({
               title: subtaskTitle,
               isCompleted: false,
+              id: `${title}-${index}`,
             })),
           },
         })

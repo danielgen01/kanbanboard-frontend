@@ -53,13 +53,16 @@ const Navbar = () => {
   )
 
   useEffect(() => {
-    if (currentBoard?.columns.length <= 0) {
-      setIsBoardEmpty(true);
+    if (
+      !currentBoard ||
+      !currentBoard.columns ||
+      currentBoard.columns.length <= 0
+    ) {
+      setIsBoardEmpty(true)
     } else {
-      setIsBoardEmpty(false);
+      setIsBoardEmpty(false)
     }
-  }, [currentBoard?.columns]);
-  
+  }, [currentBoard?.columns])
 
   return (
     <nav

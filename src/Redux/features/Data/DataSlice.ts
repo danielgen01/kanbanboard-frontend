@@ -8,6 +8,7 @@ export type Board = {
 }
 
 type Column = {
+  id: any
   name: string
   tasks: Task[]
 }

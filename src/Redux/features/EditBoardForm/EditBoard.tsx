@@ -81,6 +81,7 @@ const EditBoardForm = ({ key }: { key: string }) => {
         return {
           name: column.name,
           tasks: updatedTasks,
+          id:column.id
         }
       }),
     }

@@ -1,5 +1,4 @@
 import React from "react"
-import { TodoItemsColumn } from "../../Redux/features/columns/Todo/TodoItemsColumn"
 import showSlideBarIcon from "../../../assets/icon-show-sidebar.svg"
 import { toggleSidebar } from "../../Redux/features/Sidebar/sidebarSlice"
 import { RootState } from "../../Redux/rootReducer"
