@@ -5,6 +5,7 @@
       "columns": [
         {
           "name": "Todo",
+          "id": 1000,
           "tasks": [
             {
               "title": "Build UI for onboarding flow",
@@ -78,6 +79,7 @@
         },
         {
           "name": "Doing",
+          "id":1001,
           "tasks": [
             {
               "title": "Design settings and search pages",
@@ -205,6 +207,7 @@
         },
         {
           "name": "Done",
+          "id":1002,
           "tasks": [
             {
               "title": "Conduct 5 wireframe tests",
@@ -307,6 +310,7 @@
       "columns": [
         {
           "name": "Todo",
+          "id":1003,
           "tasks": [
             {
               "title": "Plan Product Hunt launch",
@@ -398,10 +402,12 @@
         },
         {
           "name": "Doing",
+          "id":1005,
           "tasks": []
         },
         {
           "name": "Done",
+          "id":1006,
           "tasks": []
         }
       ]
@@ -411,14 +417,17 @@
       "columns": [
         {
           "name": "Now",
+          "id":1008,
           "tasks": []
         },
         {
           "name": "Next",
+          "id":1009,
           "tasks": []
         },
         {
           "name": "Later",
+          "id":1010,
           "tasks": []
         }
       ]
