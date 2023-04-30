@@ -5,6 +5,8 @@ import { RootState } from "../../rootReducer"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { toggleEditTaskForm } from "./EditTaskFormSlice"
 import { updateTask, Task, Subtask } from "../Data/DataSlice"
+import { v4 as uuidv4 } from "uuid";
+
 
 const EditTaskForm = ({ key }: { key: string }) => {
   const dispatch = useAppDispatch()
@@ -61,7 +63,7 @@ const EditTaskForm = ({ key }: { key: string }) => {
     setSubtasks([
       ...subtasks,
       {
-        id: Math.floor(Math.random() * 6_000_000).toString(),
+        id: uuidv4(),
         title: "",
         isCompleted: false,
       },
@@ -73,8 +75,10 @@ const EditTaskForm = ({ key }: { key: string }) => {
     title: string
     isCompleted: boolean
   }) {
-    setSubtasks(subtasks.filter((subtask) => subtask.id !== subtaskToRemove.id))
+    console.log("Removing subtask: ", subtaskToRemove);
+    setSubtasks(subtasks.filter((subtask) => subtask.id !== subtaskToRemove.id));
   }
+  
 
   function updateSubTaskTitle(id: string, newTitle: string) {
     setSubtasks((prevSubtasks) =>
