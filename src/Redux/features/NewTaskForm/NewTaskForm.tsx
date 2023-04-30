@@ -12,7 +12,7 @@ const NewTaskForm = () => {
 
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
-  const [subtasks, setSubtasks] = useState<string[]>([""])
+  const [subtasks, setSubtasks] = useState<string[]>([])
 
   const descriptionRef: any = useRef(null)
   const titleRef: any = useRef(null)
@@ -53,7 +53,7 @@ const NewTaskForm = () => {
   const columnNames = currentBoard?.columns.map((column) => column.name)
 
   function addNewSubTask() {
-    setSubtasks([...subtasks, ""])
+    setSubtasks([...subtasks, "Subtask"])
   }
 
   function removeSubTask(title: string) {
@@ -189,7 +189,7 @@ const NewTaskForm = () => {
             {subtasks.map((title, index) => (
               <AddColInput
                 key={index}
-                defaultValue={"Subtask " + (index + 1)}
+                defaultValue={""}
                 onRemove={() => removeSubTask(title)}
                 onInputChange={(event) =>
                   handleSubTaskNameChange(index, event.target.value)
