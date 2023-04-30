@@ -16,10 +16,12 @@ type AddBoardFormProps = {
 const AddBoardForm: React.FC<AddBoardFormProps> = ({ onBoardAdded }) => {
   const data = useAppSelector((state: RootState) => state.data)
   const [boardTitle, setBoardTitle] = useState<string>("New Board")
-  const [columnNames, setColumnNames] = useState<string[]>([
-    "Todo",
-    "Doing",
-    "Done",
+  const [columnNames, setColumnNames] = useState<
+    Array<{ id: number; name: string }>
+  >([
+    { id: 1, name: "Todo" },
+    { id: 2, name: "Doing" },
+    { id: 3, name: "Done" },
   ])
 
   const currentBoardName = useAppSelector(
@@ -31,15 +33,13 @@ const AddBoardForm: React.FC<AddBoardFormProps> = ({ onBoardAdded }) => {
   )
 
   function addNewColumn() {
-    setColumnNames([...columnNames, ""])
+    const newId =
+      columnNames.length > 0 ? columnNames[columnNames.length - 1].id + 1 : 1
+    setColumnNames([...columnNames, { id: newId, name: "" }])
   }
 
-  function removeColumn(name: string) {
-    const index = columnNames.findIndex((columnName) => columnName === name)
-    if (index !== -1) {
-      setColumnNames(columnNames.filter((_, i) => i !== index))
-    }
-    console.log(index)
+  function removeColumn(id: number) {
+    setColumnNames(columnNames.filter((column) => column.id !== id))
   }
 
   const isBoardFormOpen = useAppSelector(
@@ -51,12 +51,16 @@ const AddBoardForm: React.FC<AddBoardFormProps> = ({ onBoardAdded }) => {
   const handleToggleAddBoardForm = () => {
     dispatch(toggleAddBoardForm())
     setBoardTitle("New Board")
-    setColumnNames(["Todo", "Doing", "Done"])
+    setColumnNames([
+      { id: 1, name: "Todo" },
+      { id: 2, name: "Doing" },
+      { id: 3, name: "Done" },
+    ])
   }
 
   const addNewBoard = () => {
-    let columns = columnNames.map((name) => ({
-      name,
+    let columns = columnNames.map((column) => ({
+      name: column.name,
       tasks: [],
     }))
     const boardExists = data.boards.find((board) => board.name === boardTitle)
@@ -77,14 +81,19 @@ const AddBoardForm: React.FC<AddBoardFormProps> = ({ onBoardAdded }) => {
     dispatch(setCurrentBoardName(boardTitle))
 
     setBoardTitle("New Board")
-    setColumnNames(["Todo", "Doing", "Done"])
+    setColumnNames([
+      { id: 1, name: "Todo" },
+      { id: 2, name: "Doing" },
+      { id: 3, name: "Done" },
+    ])
     onBoardAdded()
   }
 
-  function handleColumnNameChange(index: number, value: string) {
+  function handleColumnNameChange(id: number, value: string) {
     setColumnNames((prevColumnNames) => {
-      const newColumnNames = [...prevColumnNames]
-      newColumnNames[index] = value
+      const newColumnNames = prevColumnNames.map((column) =>
+        column.id === id ? { ...column, name: value } : column
+      )
       return newColumnNames
     })
   }
@@ -132,13 +141,13 @@ const AddBoardForm: React.FC<AddBoardFormProps> = ({ onBoardAdded }) => {
             >
               Board Columns
             </label>
-            {columnNames.map((name, index) => (
+            {columnNames.map((column) => (
               <AddColInput
-                key={index}
-                defaultValue={name}
-                onRemove={() => removeColumn(name)}
+                key={column.id}
+                defaultValue={column.name}
+                onRemove={() => removeColumn(column.id)}
                 onInputChange={(event) =>
-                  handleColumnNameChange(index, event.target.value)
+                  handleColumnNameChange(column.id, event.target.value)
                 }
               />
             ))}
