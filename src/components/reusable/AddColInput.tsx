@@ -25,7 +25,8 @@ export const AddColInput: React.FC<props> = ({
 
       <RxCross1
         onClick={onRemove}
-        className="text-dark-red font-bold cursor-pointer
+        className="hover:text-dark-red 
+        text-dark-black font-bold cursor-pointer
        text-3xl"
       />
     </div>
