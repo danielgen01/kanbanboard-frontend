@@ -12,6 +12,15 @@
       rel="stylesheet"
     />
     <script>
+      function setDefaultTheme() {
+        if (!("theme" in localStorage)) {
+          localStorage.theme = "dark"
+        }
+      }
+
+      // Call the setDefaultTheme function when the page loads
+      setDefaultTheme()
+
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
       if (
         localStorage.theme === "dark" ||
