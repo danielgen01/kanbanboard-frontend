@@ -55,7 +55,7 @@ const Board = () => {
 
         <section
           className="columns 
-           flex flex-row gap-20 md:gap-40 lg:gap-60 xl:gap-80  overflow-x-scroll
+           flex flex-row gap-20 md:gap-40 lg:gap-60 xl:gap-70  overflow-x-scroll
              px-5 mt-5 overflow-auto pb-20"
         >
           {currentBoard && currentBoard.columns.length > 0 ? (

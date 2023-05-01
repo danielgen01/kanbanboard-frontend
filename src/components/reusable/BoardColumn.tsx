@@ -33,7 +33,7 @@ export const BoardColumn: React.FC<props> = ({
   )
 
   return (
-    <div className=" flex flex-col ">
+    <div className=" flex flex-col">
       <div className="headline flex items-center gap-2 mb-4">
         <div className={`h-5 w-5 rounded-full ${batchColor} `}></div>
         <h1
