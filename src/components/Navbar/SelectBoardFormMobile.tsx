@@ -5,6 +5,7 @@ import { AiOutlinePlus } from "react-icons/ai"
 import boardicon from "../../../assets/icon-board.svg"
 import { toggleAddBoardForm } from "../../Redux/features/NewBoardForm/NewBoardFormSlice"
 import { setCurrentBoardName } from "../../Redux/features/currentBoard/currentBoardSlice"
+import { ToggleTheme } from "../reusable/ToggleTheme"
 
 type props = {
   isSelectBoardOpen: boolean
@@ -44,6 +45,7 @@ const SelectBoardFormMobile: React.FC<props> = ({
             <button className="text-white font-bold">{board.name}</button>
           </div>
         ))}
+          <ToggleTheme />
         <button
           className="flex items-center px-10 py-4 rounded-3xl -ml-5 gap-3
          font-bold text-sm"
