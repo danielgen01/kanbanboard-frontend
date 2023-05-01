@@ -1,6 +1,6 @@
 import React from "react"
 import crossicon from "../../../assets/icon-cross.svg"
-
+import { RxCross1 } from "react-icons/rx"
 type props = {
   defaultValue: string
   onRemove: () => void
@@ -22,7 +22,12 @@ export const AddColInput: React.FC<props> = ({
         defaultValue={defaultValue}
         onChange={onInputChange}
       />
-      <img src={crossicon} alt="cross icon" onClick={onRemove} className="cursor-pointer"/>
+
+      <RxCross1
+        onClick={onRemove}
+        className="text-dark-red font-bold cursor-pointer
+       text-3xl"
+      />
     </div>
   )
 }
