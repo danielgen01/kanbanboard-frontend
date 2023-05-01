@@ -6,6 +6,8 @@ import { useAppDispatch, useAppSelector } from "../../store"
 import { RootState } from "../../rootReducer"
 import { toggleNewTaskForm } from "./NewTaskFormSlice"
 import { addTask } from "../Data/DataSlice"
+import { Listbox } from "@headlessui/react"
+import chevronDown from "../../../../assets/icon-chevron-down.svg"
 
 const NewTaskForm = () => {
   const data = useAppSelector((state: RootState) => state.data)
@@ -116,8 +118,8 @@ const NewTaskForm = () => {
     setDescription(descriptionRef.current.value)
   }
 
-  function updateStatus() {
-    setStatus(selectRef.current.value)
+  function updateStatus(value: string) {
+    setStatus(value)
   }
 
   return (
@@ -219,20 +221,37 @@ const NewTaskForm = () => {
             >
               Status
             </label>
-            <select
-              name="select-status"
-              className="border-bright-gray border-2 outline-bright-gray rounded-md h-10 px-2 text-sm
-              dark:text-white dark:bg-dark-gray dark:border-medium-gray"
-              ref={selectRef}
-              onChange={updateStatus}
+            <Listbox
               value={status}
+              onChange={updateStatus}
+              as="div"
+              className="relative"
             >
-              {columnNames?.map((name) => (
-                <option key={name} value={name}>
-                  {name}
-                </option>
-              ))}
-            </select>
+              <Listbox.Button
+                className="w-full flex justify-between items-center
+      border-2 h-10 rounded-md cursor-pointer
+      px-2 dark:bg-dark-gray dark:outline-none dark:text-white dark:border-medium-gray
+      border-bright-gray focus:border-dark-purple active:border-dark-purple"
+              >
+                <span>{status}</span>
+                <img src={chevronDown} alt="chevron down" className="w-3 h-2" />
+              </Listbox.Button>
+              <Listbox.Options className="absolute w-full mt-1 bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none z-10">
+                {columnNames?.map((name) => (
+                  <Listbox.Option
+                    key={name}
+                    value={name}
+                    className={({ active }) =>
+                      `${
+                        active ? "bg-bright-gray" : "text-medium-gray"
+                      } px-4 py-2`
+                    }
+                  >
+                    {name}
+                  </Listbox.Option>
+                ))}
+              </Listbox.Options>
+            </Listbox>
           </div>
 
           {/* Create task button */}

@@ -174,11 +174,16 @@ const ViewTaskForm = () => {
               value={currentTask?.status}
               onChange={updateStatus} // Stellen Sie sicher, dass updateStatus den neuen Wert direkt annimmt
               as="div"
-              className="relative"
+              className="relative "
             >
               <Listbox.Button
-                className="w-full flex justify-between items-center border-bright-gray border-2 h-10 rounded-md cursor-pointer
-      px-2 dark:bg-transparent dark:outline-none dark:text-white"
+                className="w-full flex justify-between items-center
+      border-2 h-10 rounded-md cursor-pointer
+      px-2 dark:bg-transparent dark:outline-none dark:text-white
+      dark:focus:border-dark-purple
+      dark:active:border-dark-purple
+      dark:focus:outline-none
+      border-bright-gray focus:border-dark-purple active:border-dark-purple"
               >
                 {currentTask?.status}
                 <img src={chevronDown} alt="Chevron Down" className="w-4 h-3" />
