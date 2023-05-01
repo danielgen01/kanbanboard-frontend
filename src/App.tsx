@@ -31,7 +31,7 @@ function App() {
   )
 
   return (
-    <div className="app min-h-screen md:w-screen grid grid-cols-1 md:grid-cols-6 ">
+    <div className="app  grid grid-cols-1 md:grid-cols-6 ">
       <Sidebar />
       <Board />
       <NewTaskForm />
