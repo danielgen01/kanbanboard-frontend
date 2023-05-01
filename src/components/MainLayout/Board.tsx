@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useRef } from "react"
 import showSlideBarIcon from "../../../assets/icon-show-sidebar.svg"
 import { toggleSidebar } from "../../Redux/features/Sidebar/sidebarSlice"
 import { RootState } from "../../Redux/rootReducer"
@@ -10,6 +10,9 @@ import EmptyBoardContent from "../reusable/EmptyBoardContent"
 
 const Board = () => {
   const data = useSelector((state: RootState) => state.data)
+  const [isMouseDown, setIsMouseDown] = useState(false)
+  const [mouseDownPosX, setMouseDownPosX] = useState(0)
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   const isSideBarOpen = useSelector(
     (state: RootState) => state.sidebar.isSideBarOpen
@@ -26,20 +29,36 @@ const Board = () => {
     (board: any) => board.name === currentBoardName
   )
 
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsMouseDown(true)
+    setMouseDownPosX(e.clientX)
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isMouseDown) return
+    e.preventDefault() // Verhindert das Markieren von Elementen
+    const container = scrollContainerRef.current
+    if (container) {
+      container.scrollLeft += mouseDownPosX - e.clientX
+      setMouseDownPosX(e.clientX)
+    }
+  }
+
+  const handleMouseUp = () => {
+    setIsMouseDown(false)
+  }
+
   const colorOptions = [
     "bg-teal-500",
     "bg-blue-500",
-    "bg-red-500",
+    "bg-purple-500",
+
     "bg-yellow-500",
     "bg-green-500",
     "bg-indigo-500",
-    "bg-purple-500",
     "bg-pink-500",
+    "bg-red-500",
   ]
-
-  const getRandomColor = () => {
-    return colorOptions[Math.floor(Math.random() * colorOptions.length)]
-  }
 
   return (
     <>
@@ -54,17 +73,22 @@ const Board = () => {
         <Navbar />
 
         <section
-          className="columns 
-           flex flex-row gap-20 md:gap-40 lg:gap-60 xl:gap-70  overflow-x-scroll
-             px-5 mt-5 overflow-auto pb-20"
+          ref={scrollContainerRef}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          className={`columns ${
+            isMouseDown ? "cursor-grabbing" : "cursor-grab"
+          } flex flex-row gap-20 md:gap-40 lg:gap-60 xl:gap-70  overflow-x-scroll px-5 mt-5 overflow-auto pb-20`}
         >
           {currentBoard && currentBoard.columns.length > 0 ? (
-            currentBoard.columns.map((column: any) => (
+            currentBoard.columns.map((column: any, index: number) => (
               <BoardColumn
                 key={column.name}
                 statusName={column.name}
                 columnName={`${column.name}`}
-                batchColor={getRandomColor()}
+                batchColor={colorOptions[index % colorOptions.length]}
               />
             ))
           ) : (
