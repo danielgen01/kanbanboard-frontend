@@ -8,6 +8,8 @@ import { toggleViewTaskForm } from "./ViewTaskFormSlice"
 import { toggleEditTaskForm } from "../EditTaskForm/EditTaskFormSlice"
 import { toggleDeleteTaskForm } from "../DeletTaskForm/DeleteTaskFormSlice"
 import { updateTask, Task, removeTask, addTask } from "../Data/DataSlice"
+import { Listbox } from "@headlessui/react"
+import chevronDown from "../../../../assets/icon-chevron-down.svg"
 
 const ViewTaskForm = () => {
   const handleToggleViewTaskForm = () => {
@@ -92,18 +94,16 @@ const ViewTaskForm = () => {
     }
   }
 
-  const updateStatus = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const updateStatus = (value: string) => {
     const updatedTask: Task = {
       ...currentTask,
-      status: event.target.value,
+      status: value,
     }
 
-    // Find the new columnIndex based on the updated status
     const newColumnIndex: any = currentBoard?.columns.findIndex(
-      (column: any) => column.name === event.target.value
+      (column: any) => column.name === value
     )
 
-    // Remove the task from the original column
     dispatch(
       removeTask({
         boardIndex: boardIndex,
@@ -112,7 +112,6 @@ const ViewTaskForm = () => {
       })
     )
 
-    // Add the task to the new column
     dispatch(
       addTask({
         boardIndex: boardIndex,
@@ -171,20 +170,35 @@ const ViewTaskForm = () => {
             >
               Current Status
             </label>
-            <select
-              name="select-status"
-              id="select-staus"
-              className="border-bright-gray border-2 h-10 rounded-md cursor-pointer
-               px-2 dark:bg-transparent dark:outline-none dark:text-white"
+            <Listbox
               value={currentTask?.status}
-              onChange={updateStatus}
+              onChange={updateStatus} // Stellen Sie sicher, dass updateStatus den neuen Wert direkt annimmt
+              as="div"
+              className="relative"
             >
-              {currentBoard?.columns.map((column: any) => (
-                <option className="text-medium-gray" value={column.name}>
-                  {column.name}
-                </option>
-              ))}
-            </select>
+              <Listbox.Button
+                className="w-full flex justify-between items-center border-bright-gray border-2 h-10 rounded-md cursor-pointer
+      px-2 dark:bg-transparent dark:outline-none dark:text-white"
+              >
+                {currentTask?.status}
+                <img src={chevronDown} alt="Chevron Down" className="w-4 h-3" />
+              </Listbox.Button>
+              <Listbox.Options className="absolute w-full mt-1 bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none z-10">
+                {currentBoard?.columns.map((column: any) => (
+                  <Listbox.Option
+                    key={column.name}
+                    value={column.name}
+                    className={({ active }) =>
+                      `${
+                        active ? "bg-bright-gray" : "text-medium-gray"
+                      } px-4 py-2`
+                    }
+                  >
+                    {column.name}
+                  </Listbox.Option>
+                ))}
+              </Listbox.Options>
+            </Listbox>
           </section>
         </div>
 
