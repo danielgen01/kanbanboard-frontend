@@ -236,7 +236,7 @@ const NewTaskForm = () => {
                 <span>{status}</span>
                 <img src={chevronDown} alt="chevron down" className="w-3 h-2" />
               </Listbox.Button>
-              <Listbox.Options className="absolute w-full mt-1 bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none z-10">
+              <Listbox.Options className="absolute w-full mt-1 bg-white  dark:bg-dark-black shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none z-10">
                 {columnNames?.map((name) => (
                   <Listbox.Option
                     key={name}

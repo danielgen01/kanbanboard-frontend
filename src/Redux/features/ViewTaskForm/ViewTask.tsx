@@ -182,13 +182,13 @@ const ViewTaskForm = () => {
       px-2 dark:bg-transparent dark:outline-none dark:text-white
       dark:focus:border-dark-purple
       dark:active:border-dark-purple
-      dark:focus:outline-none
-      border-bright-gray focus:border-dark-purple active:border-dark-purple"
+      outline-none 
+       focus:border-dark-purple active:border-dark-purple"
               >
                 {currentTask?.status}
                 <img src={chevronDown} alt="Chevron Down" className="w-4 h-3" />
               </Listbox.Button>
-              <Listbox.Options className="absolute w-full mt-1 bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none z-10">
+              <Listbox.Options className="absolute w-full mt-1 bg-white dark:bg-dark-black shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none z-10">
                 {currentBoard?.columns.map((column: any) => (
                   <Listbox.Option
                     key={column.name}
