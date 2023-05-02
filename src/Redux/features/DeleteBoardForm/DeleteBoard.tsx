@@ -47,7 +47,7 @@ const DeleteBoard: React.FC = () => {
           </h1>
           <p className="text-medium-gray leading-6 font-bold text-sm">
             Are you sure you want to delete the{" "}
-            <span className="font-bold uppercase ">{currentBoardName}</span>{" "}
+            <span className="font-bold uppercase ">"{currentBoardName}"</span>{" "}
             board? This action will remove all columns and tasks and cannot be
             reversed.
           </p>
