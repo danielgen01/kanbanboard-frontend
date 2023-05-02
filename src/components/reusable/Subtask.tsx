@@ -1,17 +1,13 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 import { useAppSelector, useAppDispatch } from "../../Redux/store"
 import { RootState } from "../../Redux/rootReducer"
 import { updateTask, Task } from "../../Redux/features/Data/DataSlice"
 import { toggleViewTaskForm } from "../../Redux/features/ViewTaskForm/ViewTaskFormSlice"
 type props = {
   title: string
-
 }
 
-export const Subtask: React.FC<props> = ({
-  title,
-  
-}) => {
+export const Subtask: React.FC<props> = ({ title }) => {
   const dispatch = useAppDispatch()
 
   const data = useAppSelector((state: RootState) => state.data)
@@ -59,7 +55,6 @@ export const Subtask: React.FC<props> = ({
       })
     )
     dispatch(toggleViewTaskForm())
-      
   }
 
   return (
@@ -78,10 +73,10 @@ export const Subtask: React.FC<props> = ({
       />
       <span
         className={`text-sm font-bold ${
-          currentSubtask?.isCompleted ? "line-through" : ""
-        } ${
-          currentSubtask?.isCompleted ? "dark:text-medium-gray" : ""
-        } dark:text-white`}
+          currentSubtask?.isCompleted
+            ? "line-through text-medium-gray dark:text-medium-gray"
+            : "dark:text-white"
+        }`}
       >
         {title}
       </span>
