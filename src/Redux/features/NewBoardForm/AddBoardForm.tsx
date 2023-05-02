@@ -100,7 +100,7 @@ const AddBoardForm: React.FC<AddBoardFormProps> = ({ onBoardAdded }) => {
   return (
     <>
       <section
-        className="transparent-background bg-black/50 absolute h-screen w-screen top-0 left-0 "
+        className="transparent-background bg-black/50 fixed h-screen w-screen top-0 left-0 "
         style={{ display: isBoardFormOpen ? "block" : "none" }}
         onClick={handleToggleAddBoardForm}
       ></section>

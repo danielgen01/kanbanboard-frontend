@@ -126,7 +126,7 @@ const ViewTaskForm = () => {
   return (
     <>
       <section
-        className="transparent-background absolute top-0 left-0 h-screen w-screen bg-black/60"
+        className="transparent-background fixed top-0 left-0 min-h-screen w-screen bg-black/60"
         style={{ display: isViewTaskFormOpen ? "block" : "none" }}
         onClick={handleToggleViewTaskForm}
       ></section>
