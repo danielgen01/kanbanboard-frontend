@@ -59,8 +59,7 @@ export const Subtask: React.FC<props> = ({ title }) => {
 
   return (
     <div
-      className="subtask flex items-center gap-2 w-full bg-bright-gray min-h-[50px] rounded-md px-3
-       hover:bg-bright-purple dark:bg-dark-black cursor-pointer dark:hover:bg-bright-purple duration-100"
+      className="subtask flex items-center gap-2 w-full bg-bright-gray min-h-[50px] rounded-md px-3 hover:bg-bright-purple dark:bg-dark-black cursor-pointer dark:hover:bg-bright-purple duration-100"
       onClick={handleCheckboxChange}
     >
       <input
@@ -69,9 +68,29 @@ export const Subtask: React.FC<props> = ({ title }) => {
         id="check-task"
         className={`w-6 h-6 border border-gray-300 rounded-sm bg-white ${
           currentSubtask?.isCompleted ? "bg-dark-purple" : ""
-        } focus:outline-none`}
+        } focus:outline-none opacity-0 absolute`}
         checked={currentSubtask?.isCompleted}
       />
+      <div
+        className={`w-6 h-6 border border-gray-300 rounded-sm ${
+          currentSubtask?.isCompleted ? "bg-dark-purple" : "dark:bg-dark-gray bg-white"
+        } flex items-center justify-center outline-none border-none`}
+      >
+        {currentSubtask?.isCompleted && (
+          <svg
+            className="w-4 h-4 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clipRule="evenodd"
+            />
+          </svg>
+        )}
+      </div>
       <span
         className={`text-sm font-bold ${
           currentSubtask?.isCompleted
@@ -82,5 +101,5 @@ export const Subtask: React.FC<props> = ({ title }) => {
         {title}
       </span>
     </div>
-  )
-}
+  );
+};
