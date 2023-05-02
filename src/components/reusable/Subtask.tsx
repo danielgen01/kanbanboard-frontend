@@ -78,7 +78,7 @@ export const Subtask: React.FC<props> = ({ title }) => {
       >
         {currentSubtask?.isCompleted && (
           <svg
-            className="w-4 h-4 text-white"
+            className="w-6 h-4 text-white"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
