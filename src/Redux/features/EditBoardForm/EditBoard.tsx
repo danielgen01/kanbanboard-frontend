@@ -126,7 +126,7 @@ const EditBoardForm = ({ key }: { key: string }) => {
           <input
             type="text"
             className="px-5 border-2 border-bright-gray rounded-md h-12 dark:bg-dark-gray dark:border-medium-gray dark:border
-             dark:text-white  dark:outline-none dark:focus:border-dark-purple"
+             dark:text-white  dark:outline-none dark:focus:border-dark-purple focus:border-dark-purple outline-none"
             placeholder={currentBoardName}
             value={boardName}
             onChange={handleInputChange}

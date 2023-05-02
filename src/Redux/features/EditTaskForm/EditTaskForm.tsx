@@ -5,8 +5,7 @@ import { RootState } from "../../rootReducer"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { toggleEditTaskForm } from "./EditTaskFormSlice"
 import { updateTask, Task, Subtask } from "../Data/DataSlice"
-import { v4 as uuidv4 } from "uuid";
-
+import { v4 as uuidv4 } from "uuid"
 
 const EditTaskForm = ({ key }: { key: string }) => {
   const dispatch = useAppDispatch()
@@ -75,10 +74,9 @@ const EditTaskForm = ({ key }: { key: string }) => {
     title: string
     isCompleted: boolean
   }) {
-    console.log("Removing subtask: ", subtaskToRemove);
-    setSubtasks(subtasks.filter((subtask) => subtask.id !== subtaskToRemove.id));
+    console.log("Removing subtask: ", subtaskToRemove)
+    setSubtasks(subtasks.filter((subtask) => subtask.id !== subtaskToRemove.id))
   }
-  
 
   function updateSubTaskTitle(id: string, newTitle: string) {
     setSubtasks((prevSubtasks) =>
@@ -156,7 +154,7 @@ const EditTaskForm = ({ key }: { key: string }) => {
             className="px-5 border-2 border-bright-gray rounded-md
              h-12 dark:bg-dark-gray
               dark:border-medium-gray dark:border
-               dark:text-white font-bold outline-white dark:outline-none dark:focus:border-dark-purple"
+               dark:text-white font-bold outline-white dark:outline-none dark:focus:border-dark-purple focus:border-dark-purple outline-none"
             placeholder="e.g ..."
             defaultValue={currentTaskTitle}
             ref={titleRef}
@@ -174,8 +172,9 @@ const EditTaskForm = ({ key }: { key: string }) => {
             </label>
             <textarea
               name="input-title"
-              className="border-bright-gray border-2 outline-bright-gray rounded-md h-28 px-2 py-2 text-sm resize-none
-               dark:bg-dark-gray dark:border-medium-gray dark:text-white dark:outline-none dark:focus:border-dark-purple"
+              className="border-bright-gray border-2 rounded-md h-28 px-2 py-2 text-sm resize-none
+               dark:bg-dark-gray dark:border-medium-gray
+                dark:text-white dark:outline-none dark:focus:border-dark-purple focus:border-dark-purple outline-none "
               placeholder="e.g its always good to take a small break from working to prevent burnouts"
               defaultValue={currentTaskDescription}
               ref={descriptionRef}
