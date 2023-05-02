@@ -30,7 +30,7 @@ const DeleteBoard: React.FC = () => {
   return (
     <>
       <section
-        className="transparent-background bg-black/50 absolute top-0 left-0 h-screen w-screen"
+        className="transparent-background bg-black/50 fixed top-0 left-0 h-screen w-screen"
         onClick={handleToggleDeleteBoardForm}
         style={{ display: isDeleteBoardFormOpen ? "block" : "none" }}
       >
