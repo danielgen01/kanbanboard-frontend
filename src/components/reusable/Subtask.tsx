@@ -59,7 +59,8 @@ export const Subtask: React.FC<props> = ({ title }) => {
 
   return (
     <div
-      className="subtask flex items-center gap-2 w-full bg-bright-gray min-h-[50px] rounded-md px-3 hover:bg-bright-purple dark:bg-dark-black cursor-pointer"
+      className="subtask flex items-center gap-2 w-full bg-bright-gray min-h-[50px] rounded-md px-3
+       hover:bg-bright-purple dark:bg-dark-black cursor-pointer dark:hover:bg-bright-purple duration-100"
       onClick={handleCheckboxChange}
     >
       <input
