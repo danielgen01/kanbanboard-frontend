@@ -62,7 +62,7 @@ const NewTaskForm = () => {
             <label
               htmlFor="input-title"
               className="text-medium-gray font-bold text-sm 
-              dark:text-white"
+              dark:text-white "
             >
               Title
             </label>
@@ -71,7 +71,8 @@ const NewTaskForm = () => {
               name="input-title"
               id="input-title"
               className="border-bright-gray border-2  rounded-md h-10 px-2 text-sm
-              dark:bg-dark-gray dark:border-medium-gray dark:text-white dark:outline-none dark:focus:border-dark-purple"
+              dark:bg-dark-gray dark:border-medium-gray dark:text-white outline-none
+               dark:focus:border-dark-purple focus:border-dark-purple"
               placeholder="e.g Take coffee break"
               ref={titleRef}
               onChange={updateTitle}
@@ -91,7 +92,8 @@ const NewTaskForm = () => {
               id="textarea-description"
               name="description"
               className="border-bright-gray border-2  rounded-md h-20 px-2 py-2 text-sm resize-none
-               dark:bg-dark-gray dark:border-medium-gray dark:text-white dark:outline-none dark:focus:border-dark-purple"
+               dark:bg-dark-gray dark:border-medium-gray dark:text-white  outline-none
+               dark:focus:border-dark-purple focus:border-dark-purple"
               placeholder="e.g its always good to take a small break from working to prevent burnouts"
               required={true}
               onChange={updateDescription}
