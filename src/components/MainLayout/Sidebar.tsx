@@ -36,7 +36,7 @@ const Sidebar: React.FC = () => {
   return (
     <>
       <aside
-        className={`hidden md:flex flex-col gap-4 min-h-screen py-5
+        className={`hidden md:flex flex-col gap-4 h-screen  py-5 sticky top-0
      dark:bg-dark-gray md:col-span-2 xl:col-span-1 border-r-[.5px] border-medium-gray  md:${
        isSideBarOpen ? "block" : "hidden"
      }`}
