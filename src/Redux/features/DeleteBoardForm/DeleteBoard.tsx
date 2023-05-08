@@ -1,31 +1,13 @@
-import React, { useEffect } from "react"
-import { toggleDeleteBoardForm } from "./DeleteBoardFormSlice"
-import { useAppDispatch, useAppSelector } from "../../store"
-import { RootState } from "../../rootReducer"
-import { removeBoard } from "../Data/DataSlice"
-import { setCurrentBoardName } from "../currentBoard/currentBoardSlice"
+import React from "react"
+import { useDeleteBoard } from "./useDeleteBoard"
 
 const DeleteBoard: React.FC = () => {
-  const data = useAppSelector((state: RootState) => state.data)
-  const dispatch = useAppDispatch()
-
-  const isDeleteBoardFormOpen = useAppSelector(
-    (state: RootState) => state.deleteBoardForm.isDeleteBoardFormOpen
-  )
-
-  const currentBoardName = useAppSelector(
-    (state: RootState) => state.currentBoardName.currentBoardName
-  )
-
-  const deleteCurrentBoard = () => {
-    dispatch(removeBoard(currentBoardName))
-
-    handleToggleDeleteBoardForm()
-  }
-
-  const handleToggleDeleteBoardForm = () => {
-    dispatch(toggleDeleteBoardForm())
-  }
+  const {
+    handleToggleDeleteBoardForm,
+    isDeleteBoardFormOpen,
+    currentBoardName,
+    deleteCurrentBoard,
+  } = useDeleteBoard()
 
   return (
     <>

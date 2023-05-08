@@ -73,7 +73,9 @@ export const Subtask: React.FC<props> = ({ title }) => {
       />
       <div
         className={`w-6 h-6 border border-gray-300 rounded-sm ${
-          currentSubtask?.isCompleted ? "bg-dark-purple" : "dark:bg-dark-gray bg-white"
+          currentSubtask?.isCompleted
+            ? "bg-dark-purple"
+            : "dark:bg-dark-gray bg-white"
         } flex items-center justify-center outline-none border-none`}
       >
         {currentSubtask?.isCompleted && (
@@ -101,5 +103,5 @@ export const Subtask: React.FC<props> = ({ title }) => {
         {title}
       </span>
     </div>
-  );
-};
+  )
+}
