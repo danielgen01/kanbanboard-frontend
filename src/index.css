@@ -15,6 +15,7 @@
 ::-webkit-scrollbar {
     height:10px; /* Höhe der Scrollbar */
     background-color: #f5f5f5; /* Hintergrundfarbe der Scrollbar */
+    width: 5px;
    
   }
   
@@ -23,3 +24,19 @@
     border-radius: 10px; /* Eckenradius des Scrollbar-Knopfs */
   }
 
+
+  .column-rows::-webkit-scrollbar {
+    width: 1px; /* Breite der Scrollbar */
+  }
+  
+  .column-rows::-webkit-scrollbar-track {
+    background-color: #F0F0F0; /* Hintergrundfarbe der Scrollbar-Bahn */
+    border-radius: 10px; /* Eckenradius der Scrollbar-Bahn */
+  }
+  
+  .column-rows::-webkit-scrollbar-thumb {
+    background-color: #635FC7; /* Farbe des Scrollbar-Knopfs */
+    border-radius: 10px; /* Eckenradius des Scrollbar-Knopfs */
+  }
+
+  

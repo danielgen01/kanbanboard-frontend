@@ -56,16 +56,18 @@ const EditBoardForm = ({ key }: { key: string }) => {
             >
               Board Columns
             </label>
-            {columnNames.map((column) => (
-              <AddColInput
-                key={column.id}
-                defaultValue={column.name}
-                onRemove={() => removeColumn(column.id)}
-                onInputChange={(event) =>
-                  handleColumnNameChange(column.id, event.target.value)
-                }
-              />
-            ))}
+            <div className="overflow-y-scroll md:overflow-auto flex flex-col gap-2 h-44 column-rows">
+              {columnNames.map((column) => (
+                <AddColInput
+                  key={column.id}
+                  defaultValue={column.name}
+                  onRemove={() => removeColumn(column.id)}
+                  onInputChange={(event) =>
+                    handleColumnNameChange(column.id, event.target.value)
+                  }
+                />
+              ))}
+            </div>
           </section>
           <section className="buttons flex flex-col gap-5">
             <button

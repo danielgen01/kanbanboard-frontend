@@ -68,6 +68,7 @@ const AddBoardForm: React.FC<AddBoardFormProps> = ({ onBoardAdded }) => {
             >
               Board Columns
             </label>
+            <div className="overflow-y-scroll md:overflow-auto flex flex-col gap-2 h-44 column-rows">
             {columnNames.map((column) => (
               <AddColInput
                 key={column.id}
@@ -78,6 +79,7 @@ const AddBoardForm: React.FC<AddBoardFormProps> = ({ onBoardAdded }) => {
                 }
               />
             ))}
+            </div>
           </section>
           <section className="buttons flex flex-col gap-5">
             <button
